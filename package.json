@@ -1,0 +1,30 @@
+{
+  "name": "@litecanvas/utils",
+  "version": "0.0.1",
+  "description": "Functions to help build javascript games",
+  "author": "Luiz Bills <luizbills@pm.me>",
+  "license": "MIT",
+  "homepage": "https://github.com/litecanvas/utils#readme",
+  "bugs": {
+    "url": "https://github.com/litecanvas/utils/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/litecanvas/utils.git#main"
+  },
+  "main": "src/index.js",
+  "keywords": [
+    "litecanvas",
+    "timer"
+  ],
+  "scripts": {},
+  "devDependencies": {
+    "esbuild": "^0.20.1"
+  },
+  "peerDependencies": {
+    "@litecanvas/litecanvas": "*"
+  },
+  "files": [
+    "src"
+  ]
+}
