@@ -18,9 +18,6 @@
     "timer"
   ],
   "scripts": {},
-  "peerDependencies": {
-    "@litecanvas/litecanvas": "*"
-  },
   "files": [
     "src"
   ]
