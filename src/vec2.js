@@ -1,13 +1,29 @@
-// TODO: vector 2d library
+class Vector2D {
+  x = 0
+  y = 0
+
+  /**
+   * @param {number} x
+   * @param {number} y
+   */
+  constructor(x = 0, y = 0) {
+    this.x = x
+    this.y = y || x
+  }
+
+  /**
+   * @param {number} x
+   * @param {number} y
+   */
+  add(x = 0, y = 0) {
+    this.x += x
+    this.y += y || x
+  }
+}
 
 /**
  * @param {number} x
  * @param {number} y
- * @returns {object}
+ * @returns {Vector2D}
  */
-export default vec2 = (x, y) => ({
-  x: x || 0,
-  y: y || x || 0,
-})
-
-vec2.add = (a, b) => vec2(a.x + b.x, a.y + b.y)
+export default vec2 = (x, y) => new Vector2D(x, y)

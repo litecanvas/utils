@@ -1,5 +1,5 @@
 {
-  "name": "@litecanvas/utils",
+  "name": "@litecanvas/gamedev-utils",
   "version": "0.0.1",
   "description": "Functions to help build javascript games",
   "author": "Luiz Bills <luizbills@pm.me>",
