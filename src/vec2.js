@@ -1,4 +1,4 @@
-class Vector2D {
+export class Vector2D {
   x = 0
   y = 0
 
@@ -26,4 +26,4 @@ class Vector2D {
  * @param {number} y
  * @returns {Vector2D}
  */
-export default vec2 = (x, y) => new Vector2D(x, y)
+export vec2 = (x, y) => new Vector2D(x, y)
