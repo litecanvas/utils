@@ -1,7 +1,7 @@
 {
-  "name": "@litecanvas/gamedev-utils",
+  "name": "@litecanvas/utils",
   "version": "0.0.1",
-  "description": "Functions to help build javascript games",
+  "description": "Functions to help build litecanvas games",
   "author": "Luiz Bills <luizbills@pm.me>",
   "license": "MIT",
   "homepage": "https://github.com/litecanvas/utils#readme",
@@ -17,8 +17,18 @@
     "litecanvas",
     "timer"
   ],
-  "scripts": {},
+  "scripts": {
+    "dev": "esbuild src/index.js --bundle --watch --outfile=dist/dist.js --servedir=.",
+    "build": "esbuild src/index.js --bundle --minify --outfile=dist/dist.js",
+    "prepare": "npm run build"
+  },
   "files": [
     "src"
-  ]
+  ],
+  "peerDependencies": {
+    "litecanvas": "^0.47.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.23.1"
+  }
 }
