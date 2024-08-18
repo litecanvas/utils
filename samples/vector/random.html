@@ -19,29 +19,36 @@
     <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
     <script src="../../dist/dist.js"></script>
     <script>
-      litecanvas()
+      const g = litecanvas({
+        global: false,
+      })
 
       function init() {
-        center = utils.vec(CENTERX, CENTERY)
-        points = [center]
-        t = 0
+        // g.seed(42)
+        utils.vecconfig.random = g.rand
+
+        center = utils.vec(g.CENTERX, g.CENTERY)
+        points = []
+        count = 10
       }
 
       function update(dt) {
-        if (ELAPSED > t) {
+        if (count > 0) {
           const v = utils.veccopy(center)
           const randomDir = utils.vecrand(200)
           utils.vecadd(v, randomDir.x, randomDir.y)
           points.push(v)
-          t = ELAPSED + 0.1
+          count--
         }
       }
 
       function draw() {
-        cls(0)
+        g.cls(0)
+
+        g.circfill(center.x, center.y, 10, 5)
 
         for (const p of points) {
-          circfill(p.x, p.y, 5, 4)
+          g.circfill(p.x, p.y, 5, 4)
         }
       }
     </script>

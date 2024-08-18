@@ -4,6 +4,6 @@ Small collection of tools for developing games with [Litecanvas](https://github.
 
 ## Components
 
-- **Camera**: Move-, zoom- and rotatable camera.
-- **Vector**: 2d vector math.
-- And [more...](https://github.com/litecanvas/utils/tree/main/src/math)
+- **Camera**: Move-, zoom- and rotatable camera with shake. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/camera)
+- **Vector**: Modular 2D vector. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/vector)
+- And [other math utilities](https://github.com/litecanvas/utils/tree/main/src/math)

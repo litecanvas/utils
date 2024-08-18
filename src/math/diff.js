@@ -5,4 +5,5 @@
  * @param {number} b
  * @returns {number}
  */
-export default dist = (a, b) => Math.abs(b - a)
+
+export default (a, b) => Math.abs(b - a) || 0

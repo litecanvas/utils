@@ -34,15 +34,15 @@ export const vec = (x = 0, y = 0) => new Vector(x, y)
 export const veccopy = (v) => vec(v.x, v.y)
 
 /**
- * Set new values to a vector.
+ * Assigns new values to a vector.
  *
  * @param {Vector} v The vector
  * @param {number} x
  * @param {number} y
  */
-export const vecset = (v, x, y) => {
+export const vecset = (v, x, y = x) => {
   v.x = x
-  v.y = y || x
+  v.y = y
 }
 
 /**
@@ -52,9 +52,9 @@ export const vecset = (v, x, y) => {
  * @param {number} x
  * @param {number} y
  */
-export const vecadd = (v, x, y) => {
+export const vecadd = (v, x, y = x) => {
   v.x += x
-  v.y += y || x
+  v.y += y
 }
 
 /**
@@ -64,9 +64,9 @@ export const vecadd = (v, x, y) => {
  * @param {number} x
  * @param {number} y
  */
-export const vecsub = (v, x, y) => {
+export const vecsub = (v, x, y = x) => {
   v.x -= x
-  v.y -= y || x
+  v.y -= y
 }
 
 /**
@@ -76,9 +76,9 @@ export const vecsub = (v, x, y) => {
  * @param {number} x
  * @param {number} y
  */
-export const vecmult = (v, x, y) => {
+export const vecmult = (v, x, y = x) => {
   v.x *= x
-  v.y *= y || x
+  v.y *= y
 }
 
 /**
@@ -88,9 +88,9 @@ export const vecmult = (v, x, y) => {
  * @param {number} x
  * @param {number} y
  */
-export const vecdiv = (v, x, y) => {
+export const vecdiv = (v, x, y = x) => {
   v.x /= x
-  v.y /= y || x
+  v.y /= y
 }
 
 /**
@@ -124,16 +124,13 @@ export const vecmag = (v) => Math.sqrt(v.x * v.x + v.y * v.y)
 export const vecmag2 = (v) => v.x * v.x + v.y * v.y
 
 /**
- * Scales the components of a vector so that its magnitude is 1.
+ * Scales the values of a vector so that its magnitude is 1.
  *
  * @param {Vector} v
- * @param {boolean} [copy] If `true` return a cloned vector (default: `false`)
- * @returns
  */
-export const vecnorm = (v, copy = false) => {
-  v = copy ? veccopy(v) : v
+export const vecnorm = (v) => {
   const length = vecmag(v)
-  return length > 0 ? vecdiv(v, length, length) : v
+  length > 0 ? vecdiv(v, length, length) : v
 }
 
 /**
@@ -143,7 +140,7 @@ export const vecnorm = (v, copy = false) => {
  * @param {number} max
  */
 export const veclimit = (v, max) => {
-  const sq = this.vecmag2(v)
+  const sq = vecmag2(v)
   if (sq > max * max) {
     vecdiv(v, Math.sqrt(sq)) //normalize it
     vecmult(v, max)
@@ -223,7 +220,7 @@ export const veccross = (a, b) => a.x * b.y - a.y * b.x
  * @param {number} t
  * @returns
  */
-export const lerp = (a, b, t) => {
+export const veclerp = (a, b, t) => {
   a.x += (b.x - a.x) * t || 0
   a.y += (b.y - a.y) * t || 0
 }

@@ -1,21 +1,6 @@
-import "litecanvas"
+import "litecanvas/types"
 
-/**
- *
- * @param {LitecanvasInstance} engine
- */
-export function camera(engine = null) {
-  const cam = new Camera()
-
-  engine = engine || globalThis
-
-  cam._engine = engine
-  cam.size(engine.WIDTH, engine.HEIGHT)
-
-  return cam
-}
-
-class Camera {
+export default class Camera {
   /** @type {LitecanvasInstance} */
   _engine = null
 
@@ -37,6 +22,12 @@ class Camera {
     x: 0,
     y: 0,
     removeListener: null,
+  }
+
+  constructor(engine = null) {
+    engine = engine || globalThis
+    this._engine = engine
+    this.size(engine.WIDTH || 0, engine.HEIGHT || 0)
   }
 
   /**
@@ -103,7 +94,7 @@ class Camera {
     this.height = height
   }
 
-  start(clip = true) {
+  start(clip = false) {
     this._engine.push()
     this._engine.translate(-this.x + this._shake.x, -this.y + this._shake.y)
     this._engine.scale(this.scale)

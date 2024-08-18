@@ -1,7 +1,7 @@
 {
   "name": "@litecanvas/utils",
   "version": "0.0.1",
-  "description": "Functions to help build litecanvas games",
+  "description": "Utilities to help build litecanvas games",
   "author": "Luiz Bills <luizbills@pm.me>",
   "license": "MIT",
   "homepage": "https://github.com/litecanvas/utils#readme",
@@ -12,21 +12,32 @@
     "type": "git",
     "url": "git+https://github.com/litecanvas/utils.git#main"
   },
-  "main": "src/index.js",
+  "type": "module",
+  "exports": {
+    "./*": "./src/*.js",
+    "./vector": "./src/vector/index.js",
+    "./camera": "./src/camera/index.js",
+    "./math/*": "./src/math/*.js"
+  },
   "keywords": [
     "litecanvas",
-    "timer"
+    "utilities",
+    "camera",
+    "vector",
+    "gamedev"
   ],
   "scripts": {
     "dev": "esbuild src/index.js --bundle --watch --outfile=dist/dist.js --servedir=.",
-    "build": "esbuild src/index.js --bundle --minify --outfile=dist/dist.js",
-    "prepare": "npm run build"
+    "build": "esbuild src/index.js --bundle --outfile=dist/dist.js",
+    "build:min": "esbuild src/index.js --bundle --minify --outfile=dist/dist.min.js",
+    "prepare": "npm run build && npm run build:min"
   },
   "files": [
-    "src"
+    "src",
+    "dist"
   ],
   "peerDependencies": {
-    "litecanvas": "^0.47.0"
+    "litecanvas": "^0.*"
   },
   "devDependencies": {
     "esbuild": "^0.23.1"
