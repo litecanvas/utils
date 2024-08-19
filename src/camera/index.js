@@ -1,5 +1,3 @@
-import "litecanvas/types"
-
 export default class Camera {
   /** @type {LitecanvasInstance} */
   _engine = null
@@ -24,6 +22,9 @@ export default class Camera {
     removeListener: null,
   }
 
+  /**
+   * @param {LitecanvasInstance} engine
+   */
   constructor(engine = null) {
     engine = engine || globalThis
     this._engine = engine

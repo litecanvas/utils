@@ -2,6 +2,8 @@
 
 A class to describe a two-dimensional vector.
 
+**CDN**: https://unpkg.com/@litecanvas/utils/dist/vector.js
+
 ## vec
 
 Creates a vector.
@@ -9,7 +11,7 @@ Creates a vector.
 Syntax: `vec(x: number = 0, y: number = 0): Vector`
 
 ```js
-import { vec, Vector } from "@litecanvas/utils/vector"
+import { vec, Vector } from "@litecanvas/utils"
 
 /** @type {Vector} */
 const position = vec(50, 25)
@@ -25,7 +27,7 @@ Creates a copy/clone of a given vector.
 Syntax: `veccopy(v: Vector): Vector`
 
 ```js
-import { vec, veccopy } from "@litecanvas/utils/vector"
+import { vec, veccopy } from "@litecanvas/utils"
 
 const a = vec(1, 1)
 const b = a // `b`` is a references of `a`
@@ -46,7 +48,7 @@ Assigns new values to a vector.
 Syntax: `vecset(v: Vector, x: number, y: number = x): void`
 
 ```js
-import { vec, vecset } from "@litecanvas/utils/vector"
+import { vec, vecset } from "@litecanvas/utils"
 
 const a = vec(0, 0)
 vecset(a, 10, 20)
@@ -62,7 +64,7 @@ Add values to a vector.
 Syntax: `vecadd(v: Vector, x: number, y: number = x): void`
 
 ```js
-import { vec, vecadd } from "@litecanvas/utils/vector"
+import { vec, vecadd } from "@litecanvas/utils"
 
 const a = vec(10, 10)
 vecadd(a, 5, 20)
@@ -169,7 +171,7 @@ Syntax: `vecrand(minlength: number = 1, maxlength: number = minlength): Vector`
 
 ```js
 import litecanvas from "litecanvas"
-import { vecrand, vecconfig } from "@litecanvas/utils/vector"
+import { vecrand, vecconfig } from "@litecanvas/utils"
 
 const engine = litecanvas({
   loop: { init },

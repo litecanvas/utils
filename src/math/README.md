@@ -1,5 +1,7 @@
 # Math utilities
 
+**CDN**: https://unpkg.com/@litecanvas/utils/dist/math.js
+
 ## diff
 
 Calculates the positive distance/difference of two given numbers.
@@ -8,7 +10,7 @@ Syntax: `diff(a: number, b: number): number`
 
 ```js
 import litecanvas from "litecanvas"
-import { diff } from "@litecanvas/utils/math/diff"
+import { diff } from "@litecanvas/utils"
 
 litecanvas({
   loop: { init },
@@ -28,7 +30,7 @@ Syntax: `fract(value: number): number`
 
 ```js
 import litecanvas from "litecanvas"
-import { fract } from "@litecanvas/utils/math/fract"
+import { fract } from "@litecanvas/utils"
 
 litecanvas({
   loop: { init },
@@ -47,7 +49,7 @@ Syntax: `wave(lower: number, higher: number, time: number, fn = Math.sin): numbe
 
 ```js
 import litecanvas from "litecanvas"
-import { wave } from "@litecanvas/utils/math/wave"
+import { wave } from "@litecanvas/utils"
 
 litecanvas({
   loop: { draw },

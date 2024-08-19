@@ -1,5 +1,7 @@
 # Camera
 
+**CDN**: https://unpkg.com/@litecanvas/utils/dist/camera.js
+
 ## Usage
 
 ```js

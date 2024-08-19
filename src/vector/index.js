@@ -1,16 +1,21 @@
 export class Vector {
+  /** @type {number} */
   x
+  /** @type {number} */
   y
 
   /**
    * @param {number} x
    * @param {number} y
    */
-  constructor(x = 0, y = 0) {
+  constructor(x = 0, y = x) {
     this.x = x
     this.y = y
   }
 
+  /**
+   * @returns {string}
+   */
   toString() {
     return `Vector (${this.x}, ${this.y})`
   }
@@ -20,10 +25,10 @@ export class Vector {
  * Creates a new vector.
  *
  * @param {number} x
- * @param {number} y
+ * @param {number} [y]
  * @returns {Vector}
  */
-export const vec = (x = 0, y = 0) => new Vector(x, y)
+export const vec = (x = 0, y = x) => new Vector(x, y)
 
 /**
  * Copy a vector.
@@ -37,12 +42,16 @@ export const veccopy = (v) => vec(v.x, v.y)
  * Assigns new values to a vector.
  *
  * @param {Vector} v The vector
- * @param {number} x
- * @param {number} y
+ * @param {number|Vector} x
+ * @param {number} [y]
  */
 export const vecset = (v, x, y = x) => {
-  v.x = x
-  v.y = y
+  if (isvector(x)) {
+    vecset(v, x.x, x.y)
+  } else {
+    v.x = x
+    v.y = y
+  }
 }
 
 /**
@@ -50,11 +59,15 @@ export const vecset = (v, x, y = x) => {
  *
  * @param {Vector} v The vector
  * @param {number} x
- * @param {number} y
+ * @param {number} [y]
  */
 export const vecadd = (v, x, y = x) => {
-  v.x += x
-  v.y += y
+  if (isvector(x)) {
+    vecadd(v, x.x, x.y)
+  } else {
+    v.x += x
+    v.y += y
+  }
 }
 
 /**
@@ -62,11 +75,15 @@ export const vecadd = (v, x, y = x) => {
  *
  * @param {Vector} v The vector
  * @param {number} x
- * @param {number} y
+ * @param {number} [y]
  */
 export const vecsub = (v, x, y = x) => {
-  v.x -= x
-  v.y -= y
+  if (isvector(x)) {
+    vecsub(v, x.x, x.y)
+  } else {
+    v.x -= x
+    v.y -= y
+  }
 }
 
 /**
@@ -74,11 +91,15 @@ export const vecsub = (v, x, y = x) => {
  *
  * @param {Vector} v
  * @param {number} x
- * @param {number} y
+ * @param {number} [y]
  */
 export const vecmult = (v, x, y = x) => {
-  v.x *= x
-  v.y *= y
+  if (isvector(x)) {
+    vecmult(v, x.x, x.y)
+  } else {
+    v.x *= x
+    v.y *= y
+  }
 }
 
 /**
@@ -86,11 +107,15 @@ export const vecmult = (v, x, y = x) => {
  *
  * @param {Vector} v
  * @param {number} x
- * @param {number} y
+ * @param {number} [y]
  */
 export const vecdiv = (v, x, y = x) => {
-  v.x /= x
-  v.y /= y
+  if (isvector(x)) {
+    vecdiv(v, x.x, x.y)
+  } else {
+    v.x /= x
+    v.y /= y
+  }
 }
 
 /**
@@ -130,7 +155,9 @@ export const vecmag2 = (v) => v.x * v.x + v.y * v.y
  */
 export const vecnorm = (v) => {
   const length = vecmag(v)
-  length > 0 ? vecdiv(v, length, length) : v
+  if (length > 0) {
+    vecdiv(v, length)
+  }
 }
 
 /**
@@ -218,7 +245,6 @@ export const veccross = (a, b) => a.x * b.y - a.y * b.x
  * @param {Vector} a
  * @param {Vector} b
  * @param {number} t
- * @returns
  */
 export const veclerp = (a, b, t) => {
   a.x += (b.x - a.x) * t || 0
@@ -231,10 +257,9 @@ export const veclerp = (a, b, t) => {
  * If the `litecanvas#rand()` not is globally explosed, uses `Math.random()`.
  * You can set `vecconfig.random` to set your own "random" function.
  *
- * @param {number} minlength
- * @param {number} maxlength
- * @param {() => number} randomFn
- * @returns
+ * @param {number} [minlength]
+ * @param {number} [maxlength]
+ * @returns {Vector}
  */
 export const vecrand = (minlength = 1, maxlength = minlength) => {
   const angle = vecconfig.random() * 2 * Math.PI
@@ -242,8 +267,23 @@ export const vecrand = (minlength = 1, maxlength = minlength) => {
   return vec(Math.cos(angle) * radius, Math.sin(angle) * radius)
 }
 
+/**
+ * @param {Vector} v
+ * @returns {boolean}
+ */
+export const isvector = (v) => v instanceof Vector
+
 export const vecconfig = {
   random: () => {
     return globalThis.rand ? rand() : Math.random()
   },
 }
+
+// constants
+export const ZERO = /** @__PURE__ */ vec(0, 0)
+export const ONE = /** @__PURE__ */ vec(1, 1)
+
+export const UP = /** @__PURE__ */ vec(0, -1)
+export const RIGHT = /** @__PURE__ */ vec(1, 0)
+export const DOWN = /** @__PURE__ */ vec(0, 1)
+export const LEFT = /** @__PURE__ */ vec(-1, 0)
