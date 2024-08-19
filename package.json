@@ -1,6 +1,6 @@
 {
   "name": "@litecanvas/utils",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "Utilities to help build litecanvas games",
   "author": "Luiz Bills <luizbills@pm.me>",
   "license": "MIT",
@@ -24,7 +24,7 @@
   "scripts": {
     "dev": "esbuild src/web.js --bundle --watch --outfile=dist/dist.js --servedir=.",
     "build": "node scripts/build.js",
-    "postinstall": "npm run build",
+    "prepare": "npm run build",
     "prepublishOnly": "npm run build"
   },
   "files": [
