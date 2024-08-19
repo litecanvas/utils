@@ -6,7 +6,7 @@
 
 ```js
 import { litecanvas } from "litecanvas"
-import Camera from "@litecanvas/util/camera"
+import { Camera } from "@litecanvas/utils"
 
 function init() {
   camera = new Camera()

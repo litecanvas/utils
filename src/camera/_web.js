@@ -1,3 +1,3 @@
 import Camera from "./index.js"
 
-globalThis.utils = { Camera }
+globalThis.utils = Object.assign(globalThis.utils || {}, { Camera })
