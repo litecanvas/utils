@@ -1,5 +1,6 @@
 export { default as diff } from "./math/diff.js"
 export { default as fract } from "./math/fract.js"
 export { default as wave } from "./math/wave.js"
+export { default as resolve } from "./math/resolve.js"
 export { default as Camera } from "./camera/index.js"
 export * from "./vector/index.js"

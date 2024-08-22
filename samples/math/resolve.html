@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <title>Litecanvas Utils</title>
+    <style type="text/css">
+      body {
+        background: #000;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
+    <script src="../../dist/all.js"></script>
+    <script>
+      litecanvas()
+
+      function init() {
+        a = [10, 10, 50, 50]
+        b = [100, 100, 100, 50]
+        dir = null
+      }
+
+      // this function detect taps/clicks
+      // and changes the circle position
+      function tapping(x, y) {
+        a[0] = x
+        a[1] = y
+      }
+
+      function tap(x, y) {
+        a[0] = x
+        a[1] = y
+      }
+
+      // this function controls the game logic
+      function update(dt) {
+        if (colrect(...a, ...b)) {
+          let [direction, x, y] = utils.resolve(...a, ...b)
+          dir = direction
+          if (direction) {
+            a[0] = x
+            a[1] = y
+          }
+        }
+      }
+
+      // this function render the game scene
+      function draw() {
+        cls(0) // clear the screen
+        rectfill(...a, 4)
+        rectfill(...b, 5)
+        if (dir) text(0, 0, dir)
+      }
+    </script>
+  </body>
+</html>
