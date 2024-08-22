@@ -31,6 +31,21 @@ export class Vector {
 export const vec = (x = 0, y = x) => new Vector(x, y)
 
 /**
+ * Checks whether two vectors are equal.
+ *
+ * @param {Vector} v
+ * @param {number|Vector} x
+ * @param {number} [y]
+ * @returns {boolean}
+ */
+export const veceq = (v, x, y = x) => {
+  if (isvector(x)) {
+    return veceq(v, x.x, x.y)
+  }
+  return v.x === x && v.y === (y || x)
+}
+
+/**
  * Copy a vector.
  *
  * @param {Vector} v The original vector
@@ -58,7 +73,7 @@ export const vecset = (v, x, y = x) => {
  * Add values to a vector.
  *
  * @param {Vector} v The vector
- * @param {number} x
+ * @param {number|Vector} x
  * @param {number} [y]
  */
 export const vecadd = (v, x, y = x) => {
@@ -74,7 +89,7 @@ export const vecadd = (v, x, y = x) => {
  * Subtracts values from to a vector.
  *
  * @param {Vector} v The vector
- * @param {number} x
+ * @param {number|Vector} x
  * @param {number} [y]
  */
 export const vecsub = (v, x, y = x) => {
@@ -90,7 +105,7 @@ export const vecsub = (v, x, y = x) => {
  * Multiplies (scale) a vector.
  *
  * @param {Vector} v
- * @param {number} x
+ * @param {number|Vector} x
  * @param {number} [y]
  */
 export const vecmult = (v, x, y = x) => {
@@ -106,7 +121,7 @@ export const vecmult = (v, x, y = x) => {
  * Divides a vector.
  *
  * @param {Vector} v
- * @param {number} x
+ * @param {number|Vector} x
  * @param {number} [y]
  */
 export const vecdiv = (v, x, y = x) => {
@@ -268,7 +283,7 @@ export const vecrand = (minlength = 1, maxlength = minlength) => {
 }
 
 /**
- * @param {Vector} v
+ * @param {any} v
  * @returns {boolean}
  */
 export const isvector = (v) => v instanceof Vector
