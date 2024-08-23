@@ -12,7 +12,7 @@ import intersection from "./intersection"
  * @param {number} y2
  * @param {number} w2
  * @param {number} h2
- * @returns {{d}} An array containing the direction of the collision (index #0) and the new position (X and Y) of the first rectangle (the indexes #1 and #2).
+ * @returns {Array} An array containing the direction of the collision (index #0) and the new position (X and Y) of the first rectangle (the indexes #1 and #2).
  */
 export default (x1, y1, w1, h1, x2, y2, w2, h2) => {
   // get the intersection area
