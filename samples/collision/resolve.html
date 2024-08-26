@@ -42,7 +42,7 @@
       // this function controls the game logic
       function update(dt) {
         if (colrect(...a, ...b)) {
-          let [direction, x, y] = utils.resolve(...a, ...b)
+          let { direction, x, y } = utils.resolve(...a, ...b)
           dir = direction
           if (direction) {
             a[0] = x
