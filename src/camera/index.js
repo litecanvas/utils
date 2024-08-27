@@ -29,6 +29,32 @@ export default class Camera {
     engine = engine || globalThis
     this._engine = engine
     this.size(engine.WIDTH || 0, engine.HEIGHT || 0)
+    this.x = this.width / 2
+    this.y = this.height / 2
+  }
+
+  size(width, height) {
+    this.width = width
+    this.height = height
+  }
+
+  start(clip = false) {
+    const centerX = this.width / 2,
+      centerY = this.height / 2
+
+    this._engine.push()
+    this._engine.translate(centerX, centerY)
+    this._engine.scale(this.scale)
+    this._engine.rotate(this.rotation)
+    this._engine.translate(-this.x + this._shake.x, -this.y + this._shake.y)
+
+    if (clip) {
+      this._engine.cliprect(this.x, this.y, this.width, this.height)
+    }
+  }
+
+  end() {
+    this._engine.pop()
   }
 
   /**
@@ -88,24 +114,5 @@ export default class Camera {
 
   shaking() {
     return this._shake.removeListener !== null
-  }
-
-  size(width, height) {
-    this.width = width
-    this.height = height
-  }
-
-  start(clip = false) {
-    this._engine.push()
-    this._engine.translate(-this.x + this._shake.x, -this.y + this._shake.y)
-    this._engine.scale(this.scale)
-    this._engine.rotate(this.rotation)
-    if (clip) {
-      this._engine.cliprect(this.x, this.y, this.width, this.height)
-    }
-  }
-
-  end() {
-    this._engine.pop()
   }
 }

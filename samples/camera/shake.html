@@ -19,28 +19,35 @@
     <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
     <script src="../../dist/all.js"></script>
     <script>
-      litecanvas({
-        width: 400,
+      const engine = litecanvas({
+        width: 500,
       })
 
       function init() {
-        camera = new utils.Camera()
+        camera = new utils.Camera(engine)
       }
 
       function tapped() {
         camera.shake()
       }
 
-      function update(dt) {}
-
       function draw() {
         cls(0)
 
-        camera.start()
+        camera.start() // starts the camera scope
 
         rectfill(20, 20, 40, 40, 4)
+        rectfill(200, 90, 20, 40, 5)
 
-        camera.end()
+        // anything drawn outside the scope of the camera
+        // will have coordinates (X, Y) relative to the canvas (not the camera)
+        text(200, 200, "not UI")
+
+        camera.end() // ends the camera scope
+
+        // anything drawn outside the scope of the camera
+        // will have coordinates (X, Y) relative to the canvas (not the camera)
+        text(450, 10, "UI")
       }
     </script>
   </body>
