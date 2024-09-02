@@ -40,6 +40,8 @@ function draw() {
 
 Syntax: `resolve(x1, y1, w1, h1, x2, y2, w2, h2): { direction: string, x: number, y: number }`
 
+> Note: possible values for `direction` is `"top"`, `"botton"`, `"left"`, `"right"` or `""` (empty string, if no collision).
+
 ```js
 import litecanvas from "litecanvas"
 import { resolve } from "@litecanvas/utils"
