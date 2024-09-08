@@ -42,7 +42,7 @@ export const veceq = (v, x, y = x) => {
   if (isvector(x)) {
     return veceq(v, x.x, x.y)
   }
-  return v.x === x && v.y === (y || x)
+  return v.x === x && v.y === y
 }
 
 /**
