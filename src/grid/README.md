@@ -7,8 +7,10 @@
 Lets build an arena with [ASCII graphics](https://en.wikipedia.org/wiki/ASCII_art) like in classic roguelikes.
 
 ```js
+import { Grid } from "@litecanvas/utils"
+
 // make a grid 13x13
-let grid = new utils.Grid(13, 13)
+let grid = new Grid(13, 13)
 
 // fill the entire grid with "."
 grid.fill(".")
