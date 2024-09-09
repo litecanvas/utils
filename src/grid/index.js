@@ -1,91 +1,239 @@
-class Grid {
+export default class Grid {
+  /** @type {number} The grid width */
+  _w
+
+  /** @type {number} The grid height */
+  _h
+
+  /** @type {any[]} The grid cells */
+  _c
+
+  /**
+   * @static
+   * @param {number} width
+   * @param {number} height
+   * @param {any[]} values
+   */
+  static fromArray(width, height, values) {
+    const grid = new Grid(width, height)
+    for (let i = 0; i < values.length; i++) {
+      grid._c[i] = values[i]
+    }
+    return grid
+  }
+
+  /**
+   * @param {number} width The grid width
+   * @param {number} height The grid height
+   */
   constructor(width, height) {
-    this._width = Math.abs(width)
-    this._height = Math.abs(height)
+    this.width = width
+    this.height = height
     this.clear()
   }
 
+  /**
+   * Delete all cell values.
+   */
+  clear() {
+    this._c = Array(this._w * this._h)
+  }
+
+  /**
+   * @param {number} value
+   */
+  set width(value) {
+    this._w = Math.max(1, ~~value)
+  }
+
+  get width() {
+    return this._w
+  }
+
+  /**
+   * @param {number} value
+   */
+  set height(value) {
+    this._h = Math.max(1, ~~value)
+  }
+
+  get height() {
+    return this._h
+  }
+
+  /**
+   * The the value of a grid's cell.
+   *
+   * @param {number} x
+   * @param {number} y
+   * @param {any} value
+   */
   set(x, y, value) {
-    this.__cells[this.__getIndex(x, y)] = value
-    return this
+    this._c[this.pointToIndex(x, y)] = value
   }
 
+  /**
+   * Returns the value of a grid's cell.
+   *
+   * @param {number} x
+   * @param {number} y
+   * @returns {any}
+   */
   get(x, y) {
-    return this.__cells[this.__getIndex(x, y)] || null
+    return this._c[this.pointToIndex(x, y)]
   }
 
+  /**
+   * Returns true if the which cell has any value not equal to `null` or `undefined`.
+   *
+   * @param {number} x
+   * @param {number} y
+   * @returns {boolean}
+   */
   has(x, y) {
     return this.get(x, y) != null
   }
 
-  get width() {
-    return this._width
-  }
-
-  get height() {
-    return this._height
-  }
-
+  /**
+   * Returns the total of cells.
+   *
+   * @returns {number}
+   */
   get length() {
-    return this._width * this._height
+    return this._w * this._h
   }
 
-  forEach(callback, reverse = false) {
-    const cells = this.__cells,
-      w = this._width,
-      h = this._height,
-      limitX = !reverse ? w : -1,
-      limitY = !reverse ? h : -1
-    let x = !reverse ? 0 : w - 1,
-      y = !reverse ? 0 : h - 1
+  /**
+   * Convert a grid point (X, Y) to a index.
+   *
+   * @param {number} x
+   * @param {number} y
+   * @returns {number} The index
+   */
+  pointToIndex(x, y) {
+    return this.clampX(~~x) + this.clampY(~~y) * this._w
+  }
 
-    while (y != limitY) {
-      let proceed
-      x = !reverse ? 0 : w - 1
-      while (x != limitX) {
-        proceed = callback(cells[this.__getIndex(x, y)], x, y, this)
-        if (false === proceed) break
-        x += reverse ? -1 : 1
-      }
-      if (false === proceed) break
-      y += reverse ? -1 : 1
+  /**
+   * Convert index to a grid point X.
+   *
+   * @param {number} index
+   * @returns {number}
+   */
+  indexToPointX(index) {
+    return index % this._w
+  }
+
+  /**
+   * Convert index to a grid point Y.
+   *
+   * @param {number} index
+   * @returns {number}
+   */
+  indexToPointY(index) {
+    return Math.floor(index / this._w)
+  }
+
+  /**
+   * Loops over all grid cells.
+   *
+   * @callback GridForEachCallback
+   * @param {number} x
+   * @param {number} y
+   * @param {any} value
+   * @param {Grid} grid
+   * @returns {boolean?} returns `false` to stop/break the loop
+   *
+   * @param {GridForEachCallback} handler
+   * @param {boolean} [reverse=false]
+   */
+  forEach(handler, reverse = false) {
+    let i = reverse ? this.length - 1 : 0,
+      limit = reverse ? -1 : this.length,
+      step = reverse ? -1 : 1
+
+    while (i !== limit) {
+      const x = this.indexToPointX(i),
+        y = this.indexToPointY(i),
+        cellValue = this._c[i]
+
+      if (false === handler(x, y, cellValue, this)) break
+
+      i += step
     }
-    return this
   }
 
+  /**
+   * @param {*} value
+   */
+  fill(value) {
+    this.forEach((x, y) => {
+      this.set(x, y, value)
+    })
+  }
+
+  /**
+   * @returns {Grid} the cloned grid
+   */
   clone() {
-    return Grid.fromArray(this._width, this._height, this.__cells)
+    return Grid.fromArray(this._w, this._h, this._c)
   }
 
-  clear() {
-    this.__cells = Array(this._width * this._height)
-    return this
+  /**
+   * @param {number} y
+   * @returns {number}
+   */
+  clampX(x) {
+    return _clamp(x, 0, this._w - 1)
   }
 
-  clipX(x) {
-    return this.__clip(x, 0, this._width - 1)
+  /**
+   * @param {number} y
+   * @returns {number}
+   */
+  clampY(y) {
+    return _clamp(y, 0, this._h - 1)
   }
 
-  clipY(y) {
-    return this.__clip(y, 0, this._height - 1)
-  }
-
+  /**
+   * Returns the cell values in a single array.
+   *
+   * @returns {any[]}
+   */
   toArray() {
-    return this.__cells.slice(0)
+    return this._c.slice(0)
   }
 
-  toString() {
-    return this.__cells.join(",")
-  }
+  /**
+   * @param {string} separator
+   * @param {boolean} format
+   * @returns {string}
+   */
+  toString(separator = " ", format = true) {
+    if (!format) return this._c.join(separator)
 
-  // internals
-  __getIndex(x, y) {
-    x = this.clipX(x)
-    y = this.clipY(y)
-    return x + y * this._width
-  }
+    const rows = []
+    this.forEach((x, y, value) => {
+      rows[y] = rows[y] || ""
+      rows[y] += value + separator
+    })
 
-  __clip(n, min, max) {
-    return Math.min(Math.max(n, min), max)
+    return rows.join("\n")
   }
 }
+
+/**
+ * Constrains a number between `min` and `max`.
+ *
+ * @param {number} value
+ * @param {number} min
+ * @param {number} max
+ * @returns {number}
+ */
+function _clamp(value, min, max) {
+  if (value < min) return min
+  if (value > max) return max
+  return value
+}
+
+function _fill(x, y) {}
