@@ -122,7 +122,7 @@ Get (not set) the actor current height.
 ```js
 console.log(player.height) // => 30
 
-player.scale.x = 2
+player.scale.y = 2
 
 console.log(player.height) // => 60
 ```
