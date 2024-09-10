@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <title>Litecanvas Utils</title>
+    <style type="text/css">
+      body {
+        background: #000;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
+    <script src="../../dist/all.js"></script>
+    <script>
+      const e = litecanvas({
+        global: false,
+      })
+
+      sprite = e.paint(3, 3, [" 3 ", "303", " 3 "], {
+        scale: 20,
+      })
+
+      function init() {
+        player = new utils.Actor(sprite)
+
+        player.anchor = utils.ANCHOR_CENTER
+
+        player.x = e.CENTERX
+        player.y = e.CENTERY
+
+        player.opacity = 0.5
+      }
+
+      function update(dt) {
+        player.angle += dt
+        player.scale.x = utils.wave(0.5, 2, e.ELAPSED)
+        player.scale.y = utils.wave(0.5, 2, e.ELAPSED)
+      }
+
+      function draw() {
+        e.cls(0)
+
+        e.line(0, e.CENTERY, e.WIDTH, e.CENTERY, 1)
+        e.line(e.CENTERX, 0, e.CENTERX, e.HEIGHT, 1)
+
+        player.draw(e)
+        e.circfill(player.x, player.y, 1, 4)
+      }
+    </script>
+  </body>
+</html>
