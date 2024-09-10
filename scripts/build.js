@@ -8,6 +8,7 @@ const files = {
     "src/vector/_web": "vector",
     "src/collision/_web": "collision",
     "src/grid/_web": "grid",
+    "src/actor/_web": "actor",
   },
   outdir = "dist"
 
