@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <title>Litecanvas Utils</title>
+    <style type="text/css">
+      body {
+        background: #000;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
+    <script src="../../dist/all.js"></script>
+    <script>
+      utils.global()
+
+      let tween, obj
+      const engine = litecanvas({
+        loop: { init, draw },
+      })
+
+      function init() {
+        tween = new Tween(engine)
+        obj = { x: 0, y: 0, size: 32, color: 5 }
+
+        const easing = QUAD_IN // default is LINEAR
+        const repeat = 3 // repeats 3 times
+        tween.queue(
+          [
+            () => tween.animate(obj, "x", CENTERX, 1, easing),
+            () => tween.animate(obj, "y", CENTERY, 1, easing),
+            () => tween.animate(obj, "x", 0, 1, easing),
+            () => tween.animate(obj, "y", 0, 1, easing),
+          ],
+          repeat // accepts true (repeat infinitely) or an positive number
+        )
+
+        // timescale affects the tweens
+        timescale(4)
+      }
+
+      function draw() {
+        cls(0)
+
+        rectfill(0, 0, CENTERX + obj.size, CENTERY + obj.size, 1)
+        rectfill(obj.x, obj.y, obj.size, obj.size, obj.color)
+      }
+    </script>
+  </body>
+</html>

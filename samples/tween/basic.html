@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <title>Litecanvas Utils</title>
+    <style type="text/css">
+      body {
+        background: #000;
+        color: white;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
+    <script src="../../dist/all.js"></script>
+    <script>
+      utils.global()
+
+      let tween, obj
+      const engine = litecanvas({
+        loop: { init, tapped, draw },
+      })
+
+      function init() {
+        tween = new Tween(engine)
+        obj = { x: 0, y: 0, size: 32, color: 3 }
+      }
+
+      function tapped(tapx, tapy) {
+        // update obj.x to tapx over 1 second
+        tween.animate(obj, "x", tapx, 1)
+        // update obj.y to tapy over 1 second
+        tween.animate(obj, "y", tapy, 1)
+      }
+
+      function draw() {
+        cls(0)
+        rectfill(obj.x, obj.y, obj.size, obj.size, obj.color)
+      }
+    </script>
+  </body>
+</html>
