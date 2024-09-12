@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,6 +19,8 @@
     <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
     <script src="../../dist/all.js"></script>
     <script>
+      utils.global()
+
       litecanvas()
 
       function init() {
@@ -43,7 +45,7 @@
         rectfill(...b, 4)
 
         if (colrect(...a, ...b)) {
-          overlaps = utils.intersection(...a, ...b)
+          overlaps = intersection(...a, ...b)
           rectfill(...overlaps, 5)
         }
       }

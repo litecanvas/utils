@@ -1,3 +1,4 @@
+import "../_global.js"
 import resolve from "./resolve.js"
 import intersection from "./intersection.js"
 

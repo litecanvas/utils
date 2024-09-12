@@ -9,6 +9,7 @@ const files = {
     "src/collision/_web": "collision",
     "src/grid/_web": "grid",
     "src/actor/_web": "actor",
+    "src/tween/_web": "tween",
   },
   outdir = "dist"
 

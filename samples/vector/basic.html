@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,10 +19,12 @@
     <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
     <script src="../../dist/all.js"></script>
     <script>
+      utils.global()
+
       litecanvas()
 
       function init() {
-        pos = utils.vec(CENTERX, CENTERY)
+        pos = vec(CENTERX, CENTERY)
       }
 
       function tapped(tapx, tapy) {

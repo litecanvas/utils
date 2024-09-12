@@ -1,3 +1,4 @@
+import "../_global.js"
 import diff from "./diff.js"
 import wave from "./wave.js"
 import fract from "./fract.js"

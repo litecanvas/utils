@@ -19,6 +19,8 @@
     <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
     <script src="../../dist/all.js"></script>
     <script>
+      utils.global()
+
       const e = litecanvas({
         global: false,
       })
@@ -28,9 +30,9 @@
       })
 
       function init() {
-        player = new utils.Actor(sprite)
+        player = new Actor(sprite)
 
-        player.anchor = utils.ANCHOR_CENTER
+        player.anchor = ANCHOR_CENTER
 
         player.x = e.CENTERX
         player.y = e.CENTERY
@@ -40,8 +42,8 @@
 
       function update(dt) {
         player.angle += dt
-        player.scale.x = utils.wave(0.5, 2, e.ELAPSED)
-        player.scale.y = utils.wave(0.5, 2, e.ELAPSED)
+        player.scale.x = wave(0.5, 2, e.ELAPSED)
+        player.scale.y = wave(0.5, 2, e.ELAPSED)
       }
 
       function draw() {

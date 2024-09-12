@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -19,12 +19,14 @@
     <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
     <script src="../../dist/all.js"></script>
     <script>
+      utils.global()
+
       const engine = litecanvas({
         width: 500,
       })
 
       function init() {
-        camera = new utils.Camera(engine)
+        camera = new Camera(engine)
       }
 
       function tapped() {

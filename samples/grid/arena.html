@@ -19,8 +19,10 @@
     <h1>Open the browser console</h1>
     <script src="../../dist/all.js"></script>
     <script>
+      utils.global()
+
       // make a grid 13x13
-      let grid = new utils.Grid(13, 13)
+      let grid = new Grid(13, 13)
 
       // fill the entire grid with "."
       grid.fill(".")
