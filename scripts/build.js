@@ -9,7 +9,6 @@ const files = {
     "src/collision/_web": "collision",
     "src/grid/_web": "grid",
     "src/actor/_web": "actor",
-    "src/tween/_web": "tween",
   },
   outdir = "dist"
 
@@ -40,5 +39,5 @@ for (let [path, name] of Object.entries(files)) {
 function filesize(filename) {
   var stats = fs.statSync(filename)
   var fileSizeInBytes = stats.size
-  return (fileSizeInBytes / 1000).toFixed(1) + "kb"
+  return (fileSizeInBytes / 1000).toFixed(2) + "kb"
 }
