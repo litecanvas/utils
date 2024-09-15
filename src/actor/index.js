@@ -12,7 +12,7 @@ export class Actor {
   sprite
 
   /** @type {Vector} The actor position */
-  _p
+  pos
 
   /** @type {Vector} The actor anchor (origin) */
   _o
@@ -35,7 +35,7 @@ export class Actor {
    */
   constructor(sprite, position) {
     this.sprite = sprite
-    this._p = position || vec(0)
+    this.pos = position || vec(0)
     this._o = veccopy(ANCHOR_TOP_LEFT)
     this._s = vec(1, 1)
   }
@@ -44,28 +44,28 @@ export class Actor {
    * @param {number}
    */
   set x(value) {
-    this._p.x = value
+    this.pos.x = value
   }
 
   /**
    * @returns {number}
    */
   get x() {
-    return this._p.x
+    return this.pos.x
   }
 
   /**
    * @param {number}
    */
   set y(value) {
-    this._p.y = value
+    this.pos.y = value
   }
 
   /**
    * @returns {number}
    */
   get y() {
-    return this._p.y
+    return this.pos.y
   }
 
   /**
@@ -127,7 +127,7 @@ export class Actor {
    * @param {LitecanvasInstance} litecanvas
    */
   transform(litecanvas) {
-    litecanvas.translate(this._p.x, this._p.y)
+    litecanvas.translate(this.pos.x, this.pos.y)
     litecanvas.rotate(this.angle)
     litecanvas.scale(this._s.x, this._s.y)
     litecanvas.alpha(this.opacity)

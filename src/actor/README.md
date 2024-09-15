@@ -36,9 +36,18 @@ function draw() {
 }
 ```
 
+## Actor#pos
+
+Set or get the actor position vector
+
+```js
+player.pos.x = 100
+player.pos.x = 200
+```
+
 ## Actor#x / Actor#y
 
-Set or get the actor position
+Set or get the actor position X or Y
 
 ```js
 player.x = 100
