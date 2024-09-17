@@ -32,11 +32,12 @@ export class Actor {
   /**
    * @param {Image|HTMLCanvasElement|OffscreenCanvas} sprite
    * @param {Vector} position
+   * @param {Vector} anchor
    */
-  constructor(sprite, position) {
+  constructor(sprite, position, anchor = ANCHOR_TOP_LEFT) {
     this.sprite = sprite
     this.pos = position || vec(0)
-    this._o = veccopy(ANCHOR_TOP_LEFT)
+    this._o = veccopy(anchor)
     this._s = vec(1, 1)
   }
 
