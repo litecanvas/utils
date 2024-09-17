@@ -26,7 +26,7 @@ const pos = vec(0, 0)
 
 ### CDN
 
-Download from https://unpkg.com/@litecanvas/utils/dist and load in a `<script>` tag in your HTML.
+Download from https://unpkg.com/browse/@litecanvas/utils/dist/ and load in a `<script>` tag in your HTML.
 
 ```js
 // now the "utils" namespace is created
