@@ -28,12 +28,12 @@ export default class Camera {
   constructor(engine = null) {
     engine = engine || globalThis
     this._engine = engine
-    this.size(engine.WIDTH || 0, engine.HEIGHT || 0)
+    this.resize(engine.WIDTH || 0, engine.HEIGHT || 0)
     this.x = this.width / 2
     this.y = this.height / 2
   }
 
-  size(width, height) {
+  resize(width, height) {
     this.width = width
     this.height = height
   }
@@ -105,7 +105,7 @@ export default class Camera {
     return output
   }
 
-  shake(duration = 0.3, amplitude = 1) {
+  shake(amplitude = 1, duration = 0.3) {
     if (this.shaking()) return
 
     this._shake.removeListener = this._engine.listen("update", (dt) => {
@@ -126,7 +126,7 @@ export default class Camera {
     }
   }
 
-  shaking() {
+  get shaking() {
     return this._shake.removeListener !== null
   }
 }
