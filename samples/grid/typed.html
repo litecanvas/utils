@@ -20,14 +20,11 @@
     <script>
       utils.global()
 
-      // make a grid 13x13
-      let grid = new Grid(13, 13)
+      // make a grid 7x7
+      let grid = new TypedGrid(7, 7)
 
-      // fill the entire grid with "."
-      grid.fill(".")
-
-      // put a '@' in the middle
-      grid.set(grid.width / 2, grid.height / 2, "@")
+      // put a "7" in the middle
+      grid.set(grid.width / 2, grid.height / 2, 7)
 
       // put '#' around the grid
       grid.forEach((x, y) => {
@@ -37,7 +34,7 @@
           x === grid.width - 1 ||
           y === grid.height - 1
         ) {
-          grid.set(x, y, "#")
+          grid.set(x, y, 1)
         }
       })
 

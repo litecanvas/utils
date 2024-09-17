@@ -1,4 +1,4 @@
-export default class Grid {
+export class Grid {
   /** @type {number} The grid width */
   _w
 
@@ -9,54 +9,34 @@ export default class Grid {
   _c
 
   /**
-   * @static
-   * @param {number} width
-   * @param {number} height
-   * @param {any[]} values
-   */
-  static fromArray(width, height, values) {
-    const grid = new Grid(width, height)
-    for (let i = 0; i < values.length; i++) {
-      grid._c[i] = values[i]
-    }
-    return grid
-  }
-
-  /**
    * @param {number} width The grid width
    * @param {number} height The grid height
    */
-  constructor(width, height) {
-    this.width = width
-    this.height = height
-    this.clear()
+  constructor(width, height, values = []) {
+    this._w = Math.max(1, ~~width)
+    this._h = Math.max(1, ~~height)
+    this._c = values
   }
 
   /**
    * Delete all cell values.
    */
   clear() {
-    this._c = Array(this._w * this._h)
+    this.forEach((x, y) => this.set(x, y, undefined))
   }
 
   /**
-   * @param {number} value
+   * @returns {number}
+   * @readonly
    */
-  set width(value) {
-    this._w = Math.max(1, ~~value)
-  }
-
   get width() {
     return this._w
   }
 
   /**
-   * @param {number} value
+   * @returns {number}
+   * @readonly
    */
-  set height(value) {
-    this._h = Math.max(1, ~~value)
-  }
-
   get height() {
     return this._h
   }
@@ -201,7 +181,7 @@ export default class Grid {
    * @returns {any[]}
    */
   toArray() {
-    return this._c.slice(0)
+    return this._c.slice()
   }
 
   /**
@@ -222,6 +202,37 @@ export default class Grid {
   }
 }
 
+export class TypedGrid extends Grid {
+  /**
+   * @param {number} width The grid width
+   * @param {number} height The grid height
+   */
+  constructor(width, height, TypedArray = Uint8Array) {
+    super(width, height, null)
+    this._c = new TypedArray(this._w * this._h)
+  }
+
+  /**
+   * @param {number} x
+   * @param {number} y
+   * @returns {boolean}
+   */
+  has(x, y) {
+    return this.get(x, y) !== 0
+  }
+
+  /**
+   * @returns {TypedGrid}
+   */
+  clone() {
+    const copy = new TypedGrid(this._w, this._h, this._c.constructor)
+    this.forEach((x, y, value) => {
+      copy.set(x, y, value)
+    })
+    return copy
+  }
+}
+
 /**
  * Constrains a number between `min` and `max`.
  *
@@ -235,5 +246,3 @@ function _clamp(value, min, max) {
   if (value > max) return max
   return value
 }
-
-function _fill(x, y) {}

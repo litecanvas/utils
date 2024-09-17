@@ -1,4 +1,4 @@
-# Grid
+# Grid utils
 
 **CDN**: https://unpkg.com/@litecanvas/utils/dist/grid.js
 
@@ -45,3 +45,17 @@ The result:
 # . . . . . . . . . . . #
 # # # # # # # # # # # # #
 ```
+
+## Typed Grid
+
+You can create a grid structure thats uses a [typed array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Typed_arrays) rather than a "normal" array.
+
+```
+import { TypedGrid } from "@litecanvas/utils"
+
+let u8grid = new TypedGrid(5, 5) // by default, uses Uint8Array
+
+let i16grid = new TypedGrid(5, 5, Int16Array) // or specify your typed array
+```
+
+> Note: `TypedGrid` inherits all methods from `Grid`.
