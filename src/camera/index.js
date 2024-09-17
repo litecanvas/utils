@@ -106,7 +106,7 @@ export default class Camera {
   }
 
   shake(amplitude = 1, duration = 0.3) {
-    if (this.shaking()) return
+    if (this.shaking) return
 
     this._shake.removeListener = this._engine.listen("update", (dt) => {
       this._shake.x = this._engine.randi(-amplitude, amplitude)
@@ -119,7 +119,7 @@ export default class Camera {
   }
 
   unshake() {
-    if (this.shaking()) {
+    if (this.shaking) {
       this._shake.removeListener()
       this._shake.removeListener = null
       this._shake.x = this._shake.y = 0
