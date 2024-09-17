@@ -17,9 +17,10 @@
   "keywords": [
     "litecanvas",
     "utilities",
+    "helpers",
     "camera",
     "vector",
-    "gamedev"
+    "grid"
   ],
   "scripts": {
     "dev": "esbuild src/_web.js --bundle --watch --outfile=dist/all.js --servedir=.",
