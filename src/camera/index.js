@@ -91,6 +91,20 @@ export default class Camera {
     this.rotation = radians
   }
 
+  getWorldPoint(x, y, output) {
+    const c = Math.cos(-this.rotation),
+      s = Math.sin(-this.rotation)
+
+    x = (x - this.width / 2) / this.scale
+    y = (y - this.height / 2) / this.scale
+
+    output = output || {}
+    output.x = c * x - s * y + this.x
+    output.y = s * x + c * y + this.y
+
+    return output
+  }
+
   shake(duration = 0.3, amplitude = 1) {
     if (this.shaking()) return
 
