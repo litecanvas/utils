@@ -27,8 +27,10 @@ function draw() {
 
 ## Properties
 
-- `x` the camera X-position
-- `y` the camera Y-position
+- `x` the camera position-X
+- `y` the camera position-Y
+- `ox` the camera offset-X
+- `oy` the camera offset-Y
 - `shaking` it's `true` when the camera is shaking
 - `scale` the camera zoom
 - `rotation` the camera rotation
@@ -36,6 +38,14 @@ function draw() {
 - `height` the camera height
 
 ## Methods
+
+### start(clip: boolean = true)
+
+Apply the camera transformations (move, zoom and rotate). You must call this method before draw anything inside of the camera.
+
+### stop()
+
+Stop looking through the camera. You must call this method after draw anything inside of the camera.
 
 ### lookAt(x: number, y: number)
 
@@ -96,7 +106,7 @@ function update(dt) {
 }
 ```
 
-### shake(amplitude:number = 1, duration: number = 0.3)
+### shake(duration: number = 0.3, amplitude: number = 1)
 
 Shakes the camera view
 
@@ -113,10 +123,20 @@ Makes the camera stop shaking immediately
 
 ### getWorldPoint(x: number, y: number, output?: {x: number, y: number}): {x: number, y: number}
 
-This method is used to convert a point (X, Y) if the camera is moved, rotated or zoomed.
+This method is used to convert a camera point (X, Y) to world point.
 
 ```
+// convert a mouse/touch to world position
 function tapped(x, y) {
   const fixedTap = camera.getWorldPoint(x, y)
 }
 ```
+
+### getCameraPoint(x: number, y: number, output?: {x: number, y: number}): {x: number, y: number}
+
+This method is used to convert a world point (X, Y) to camera point.
+
+### getBounds(): number[]
+
+Returns an array containing the position-X, position-Y, the width, and the height of the camera.
+Useful to see if an object is visible on the screen.

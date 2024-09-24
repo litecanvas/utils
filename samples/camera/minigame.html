@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <title>Litecanvas Utils</title>
+    <style type="text/css">
+      body {
+        background: #000;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
+    <script src="../../dist/all.js"></script>
+    <script>
+      utils.global()
+
+      const TILE_SIZE = 8 // 8x8
+      const MAP_SIZE = 128 // 128x128
+
+      let camera, player, sprites, map
+
+      const engine = litecanvas({
+        width: 64,
+        height: 64,
+        pixelart: true,
+      })
+
+      function init() {
+        sprites = {
+          player: paint(8, 8, [
+            "........",
+            "..0000..",
+            "..0707.",
+            "..0000..",
+            "..0000..",
+            "..0000..",
+            "..0000..",
+            "..0..0..",
+          ]),
+
+          grass: paint(
+            8,
+            8,
+            [
+              "bbbbbbbb",
+              "b9b9b9b9",
+              "bb9bbb9b",
+              "bbbbbbbb",
+              "9b9b9b9b",
+              "b9bbb9bb",
+              "bbbbbbbb",
+              "bbbbbbbb",
+            ],
+            {
+              scale: 1,
+            }
+          ),
+        }
+
+        camera = new Camera(engine, 0, 0, WIDTH)
+        player = new Actor(sprites.player)
+
+        map = new Grid(MAP_SIZE / TILE_SIZE, MAP_SIZE / TILE_SIZE)
+        // add grass to map (20% chance)
+        map.forEach((x, y) => {
+          map.set(x, y, rand() < 0.2 ? 1 : 0)
+        })
+      }
+
+      // tap to move the player
+      function tapped(tapx, tapy) {
+        distx = abs(tapx - CENTERX)
+        disty = abs(tapy - CENTERY)
+
+        if (distx > disty) {
+          dirx = sign(tapx - CENTERX)
+          player.x += TILE_SIZE * dirx
+        } else {
+          diry = sign(tapy - CENTERY)
+          player.y += TILE_SIZE * diry
+        }
+
+        player.x = clamp(player.x, 0, MAP_SIZE - TILE_SIZE)
+        player.y = clamp(player.y, 0, MAP_SIZE - TILE_SIZE)
+      }
+
+      function update() {
+        // center the camera in the player position
+        camera.lookAt(player.x, player.y)
+      }
+
+      function draw() {
+        cls(0)
+
+        camera.start(true)
+
+        rectfill(0, 0, MAP_SIZE, MAP_SIZE, 11)
+
+        map.forEach((x, y, value) => {
+          if (1 === value) image(x * TILE_SIZE, y * TILE_SIZE, sprites.grass)
+        })
+
+        player.draw()
+
+        camera.end()
+      }
+    </script>
+  </body>
+</html>

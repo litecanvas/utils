@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <title>Litecanvas Utils</title>
+    <style type="text/css">
+      body {
+        background: #000;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
+    <script src="../../dist/all.js"></script>
+    <script>
+      utils.global()
+
+      let camera, object
+
+      const engine = litecanvas({
+        width: 500,
+      })
+
+      function init() {
+        camera = new Camera(engine)
+
+        object = [
+          100, // x
+          100, // y
+          50, // width
+          50, // height
+        ]
+      }
+
+      function tapping(x, y) {
+        camera.x = x
+        camera.y = y
+      }
+
+      function draw() {
+        cls(0)
+
+        camera.start()
+
+        rectfill(100, 100, 50, 50, 4)
+
+        circfill(300, 300, 50, 5)
+
+        camera.end()
+      }
+    </script>
+  </body>
+</html>
