@@ -88,7 +88,7 @@ export class Actor {
    * @returns {number}
    */
   get width() {
-    return this.sprite.width * this._s.y
+    return this.sprite.width * this._s.x
   }
 
   /**
@@ -96,6 +96,17 @@ export class Actor {
    */
   get height() {
     return this.sprite.height * this._s.y
+  }
+
+  /**
+   * @returns {number[]}
+   */
+  getBounds(scaled = true) {
+    const w = this.sprite.width * (scaled ? this._s.x : 1)
+    const h = this.sprite.height * (scaled ? this._s.y : 1)
+    const x = this.pos.x - w * this.anchor.x
+    const y = this.pos.y - h * this.anchor.y
+    return [x, y, w, h]
   }
 
   /**
@@ -116,10 +127,7 @@ export class Actor {
     litecanvas.push()
 
     this.transform(litecanvas)
-
-    const anchorX = this.sprite.width * this.anchor.x
-    const anchorY = this.sprite.height * this.anchor.y
-    litecanvas.image(-anchorX, -anchorY, this.sprite)
+    this.drawImage(litecanvas)
 
     litecanvas.pop()
   }
@@ -131,6 +139,15 @@ export class Actor {
     litecanvas.translate(this.pos.x, this.pos.y)
     litecanvas.rotate(this.angle)
     litecanvas.scale(this._s.x, this._s.y)
+  }
+
+  /**
+   * @param {LitecanvasInstance} litecanvas
+   */
+  drawImage(litecanvas) {
+    const anchorX = this.sprite.width * this.anchor.x
+    const anchorY = this.sprite.height * this.anchor.y
     litecanvas.alpha(this.opacity)
+    litecanvas.image(-anchorX, -anchorY, this.sprite)
   }
 }

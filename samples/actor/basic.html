@@ -49,10 +49,17 @@
       function draw() {
         e.cls(0)
 
+        // two lines
         e.line(0, e.CENTERY, e.WIDTH, e.CENTERY, 1)
         e.line(e.CENTERX, 0, e.CENTERX, e.HEIGHT, 1)
 
+        // the actor
         player.draw(e)
+
+        // the actor bounds (useful to check collision)
+        e.rect(...player.getBounds(), 4)
+
+        // the red dot
         e.circfill(player.x, player.y, 1, 4)
       }
     </script>
