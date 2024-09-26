@@ -38,7 +38,10 @@ export default class Camera {
     this.ox = ox
     this.oy = oy
 
-    this.resize(width || engine.WIDTH - ox, height || engine.HEIGHT - oy)
+    this.resize(
+      width || this._engine.WIDTH - ox,
+      height || this._engine.HEIGHT - oy
+    )
 
     this.x = this.width / 2
     this.y = this.height / 2
