@@ -1,10 +1,4 @@
 import "../_global.js"
-import diff from "./diff.js"
-import wave from "./wave.js"
-import fract from "./fract.js"
+import * as mathUtils from "./index.js"
 
-globalThis.utils = Object.assign(globalThis.utils || {}, {
-  diff,
-  wave,
-  fract,
-})
+globalThis.utils = Object.assign(globalThis.utils || {}, mathUtils)
