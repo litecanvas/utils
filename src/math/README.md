@@ -61,3 +61,18 @@ function draw() {
   circfill(CENTERX, CENTERY + y, 50, 4)
 }
 ```
+
+## range
+
+Returns a sequence of numbers from `0` to `size - 1`.
+
+Syntax: `range(size: number): number[]`
+
+```js
+import { range } from "@litecanvas/utils"
+
+// prints 0 1 2 3 4
+for (let i of range(5)) {
+  console.log(i)
+}
+```
