@@ -1,4 +1,4 @@
-import { Vector, vec, veccopy } from "../vector/index.js"
+import { Vector, vec } from "../vector/index.js"
 import "litecanvas"
 
 export const ANCHOR_CENTER = vec(0.5, 0.5)
@@ -37,7 +37,7 @@ export class Actor {
   constructor(sprite, position, anchor = ANCHOR_TOP_LEFT) {
     this.sprite = sprite
     this.pos = position || vec(0)
-    this._o = veccopy(anchor)
+    this._o = vec(anchor) // clone the anchor vector
     this._s = vec(1, 1)
   }
 
@@ -99,6 +99,13 @@ export class Actor {
   }
 
   /**
+   * @retuns {Vector}
+   */
+  get scale() {
+    return this._s
+  }
+
+  /**
    * @returns {number[]}
    */
   getBounds(scaled = true) {
@@ -107,13 +114,6 @@ export class Actor {
     const x = this.pos.x - w * this.anchor.x
     const y = this.pos.y - h * this.anchor.y
     return [x, y, w, h]
-  }
-
-  /**
-   * @retuns {Vector}
-   */
-  get scale() {
-    return this._s
   }
 
   /**

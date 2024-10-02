@@ -1,3 +1,8 @@
+const sqrt = Math.sqrt,
+  cos = Math.cos,
+  sin = Math.sin,
+  PI2 = 2 * Math.PI
+
 export class Vector {
   /** @type {number} */
   x
@@ -22,13 +27,25 @@ export class Vector {
 }
 
 /**
- * Creates a new vector.
+ * @param {*} v
+ * @returns {boolean}
+ */
+const isVector = (v) => v instanceof Vector
+
+/**
+ * Copy an vector or creates a new one.
  *
- * @param {number} x
+ * @param {number|Vector} [x]
  * @param {number} [y]
  * @returns {Vector}
  */
-export const vec = (x = 0, y = x) => new Vector(x, y)
+export const vec = (x = 0, y = x) => {
+  if (isVector(x)) {
+    y = x.y
+    x = x.x
+  }
+  return new Vector(x, y)
+}
 
 /**
  * Checks whether two vectors are equal.
@@ -38,20 +55,12 @@ export const vec = (x = 0, y = x) => new Vector(x, y)
  * @param {number} [y]
  * @returns {boolean}
  */
-export const veceq = (v, x, y = x) => {
-  if (isvector(x)) {
-    return veceq(v, x.x, x.y)
+export const vecEq = (v, x, y = x) => {
+  if (isVector(x)) {
+    return vecEq(v, x.x, x.y)
   }
   return v.x === x && v.y === y
 }
-
-/**
- * Copy a vector.
- *
- * @param {Vector} v The original vector
- * @returns {Vector} The clone
- */
-export const veccopy = (v) => vec(v.x, v.y)
 
 /**
  * Assigns new values to a vector.
@@ -59,14 +68,16 @@ export const veccopy = (v) => vec(v.x, v.y)
  * @param {Vector} v The vector
  * @param {number|Vector} x
  * @param {number} [y]
+ * @returns {Vector}
  */
-export const vecset = (v, x, y = x) => {
-  if (isvector(x)) {
-    vecset(v, x.x, x.y)
+export const vecSet = (v, x, y = x) => {
+  if (isVector(x)) {
+    vecSet(v, x.x, x.y)
   } else {
     v.x = x
     v.y = y
   }
+  return v
 }
 
 /**
@@ -75,14 +86,17 @@ export const vecset = (v, x, y = x) => {
  * @param {Vector} v The vector
  * @param {number|Vector} x
  * @param {number} [y]
+ * @returns {Vector}
  */
-export const vecadd = (v, x, y = x) => {
-  if (isvector(x)) {
-    vecadd(v, x.x, x.y)
-  } else {
-    v.x += x
-    v.y += y
+export const vecAdd = (v, x, y = x) => {
+  if (isVector(x)) {
+    return vecAdd(v, x.x, x.y)
   }
+
+  v.x += x
+  v.y += y
+
+  return v
 }
 
 /**
@@ -91,14 +105,17 @@ export const vecadd = (v, x, y = x) => {
  * @param {Vector} v The vector
  * @param {number|Vector} x
  * @param {number} [y]
+ * @returns {Vector}
  */
-export const vecsub = (v, x, y = x) => {
-  if (isvector(x)) {
-    vecsub(v, x.x, x.y)
-  } else {
-    v.x -= x
-    v.y -= y
+export const vecSub = (v, x, y = x) => {
+  if (isVector(x)) {
+    return vecSub(v, x.x, x.y)
   }
+
+  v.x -= x
+  v.y -= y
+
+  return v
 }
 
 /**
@@ -107,14 +124,17 @@ export const vecsub = (v, x, y = x) => {
  * @param {Vector} v
  * @param {number|Vector} x
  * @param {number} [y]
+ * @returns {Vector}
  */
-export const vecmult = (v, x, y = x) => {
-  if (isvector(x)) {
-    vecmult(v, x.x, x.y)
-  } else {
-    v.x *= x
-    v.y *= y
+export const vecMult = (v, x, y = x) => {
+  if (isVector(x)) {
+    return vecMult(v, x.x, x.y)
   }
+
+  v.x *= x
+  v.y *= y
+
+  return v
 }
 
 /**
@@ -123,14 +143,17 @@ export const vecmult = (v, x, y = x) => {
  * @param {Vector} v
  * @param {number|Vector} x
  * @param {number} [y]
+ * @returns {Vector}
  */
-export const vecdiv = (v, x, y = x) => {
-  if (isvector(x)) {
-    vecdiv(v, x.x, x.y)
-  } else {
-    v.x /= x
-    v.y /= y
+export const vecDiv = (v, x, y = x) => {
+  if (isVector(x)) {
+    return vecDiv(v, x.x, x.y)
   }
+
+  v.x /= x
+  v.y /= y
+
+  return v
 }
 
 /**
@@ -138,13 +161,41 @@ export const vecdiv = (v, x, y = x) => {
  *
  * @param {Vector} v
  * @param {number} radians
+ * @returns {Vector}
  */
-export const vecrot = (v, radians) => {
-  const cos = Math.cos(radians),
-    sin = Math.sin(radians)
+export const vecRotate = (v, radians) => {
+  const c = cos(radians),
+    s = sin(radians)
 
-  v.x = cos * v.x - sin * v.y
-  v.y = sin * v.x + cos * v.y
+  v.x = c * v.x - s * v.y
+  v.y = s * v.x + c * v.y
+
+  return v
+}
+
+/**
+ * Reflects a vector about a line (second argument).
+ *
+ * @param {Vector} v
+ * @param {Vector} normal
+ * @returns {Vector}
+ */
+export const vecReflect = (v, normal) => {
+  const normalCopy = vecNorm(vec(normal))
+  return vecSub(v, vecMult(normalCopy, 2 * vecDot(v, normalCopy)))
+}
+
+/**
+ * Reflects a vector about a line (second argument).
+ *
+ * @param {Vector} v
+ * @param {Vector} normal
+ * @returns {Vector}
+ */
+export const vecSetMag = (v, value) => {
+  vecNorm(v)
+  vecMult(v, value)
+  return v
 }
 
 /**
@@ -153,7 +204,7 @@ export const vecrot = (v, radians) => {
  * @param {Vector} v
  * @returns {number}
  */
-export const vecmag = (v) => Math.sqrt(v.x * v.x + v.y * v.y)
+export const vecMag = (v) => sqrt(v.x * v.x + v.y * v.y)
 
 /**
  * Calculates the magnitude (length) of the vector squared.
@@ -161,18 +212,20 @@ export const vecmag = (v) => Math.sqrt(v.x * v.x + v.y * v.y)
  * @param {Vector} v
  * @returns {number}
  */
-export const vecmag2 = (v) => v.x * v.x + v.y * v.y
+export const vecMag2 = (v) => v.x * v.x + v.y * v.y
 
 /**
  * Scales the values of a vector so that its magnitude is 1.
  *
  * @param {Vector} v
+ * @returns {Vector}
  */
-export const vecnorm = (v) => {
-  const length = vecmag(v)
+export const vecNorm = (v) => {
+  const length = vecMag(v)
   if (length > 0) {
-    vecdiv(v, length)
+    vecDiv(v, length)
   }
+  return v
 }
 
 /**
@@ -180,13 +233,15 @@ export const vecnorm = (v) => {
  *
  * @param {Vector} v
  * @param {number} max
+ * @returns {Vector}
  */
-export const veclimit = (v, max) => {
-  const sq = vecmag2(v)
+export const vecLimit = (v, max = 1) => {
+  const sq = vecMag2(v)
   if (sq > max * max) {
-    vecdiv(v, Math.sqrt(sq)) //normalize it
-    vecmult(v, max)
+    vecDiv(v, sqrt(sq)) //normalize it
+    vecMult(v, max)
   }
+  return v
 }
 
 /**
@@ -196,10 +251,10 @@ export const veclimit = (v, max) => {
  * @param {Vector} b
  * @returns {number}
  */
-export const vecdist = (a, b) => {
+export const vecDist = (a, b) => {
   const dx = a.x - b.x
   const dy = a.y - b.y
-  return Math.sqrt(dx * dx + dy * dy)
+  return sqrt(dx * dx + dy * dy)
 }
 
 /**
@@ -209,7 +264,7 @@ export const vecdist = (a, b) => {
  * @param {Vector} b
  * @returns {number}
  */
-export const vecdist2 = (a, b) => {
+export const vecDist2 = (a, b) => {
   const dx = a.x - b.x
   const dy = a.y - b.y
   return dx * dx + dy * dy
@@ -221,7 +276,7 @@ export const vecdist2 = (a, b) => {
  * @param {Vector} v
  * @returns {number}
  */
-export const vecdir = (v) => Math.atan2(v.y, v.x)
+export const vecAngle = (v) => Math.atan2(v.y, v.x)
 
 /**
  * Calculates the dot product of two vectors.
@@ -236,7 +291,7 @@ export const vecdir = (v) => Math.atan2(v.y, v.x)
  * @param {Vector} b
  * @returns {number}
  */
-export const vecdot = (a, b) => a.x * b.x + a.y * b.y
+export const vecDot = (a, b) => a.x * b.x + a.y * b.y
 
 /**
  * Calculates the cross product of two vectors.
@@ -249,7 +304,7 @@ export const vecdot = (a, b) => a.x * b.x + a.y * b.y
  * @param {Vector} b
  * @returns {number}
  */
-export const veccross = (a, b) => a.x * b.y - a.y * b.x
+export const vecCross = (a, b) => a.x * b.y - a.y * b.x
 
 /**
  * Calculates new vector values that are proportionally the same distance between two vectors.
@@ -260,10 +315,12 @@ export const veccross = (a, b) => a.x * b.y - a.y * b.x
  * @param {Vector} a
  * @param {Vector} b
  * @param {number} t
+ * @returns {Vector}
  */
-export const veclerp = (a, b, t) => {
+export const vecLerp = (a, b, t) => {
   a.x += (b.x - a.x) * t || 0
   a.y += (b.y - a.y) * t || 0
+  return a
 }
 
 /**
@@ -274,25 +331,91 @@ export const veclerp = (a, b, t) => {
  *
  * @param {number} [minlength]
  * @param {number} [maxlength]
+ * @param {() => number} [randomFn]
  * @returns {Vector}
  */
-export const vecrand = (minlength = 1, maxlength = minlength) => {
-  const angle = vecconfig.random() * 2 * Math.PI
-  const radius = vecconfig.random() * (maxlength - minlength) + minlength
-  return vec(Math.cos(angle) * radius, Math.sin(angle) * radius)
+export const vecRand = (
+  minlength = 1,
+  maxlength = minlength,
+  randomFn = globalThis.rand || Math.random
+) => {
+  const angle = randomFn() * PI2
+  const radius = randomFn() * (maxlength - minlength) + minlength
+  return vec(cos(angle) * radius, sin(angle) * radius)
 }
 
 /**
- * @param {any} v
- * @returns {boolean}
+ * @param {Vector} v
+ * @returns {Vector}
  */
-export const isvector = (v) => v instanceof Vector
-
-export const vecconfig = {
-  random: () => {
-    return globalThis.rand ? rand() : Math.random()
-  },
+export const vecAbs = (v) => {
+  v.x = Math.abs(v.x)
+  v.y = Math.abs(v.y)
+  return v
 }
+
+/**
+ * Rounded up all the vector components.
+ *
+ * @param {Vector} v
+ * @returns {Vector}
+ */
+export const vecCeil = (v) => {
+  v.x = Math.ceil(v.x)
+  v.y = Math.ceil(v.y)
+  return v
+}
+
+/**
+ * Rounded down all the vector components.
+ *
+ * @param {Vector} v
+ * @returns {Vector}
+ */
+export const vecFloor = (v) => {
+  v.x = Math.floor(v.x)
+  v.y = Math.floor(v.y)
+  return v
+}
+
+/**
+ * Rounded to the nearest integer all the vector components.
+ *
+ * @param {Vector} v
+ * @returns {Vector}
+ */
+export const vecRound = (v) => {
+  v.x = Math.round(v.x)
+  v.y = Math.round(v.y)
+  return v
+}
+
+/**
+ * Clamp all components between the components of min and max.
+ *
+ * @param {Vector} v
+ * @param {Vector} min
+ * @param {Vector} max
+ * @returns {Vector}
+ */
+export const vecClamp = (v, min, max) => {
+  if (v.x < min.x) v.x = min.x
+  if (v.x > max.x) v.x = max.x
+  if (v.y < min.y) v.y = min.y
+  if (v.y > max.y) v.y = max.y
+  return v
+}
+
+/**
+ * @param {Vector} v
+ * @param {Vector} to
+ * @param {number} delta
+ * @returns {Vector}
+ */
+export const vecMove = (v, to, delta = 1) =>
+  vecAdd(v, to.x * delta, to.y * delta)
+
+export const vecIsZero = (v) => vecEq(v, ZERO)
 
 // constants
 export const ZERO = /** @__PURE__ */ vec(0, 0)

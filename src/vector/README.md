@@ -6,9 +6,9 @@ A class to describe a two-dimensional vector.
 
 ## vec
 
-Creates a vector.
+Copy a vector or create a new one.
 
-Syntax: `vec(x: number = 0, y: number = 0): Vector`
+Syntax to create: `vec(x: number = 0, y: number = 0): Vector`
 
 ```js
 import { vec, Vector } from "@litecanvas/utils"
@@ -20,18 +20,14 @@ console.log(position.x) // outputs 50
 console.log(position.y) // outputs 25
 ```
 
-## veccopy
-
-Creates a copy/clone of a given vector.
-
-Syntax: `veccopy(v: Vector): Vector`
+Syntax to copy: `vec(other: Vector): Vector`
 
 ```js
-import { vec, veccopy } from "@litecanvas/utils"
+import { vec } from "@litecanvas/utils"
 
 const a = vec(1, 1)
 const b = a // `b`` is a references of `a`
-const c = veccopy(a) // `c` is a copy of `a`
+const c = vec(a) // `c` is a copy of `a`
 
 c.x = 99 // this changes only `c`
 b.x = 0 // this changes `a` and `b`
@@ -41,145 +37,136 @@ console.log(b) // outputs "Vector (0, 1)
 console.log(c) // outputs "Vector (99, 1)
 ```
 
-## vecset
+## vecSet
 
-Assigns new values to a vector.
+Assigns new values to a vector and returns the vector (first argument).
 
-Syntax: `vecset(v: Vector, x: number, y: number = x): void`
+Syntax: `vecSet(v: Vector, x: number, y: number = x): Vector`
 
 ```js
-import { vec, vecset } from "@litecanvas/utils"
+import { vec, vecSet } from "@litecanvas/utils"
 
 const a = vec(0, 0)
-vecset(a, 10, 20)
+vecSet(a, 10, 20)
 
 console.log(a.x) // outputs 10
 console.log(a.y) // outputs 20
 ```
 
-## vecadd
+## vecAdd
 
-Add values to a vector.
+Add values to a vector and returns the vector (first argument).
 
-Syntax: `vecadd(v: Vector, x: number, y: number = x): void`
+Syntax: `vecAdd(v: Vector, x: number, y: number = x): Vector`
 
 ```js
-import { vec, vecadd } from "@litecanvas/utils"
+import { vec, vecAdd } from "@litecanvas/utils"
 
 const a = vec(10, 10)
-vecadd(a, 5, 20)
+vecAdd(a, 50, 90)
 
-console.log(a.x) // outputs 15
-console.log(a.y) // outputs 30
+console.log(a.x) // outputs 60
+console.log(a.y) // outputs 100
 ```
 
-## vecsub
+## vecSub
 
-Subtracts values from to a vector.
+Subtracts values from to a vector and returns the vector (first argument).
 
-Syntax: `vecsub(v: Vector, x: number, y: number = x): void`
+Syntax: `vecSub(v: Vector, x: number, y: number = x): Vector`
 
-## vecmult
+## vecMult
 
-Multiplies (scale) a vector.
+Multiplies (scale) a vector and returns the vector (first argument).
 
-Syntax: `vecmult(v: Vector, x: number, y: number = x): void`
+Syntax: `vecMult(v: Vector, x: number, y: number = x): Vector`
 
-## vecdiv
+## vecDiv
 
-Divides a vector.
+Divides a vector and returns the vector (first argument).
 
-Syntax: `vecdiv(v: Vector, x: number, y: number = x): void`
+Syntax: `vecdiv(v: Vector, x: number, y: number = x): Vector`
 
-## vecrot
+## vecRotate
 
-Rotates a vector by an angle (in radians) without changing its magnitude.
+Rotates a vector by an angle (in radians) without changing its magnitude and returns the vector (first argument).
 
-Syntax: `vecrot(v: Vector, radians: number): void`
+Syntax: `vecRotate(v: Vector, radians: number): Vector`
 
-## vecmag
+## vecMag
 
 Returns the magnitude (length) of the vector.
 
-Syntax: `vecmag(v: Vector): number`
+Syntax: `vecMag(v: Vector): number`
 
-## vecmag2
+## vecMag2
 
 Returns the magnitude (length) of the vector squared.
 
-Syntax: `vecmag2(v: Vector): number`
+Syntax: `vecMag2(v: Vector): number`
 
-## vecnorm
+## vecNorm
 
-Scales the values of a vector so that its magnitude is 1.
+Scales the values of a vector so that its magnitude is 1 and returns the vector (first argument).
 
-Syntax: `vecnorm(v: Vector): void`
+Syntax: `vecNorm(v: Vector): Vector`
 
-## veclimit
+## vecLimit
 
-Limits (clamp) a vector's magnitude to a maximum value.
+Limits (clamp) a vector's magnitude to a maximum value and returns the vector (first argument).
 
-Syntax: `veclimit(v: Vector, max: number): void`
+Syntax: `vecLimit(v: Vector, max: number): Vector`
 
-## vecdist
+## vecDist
 
 Returns the distance between two points represented by vectors.
 
-Syntax: `vecdist(a: Vector, b: Vector): number`
+Syntax: `vecDist(a: Vector, b: Vector): number`
 
-## vecdist2
+## vecDist2
 
 Returns the distance between two points represented by vectors squared.
 
-Syntax: `vecdist2(a: Vector, b: Vector): number`
+Syntax: `vecDist2(a: Vector, b: Vector): number`
 
-## vecdir
+## vecAngle
 
 Calculates the angle a vector makes with the positive x-axis.
 
-Syntax: `vecdir(v: Vector): number`
+Syntax: `vecAngle(v: Vector): number`
 
-## vecdot
+```js
+const a = vecAngle(vec(1, 0)) // outputs 0 (zero)
+const b = vecAngle(vec(0, 1)) // outputs ~1.571 (same as Math.PI / 2)
+```
+
+## vecDot
 
 Calculates the dot product of two vectors.
 
-Syntax: `vecdot(a: Vector, b: Vector): number`
+Syntax: `vecDot(a: Vector, b: Vector): number`
 
-## veccross
+## vecCross
 
 Calculates the dot product of two vectors.
 
-Syntax: `veccross(a: Vector, b: Vector): number`
+Syntax: `vecCross(a: Vector, b: Vector): number`
 
-## veclerp
+## vecLerp
 
-Calculates new vector values that are proportionally the same distance between two vectors.
+Calculates new vector values that are proportionally the same distance
+between two vectors and returns the first vector (first argument).
+
 The `atm` parameter is the amount to interpolate between the old vector and the new vector:
 `0.0` keeps all values equal to the old vector's, `0.5` is halfway between, and `1.0` sets all
 values equal to the new vector's.
 
-Syntax: `veclerp(a: Vector, b: Vector, atm: number): void`
+Syntax: `vecLerp(a: Vector, b: Vector, atm: number): Lerp`
 
-## vecrand
+## vecRand
 
 Creates a vector with random direction and (optional) length.
 
-If the `litecanvas#rand()` not is globally explosed, uses `Math.random()`.
-You can set `vecconfig.random` to set your own "random" function.
+By default the `randomFn` (third argument) is the `globalThis.rand` (from litecanvas globally instantiated) or the native `Math.random`.
 
-Syntax: `vecrand(minlength: number = 1, maxlength: number = minlength): Vector`
-
-```js
-import litecanvas from "litecanvas"
-import { vecrand, vecconfig } from "@litecanvas/utils"
-
-const engine = litecanvas({
-  loop: { init },
-})
-
-function init() {
-  // make sure to use the RNG of this litecanvas instance
-  vecconfig.random = engine.rand
-  v = vecrand()
-}
-```
+Syntax: `vecRand(minlength: number = 1, maxlength: number = minlength, randomFn?): Vector`
