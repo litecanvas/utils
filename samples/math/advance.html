@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <title>Litecanvas Utils</title>
+    <style type="text/css">
+      body {
+        background: #000;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
+    <script src="../../dist/all.js"></script>
+    <script>
+      let pos, vel, acc
+
+      utils.global()
+      const e = litecanvas()
+
+      function init() {
+        pos = vec(0, CENTERY)
+        vel = vec(0, 0)
+        acc = vec(100, 0)
+      }
+
+      function update(dt) {
+        advance(pos, vel, acc, dt)
+        if (pos.x > WIDTH) {
+          pos.x = 0
+        }
+      }
+
+      function draw() {
+        cls(0)
+        circ(pos.x, pos.y, 48, 4)
+        text(0, 0, FPS)
+      }
+    </script>
+  </body>
+</html>
