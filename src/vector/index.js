@@ -150,8 +150,9 @@ export const vecDiv = (v, x, y = x) => {
     return vecDiv(v, x.x, x.y)
   }
 
-  v.x /= x
-  v.y /= y
+  // prevent division by zero
+  v.x /= x || 1
+  v.y /= y || 1
 
   return v
 }
