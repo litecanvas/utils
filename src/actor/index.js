@@ -106,6 +106,28 @@ export class Actor {
   }
 
   /**
+   * Sets the actor scale
+   *
+   * @param {number} x
+   * @param {number} [y]
+   */
+  scaleTo(x, y = x) {
+    this._s.x = x
+    this._s.y = y
+  }
+
+  /**
+   * Multiplies the actor scale
+   *
+   * @param {number} x
+   * @param {number} [y]
+   */
+  scaleBy(x, y = x) {
+    this._s.x *= x
+    this._s.y *= y
+  }
+
+  /**
    * @returns {number[]}
    */
   getBounds(scaled = true) {
@@ -117,19 +139,19 @@ export class Actor {
   }
 
   /**
-   * Update the transformation matrix, sets the opacity and draw the actor sprite image.
+   * Draw the actor
    *
    * @param {LitecanvasInstance} [litecanvas]
    */
-  draw(litecanvas = globalThis) {
+  draw(litecanvas = globalThis, saveContext = true) {
     if (this.hidden || this.opacity <= 0) return
 
-    litecanvas.push()
+    if (saveContext) litecanvas.push()
 
     this.transform(litecanvas)
     this.drawImage(litecanvas)
 
-    litecanvas.pop()
+    if (saveContext) litecanvas.pop()
   }
 
   /**
@@ -144,10 +166,12 @@ export class Actor {
   /**
    * @param {LitecanvasInstance} litecanvas
    */
-  drawImage(litecanvas) {
+  drawImage(litecanvas, alpha = true) {
     const anchorX = this.sprite.width * this.anchor.x
     const anchorY = this.sprite.height * this.anchor.y
-    litecanvas.alpha(this.opacity)
+
+    if (alpha) litecanvas.alpha(this.opacity)
+
     litecanvas.image(-anchorX, -anchorY, this.sprite)
   }
 }
