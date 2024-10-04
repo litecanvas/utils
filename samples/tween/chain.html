@@ -28,23 +28,18 @@
 
       function init() {
         pos = {
-          x: 100,
+          x: 0,
           y: CENTERY,
         }
 
-        // create the animation
-        const animation = tween(pos, "x", 250, 2)
+        // create the animations
+        const moveToRight = tween(pos, "x", 300, 1)
+        const moveToLeft = tween(pos, "x", 0, 1)
 
-        // start the animation
-        animation.start()
+        // wait the moveToRight animation and then starts the moveToLeft
+        moveToRight.onEnd(() => moveToLeft.start())
 
-        // print in console after when that tween finishes
-        animation.onEnd(() => {
-          console.log("FINISHED")
-        })
-
-        // or just
-        // tween(...).start()
+        moveToRight.start()
       }
 
       function draw() {

@@ -1,6 +1,5 @@
 import "litecanvas"
 
-const TWO_PI = Math.PI * 2
 const HALF_PI = Math.PI / 2
 
 export const tween = (object, prop, toValue, duration = 1, easing = LINEAR) => {
@@ -69,7 +68,7 @@ export const BOUNCE_IN_OUT = (n) => {
 
 class TweenController {
   /** @type {boolean} */
-  running = true
+  running = false
 
   /** @type {*} */
   _o
@@ -87,6 +86,8 @@ class TweenController {
   _t = 0
   /** @type {Function} */
   _u = 0
+  /** @type {LitecanvasInstance} */
+  _lc
 
   /**
    * @param {*} object
@@ -104,6 +105,36 @@ class TweenController {
   }
 
   /**
+   *
+   * @param {LitecanvasInstance} engine
+   */
+  start(engine = globalThis) {
+    if (!this.running) {
+      this.stop()
+    }
+
+    const fromValue = this._o[this._p] || 0
+
+    this._lc = engine
+    this._u = engine.listen("update", (dt) => {
+      this._o[this._p] = engine.lerp(
+        fromValue,
+        this._x,
+        this._e(this._t / this._d)
+      )
+      this._t += dt
+      if (this._t >= this._d) {
+        this._o[this._p] = this._x
+        this.stop()
+      }
+    })
+
+    this.running = true
+
+    return this
+  }
+
+  /**
    * @param {Function} callback
    */
   onEnd(callback) {
@@ -111,32 +142,29 @@ class TweenController {
   }
 
   /**
-   *
-   * @param {LitecanvasInstance} $
+   * @param {boolean} completed if `false` don't call the `onEnd()` registered callbacks.
+   * @returns
    */
-  start($ = globalThis) {
-    const fromValue = this._o[this._p]
-    this._u = $.listen("update", (dt) => {
-      this._o[this._p] = $.lerp(fromValue, this._x, this._e(this._t / this._d))
-      this._t += dt
-      if (this._t >= this._d) {
-        this.stop()
-      }
-    })
-    return this
-  }
-
   stop(completed = true) {
+    if (!this.running || !this._u) return
+
     this.running = false
+
     this._u()
+
     if (completed) {
       for (const callback of this._cb) {
-        callback()
+        callback(this._o)
       }
     }
   }
 
+  reset() {
+    this._cb.length = 0
+    this.stop()
+  }
+
   get progress() {
-    return this._t / this._d
+    return this.running ? this._t / this._d : 0
   }
 }

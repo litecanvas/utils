@@ -49,4 +49,5 @@ const pos = vec(0, 0)
 - **Actor**: class to represent game entities. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/actor)
 - **Grid**: class to handle retangular grid areas. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/grid)
 - **Collision** utilities. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/collision)
-- And [some math utilities](https://github.com/litecanvas/utils/tree/main/src/math)
+- **Tween** to create animations. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/tween)
+- And some [math utilities](https://github.com/litecanvas/utils/tree/main/src/math)...
