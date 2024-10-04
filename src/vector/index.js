@@ -279,6 +279,15 @@ export const vecDist2 = (a, b) => {
 export const vecAngle = (v) => Math.atan2(v.y, v.x)
 
 /**
+ * Calculates the angle between two vectors.
+ *
+ * @param {Vector} v1
+ * @param {Vector} v2
+ * @returns {number}
+ */
+export const vecAngleBetween = (v1, v2) => Math.atan2(v2.y - v1.y, v2.x - v1.x)
+
+/**
  * Calculates the dot product of two vectors.
  *
  * The dot product is a number that describes the overlap between two vectors.
