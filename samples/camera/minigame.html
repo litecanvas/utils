@@ -45,26 +45,19 @@
             "..0..0..",
           ]),
 
-          grass: paint(
-            8,
-            8,
-            [
-              "bbbbbbbb",
-              "b9b9b9b9",
-              "bb9bbb9b",
-              "bbbbbbbb",
-              "9b9b9b9b",
-              "b9bbb9bb",
-              "bbbbbbbb",
-              "bbbbbbbb",
-            ],
-            {
-              scale: 1,
-            }
-          ),
+          grass: paint(8, 8, [
+            "bbbbbbbb",
+            "b9b9b9b9",
+            "bb9bbb9b",
+            "bbbbbbbb",
+            "9b9b9b9b",
+            "b9bbb9bb",
+            "bbbbbbbb",
+            "bbbbbbbb",
+          ]),
         }
 
-        camera = new Camera(engine, 0, 0, WIDTH)
+        camera = new Camera(engine)
         player = new Actor(sprites.player)
 
         map = new Grid(MAP_SIZE / TILE_SIZE, MAP_SIZE / TILE_SIZE)
