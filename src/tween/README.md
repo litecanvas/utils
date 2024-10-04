@@ -134,15 +134,15 @@ Returns the percentage of the animation's progress, a number between `0.0` and `
 We provide few easing functions:
 
 - `LINEAR` (the default)
-- `BOUNCE_IN`
-- `BOUNCE_OUT`
-- `BOUNCE_IN_OUT`
 - `EASE_IN`
 - `EASE_OUT`
 - `EASE_IN_OUT`
 - `ELASTIC_IN`
 - `ELASTIC_OUT`
 - `ELASTIC_IN_OUT`
+- `BOUNCE_IN`
+- `BOUNCE_OUT`
+- `BOUNCE_IN_OUT`
 - `BACK_IN`
 - `BACK_OUT`
 - `BACK_IN_OUT`
