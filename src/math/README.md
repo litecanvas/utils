@@ -62,6 +62,41 @@ function draw() {
 }
 ```
 
+[See in playground](https://litecanvas.js.org?c=eJwlyrEKwjAUheE9T3HGBKME0UVwEM0mIuqgY4ytBC6JNGlLKXl3bVwOP4evTY7i4k3haYgLRi5V1vjORD4ygEL4bDDi1ZgeWbIsGKtbb5MLvpxcYHKWIldiiuBjwoAtetNVfL5USqKMPu7OV30oyDW2dkR8r083fblL%2FOOBGQaJ9U%2BvBMtfqxAsyg%3D%3D)
+
+## advance
+
+Returns a sequence of numbers from `0` to `size - 1`.
+
+Syntax: `range(size: number): number[]`
+
+```js
+import litecanvas from "litecanvas"
+import { vec, advance } from "@litecanvas/utils"
+
+litecanvas()
+
+function init() {
+  pos = vec(0, CENTERY)
+  vel = vec(0, 0)
+  acc = vec(100, 0)
+}
+
+function update(dt) {
+  advance(pos, vel, acc, dt)
+  if (pos.x > WIDTH) {
+    pos.x = 0
+  }
+}
+
+function draw() {
+  cls(0)
+  circ(pos.x, pos.y, 48, 4)
+}
+```
+
+[See in playground](https://litecanvas.js.org?c=eJxVjjELwjAQhff%2BihtTCKWCg0tdtKCLgxTEMV5SCYS0NGlUpP%2FdS1NQhxvue7yPN3ptXHE33U0YlmdGe4XCBuHoydrRotedBW21Zzm8M4C%2Bc1BBUMhKDrv61NTna048KPPlZSQCcSGrMrHpRzn2UnjFpE9aIYOwqBjpeXTxWOdAMYW6hRgUT9jC5bhvDqkzjyFYQUnf9KeXg3gsi9E4Ng9CPWDy8Ln54rDe0NGwDwbOS1Q%3D)
+
 ## range
 
 Returns a sequence of numbers from `0` to `size - 1`.
