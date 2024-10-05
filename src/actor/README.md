@@ -56,13 +56,43 @@ player.y = 200
 
 ## Actor#scale
 
-Set or get the actor scale/size
+Set or get the actor scale vector
 
 ```js
 // twice bigger
 player.scale.x = 2
 player.scale.y = 2
 ```
+
+## Actor#scaleBy(x, y = x)
+
+```js
+// multiplies the scale (y is optional)
+player.scaleBy(3)
+
+// same as
+player.scale.x *= 3
+player.scale.y *= 3
+```
+
+## Actor#scaleTo(x, y = x)
+
+```js
+// sets the scale (y is optional)
+player.scaleTo(3)
+
+// same as
+player.scale.x = 3
+player.scale.y = 3
+```
+
+## Actor#flipX
+
+If `true` the actor sprite is flipped horizontally. Default is `false`.
+
+## Actor#flipY
+
+If `true` the actor sprite is flipped vertically. Default is `false`.
 
 ## Actor#anchor
 

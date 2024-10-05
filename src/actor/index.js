@@ -20,6 +20,12 @@ export class Actor {
   /** @type {Vector} The actor scale */
   _s
 
+  /** @type {boolean} */
+  flipX = false
+
+  /** @type {boolean} */
+  flipY = false
+
   /** @type {number} The actor angle (in radians) */
   angle = 0
 
@@ -160,18 +166,21 @@ export class Actor {
   transform(litecanvas) {
     litecanvas.translate(this.pos.x, this.pos.y)
     litecanvas.rotate(this.angle)
-    litecanvas.scale(this._s.x, this._s.y)
+    litecanvas.scale(
+      (this.flipX ? -1 : 1) * this._s.x,
+      (this.flipY ? -1 : 1) * this._s.y
+    )
   }
 
   /**
    * @param {LitecanvasInstance} litecanvas
    */
   drawImage(litecanvas, alpha = true) {
-    const anchorX = this.sprite.width * this.anchor.x
-    const anchorY = this.sprite.height * this.anchor.y
+    const anchor = this.anchor
+    const x = -this.sprite.width * (this.flipX ? 1 - anchor.x : anchor.x)
+    const y = -this.sprite.height * (this.flipY ? 1 - anchor.y : anchor.y)
 
     if (alpha) litecanvas.alpha(this.opacity)
-
-    litecanvas.image(-anchorX, -anchorY, this.sprite)
+    litecanvas.image(x, y, this.sprite)
   }
 }
