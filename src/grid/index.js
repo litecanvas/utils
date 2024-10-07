@@ -18,6 +18,25 @@ export class Grid {
     this._c = values
   }
 
+  [Symbol.iterator]() {
+    let i = 0
+    return {
+      next: () => {
+        return {
+          value: [this.indexToPointX(i), this.indexToPointY(i), this._c[i++]],
+          done: i === this._c.length,
+        }
+      },
+    }
+  }
+
+  /**
+   * @returns {Grid} the cloned grid
+   */
+  clone() {
+    return new Grid(this._w, this._h, this._c)
+  }
+
   /**
    * Delete all cell values.
    */
@@ -72,6 +91,17 @@ export class Grid {
    */
   has(x, y) {
     return this.get(x, y) != null
+  }
+
+  /**
+   * Checks if a which point (x, y) is within the grid.
+   *
+   * @param {number} x
+   * @param {number} y
+   * @returns {boolean}
+   */
+  check(x, y) {
+    return x >= 0 && x < this._w && y >= 0 && y < this._h
   }
 
   /**
@@ -150,13 +180,6 @@ export class Grid {
     this.forEach((x, y) => {
       this.set(x, y, value)
     })
-  }
-
-  /**
-   * @returns {Grid} the cloned grid
-   */
-  clone() {
-    return Grid.fromArray(this._w, this._h, this._c)
   }
 
   /**
