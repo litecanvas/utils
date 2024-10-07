@@ -24,7 +24,7 @@ export class Grid {
       next: () => {
         return {
           value: [this.indexToPointX(i), this.indexToPointY(i), this._c[i++]],
-          done: i === this._c.length,
+          done: i > this._c.length,
         }
       },
     }
