@@ -2,6 +2,14 @@ import "litecanvas"
 
 const HALF_PI = Math.PI / 2
 
+/**
+ * @param {any} object
+ * @param {string} prop
+ * @param {number|number} toValue
+ * @param {number} [duration]
+ * @param {(n: number) => number} [easing]
+ * @returns {TweenController}
+ */
 export const tween = (object, prop, toValue, duration = 1, easing = LINEAR) => {
   return new TweenController(object, prop, toValue, duration, easing)
 }
@@ -74,25 +82,32 @@ class TweenController {
   _o
   /** @type {string} */
   _p
-  /** @type {number} */
+  /** @type {number|number} */
   _x
   /** @type {number} */
   _d
   /** @type {(x: number) => number} */
   _e
+  /** @type {boolean} */
+  _rel
+
   /** @type {Function[]} */
   _cb = []
   /** @type {number} */
   _t = 0
   /** @type {Function} */
   _u = 0
+  /** @type {TweenController} */
+  _ch = this
+  /** @type {TweenController} */
+  _cu = this
   /** @type {LitecanvasInstance} */
   _lc
 
   /**
    * @param {*} object
    * @param {string} prop
-   * @param {number} toValue
+   * @param {number|number} toValue
    * @param {number} duration
    * @param {(x: number) => number} easing
    */
@@ -105,26 +120,31 @@ class TweenController {
   }
 
   /**
-   *
-   * @param {LitecanvasInstance} engine
+   * @param {LitecanvasInstance} [engine]
+   * @returns {TweenController} this instance
    */
-  start(engine = globalThis) {
+  start(engine) {
     if (!this.running) {
       this.stop()
     }
 
-    const fromValue = this._o[this._p] || 0
+    this._cu.stop(false)
+    this._ch = this._cu = this
 
-    this._lc = engine
-    this._u = engine.listen("update", (dt) => {
-      this._o[this._p] = engine.lerp(
+    const fromValue = this._o[this._p] || 0
+    const toValue = this._rel ? fromValue + this._x : this._x
+
+    this._lc = this._lc || engine || globalThis
+
+    this._u = this._lc.listen("update", (dt) => {
+      this._o[this._p] = this._lc.lerp(
         fromValue,
-        this._x,
+        toValue,
         this._e(this._t / this._d)
       )
       this._t += dt
       if (this._t >= this._d) {
-        this._o[this._p] = this._x
+        this._o[this._p] = toValue
         this.stop()
       }
     })
@@ -151,6 +171,7 @@ class TweenController {
     this.running = false
 
     this._u()
+    this._t = 0
 
     if (completed) {
       for (const callback of this._cb) {
@@ -159,9 +180,35 @@ class TweenController {
     }
   }
 
+  /**
+   * @param {TweenController} another
+   * @returns {TweenController} this instance
+   */
+  chain(another) {
+    this._ch.onEnd(() => {
+      this._cu = another.start(this._lc)
+    })
+    this._ch = another
+    return this
+  }
+
   reset() {
     this._cb.length = 0
     this.stop()
+  }
+
+  relative(flag = true) {
+    this._rel = flag
+    return this
+  }
+
+  /**
+   * Returns the current tween of the chain.
+   *
+   * @returns {TweenController}
+   */
+  get current() {
+    return this._cu
   }
 
   get progress() {

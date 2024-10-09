@@ -57,7 +57,7 @@ function draw() {
 
 ### TweenController#start()
 
-Starts the animation
+Starts the animation.
 
 Syntax: `.start(engine?: LitecanvasInstance): TweenController`
 
@@ -83,6 +83,48 @@ function init () {
     // just call start
     engine.tween(...).start()
 }
+```
+
+### TweenController#relative()
+
+If enabled (`flag = true`) the tween we animate from a value to another relative value.
+
+Syntax: `.relative(flag?: boolean = true): void`
+
+```js
+const obj = { x: 0 }
+
+// DEFAULT
+// this tween animates the obj.x to 100
+tween(obj, "x", 100)
+
+// this tween animates the obj.x value to -100
+tween(obj, "x", -100)
+
+// RELATIVE
+// this tween animates the obj.x increasing +100
+tween(obj, "x", 100).relative()
+
+// this tween animates the obj.x decreasing -100
+tween(obj, "x", -100).relative()
+```
+
+### TweenController#chain()
+
+Make another tween start right after this tween ends.
+
+Syntax: `.relative(another: TweenController): TweenController`
+
+```js
+const obj = { x: 0, angle: 0 }
+
+const moveRight = tween(obj, "x", 100, 1).relative()
+const moveLeft = tween(obj, "x", -100, 1).relative()
+const moveLeft = tween(obj, "angle", Math.PI, 1).relative()
+
+// move 100px to right, move 100px to left and rotate
+moveRight.chain(moveLeft)
+moveRight.start()
 ```
 
 ### TweenController#onEnd()
