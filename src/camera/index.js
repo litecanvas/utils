@@ -197,6 +197,8 @@ export default class Camera {
   }
 
   /**
+   * Shake the camera
+   *
    * @param {number} amplitude
    * @param {number} duration in seconds
    */

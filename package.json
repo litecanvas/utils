@@ -1,6 +1,6 @@
 {
   "name": "@litecanvas/utils",
-  "version": "0.19.1",
+  "version": "0.19.2",
   "description": "Utilities to help build litecanvas games",
   "author": "Luiz Bills <luizbills@pm.me>",
   "license": "MIT",

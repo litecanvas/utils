@@ -106,7 +106,7 @@ function update(dt) {
 }
 ```
 
-### shake(duration: number = 0.3, amplitude: number = 1)
+### shake(amplitude?: number = 1, duration?: number = 0.3)
 
 Shakes the camera view
 
