@@ -26,7 +26,7 @@ export class Actor {
   /** @type {boolean} */
   flipY = false
 
-  /** @type {number} The actor angle (in radians) */
+  /** @type {number} The actor angle (in degrees) */
   angle = 0
 
   /** @type {number} The actor opacity */
@@ -165,7 +165,7 @@ export class Actor {
    */
   transform(litecanvas) {
     litecanvas.translate(this.pos.x, this.pos.y)
-    litecanvas.rotate(this.angle)
+    litecanvas.rotate(litecanvas.deg2rad(this.angle))
     litecanvas.scale(
       (this.flipX ? -1 : 1) * this._s.x,
       (this.flipY ? -1 : 1) * this._s.y

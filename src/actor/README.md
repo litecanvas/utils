@@ -116,13 +116,10 @@ player.anchor = ANCHOR_CENTER
 
 ## Actor#angle
 
-Set or get the actor angle (in radians).
+Set or get the actor angle (in degrees).
 
 ```js
-player.angle = HALF_PI / 2 // 45 degrees
-
-// or use the litecanvas' `deg2rad()` helper
-player.angle = deg2rad(45)
+player.angle = 45
 ```
 
 ## Actor#opacity

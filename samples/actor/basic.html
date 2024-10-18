@@ -41,7 +41,7 @@
       }
 
       function update(dt) {
-        player.angle += dt
+        player.angle += 180 * dt
         player.scale.x = wave(0.5, 2, e.ELAPSED)
         player.scale.y = wave(0.5, 2, e.ELAPSED)
       }
