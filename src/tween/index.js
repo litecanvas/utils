@@ -159,6 +159,7 @@ class TweenController {
    */
   onEnd(callback) {
     this._cb.push(callback)
+    return this
   }
 
   /**
@@ -178,6 +179,8 @@ class TweenController {
         callback(this._o)
       }
     }
+
+    return this
   }
 
   /**
@@ -194,7 +197,7 @@ class TweenController {
 
   reset() {
     this._cb.length = 0
-    this.stop()
+    return this.stop()
   }
 
   relative(flag = true) {
