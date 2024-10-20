@@ -66,9 +66,11 @@ function draw() {
 
 ## advance
 
-Returns a sequence of numbers from `0` to `size - 1`.
+Move a vector (position) using another vectors: velocity (required) and acceleration (optional).
 
-Syntax: `range(size: number): number[]`
+> Note: This function changes the position and velocity vectors.
+
+Syntax: `advance(position: Vector, velocity: Vector, acceleration?: Vector, delta?: number): void`
 
 ```js
 import litecanvas from "litecanvas"
@@ -110,4 +112,15 @@ import { range } from "@litecanvas/utils"
 for (let i of range(5)) {
   console.log(i)
 }
+```
+
+## mod
+
+Math modulus (always returns a positive number).
+
+```js
+import { mod } from "@litecanvas/utils"
+
+mod(17, 5) // => 2
+mod(-17, 5) // => 3
 ```
