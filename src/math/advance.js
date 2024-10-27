@@ -1,4 +1,4 @@
-import { Vector, vecMult, vecAdd } from "../vector"
+import { Vector } from "../vector"
 
 /**
  * Move a vector (position) using another vectors: velocity and acceleration (optional).

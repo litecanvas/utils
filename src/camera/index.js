@@ -60,7 +60,9 @@ export default class Camera {
     this._engine.push()
 
     if (clip) {
-      this._engine.cliprect(this.ox, this.oy, this.width, this.height)
+      const region = path()
+      region.rect(this.ox, this.oy, this.width, this.height)
+      this._engine.clip(region)
     }
 
     const centerX = this.ox + this.width / 2,
