@@ -86,6 +86,8 @@ class TweenController {
   _x
   /** @type {number} */
   _d
+  /** @type {number} */
+  _w
   /** @type {(x: number) => number} */
   _e
   /** @type {boolean} */
@@ -117,6 +119,7 @@ class TweenController {
     this._x = toValue
     this._d = duration
     this._e = easing
+    this._w = 0
   }
 
   /**
@@ -137,13 +140,17 @@ class TweenController {
     this._lc = this._lc || engine || globalThis
 
     this._u = this._lc.listen("update", (dt) => {
-      this._o[this._p] = this._lc.lerp(
-        fromValue,
-        toValue,
-        this._e(this._t / this._d)
-      )
+      if (this._t <= this._w) {
+        this._t += dt
+        return
+      }
+
+      const t = this._t - this._w
+      this._o[this._p] = this._lc.lerp(fromValue, toValue, this._e(t / this._d))
+
       this._t += dt
-      if (this._t >= this._d) {
+
+      if (t >= this._d) {
         this._o[this._p] = toValue
         this.stop()
       }
@@ -156,6 +163,7 @@ class TweenController {
 
   /**
    * @param {Function} callback
+   * @returns {this}
    */
   onEnd(callback) {
     this._cb.push(callback)
@@ -164,7 +172,7 @@ class TweenController {
 
   /**
    * @param {boolean} completed if `false` don't call the `onEnd()` registered callbacks.
-   * @returns
+   * @returns {this}
    */
   stop(completed = true) {
     if (!this.running || !this._u) return
@@ -185,7 +193,7 @@ class TweenController {
 
   /**
    * @param {TweenController} another
-   * @returns {TweenController} this instance
+   * @returns {this}
    */
   chain(another) {
     this._ch.onEnd(() => {
@@ -195,26 +203,49 @@ class TweenController {
     return this
   }
 
+  /**
+   * @param {boolean} [flag=true]
+   * @returns {this}
+   */
   reset() {
     this._cb.length = 0
     return this.stop()
   }
 
+  /**
+   * @param {boolean} [flag=true]
+   * @returns {this}
+   */
   relative(flag = true) {
     this._rel = flag
     return this
   }
 
   /**
+   * @param {number} value
+   * @returns {this}
+   */
+  delay(value) {
+    this._w = value
+    return this
+  }
+
+  /**
    * Returns the current tween of the chain.
    *
-   * @returns {TweenController}
+   * @returns {this}
    */
   get current() {
     return this._cu
   }
 
+  /**
+   * @returns {number} the current progress (0..1)
+   */
   get progress() {
-    return this.running ? this._t / this._d : 0
+    if (this.running && this._t > this._w) {
+      return (this._t - this._w) / this._d
+    }
+    return 0
   }
 }
