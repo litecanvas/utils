@@ -8,7 +8,7 @@ const HALF_PI = Math.PI / 2
  * @param {number|number} toValue
  * @param {number} [duration]
  * @param {(n: number) => number} [easing]
- * @returns {TweenController}
+ * @returns {this}
  */
 export const tween = (object, prop, toValue, duration = 1, easing = LINEAR) => {
   return new TweenController(object, prop, toValue, duration, easing)
@@ -124,13 +124,14 @@ class TweenController {
 
   /**
    * @param {LitecanvasInstance} [engine]
-   * @returns {TweenController} this instance
+   * @returns {this}
    */
   start(engine) {
-    if (!this.running) {
-      this.stop()
+    if (this.running) {
+      return this
     }
 
+    this.running = true
     this._cu.stop(false)
     this._ch = this._cu = this
 
@@ -156,17 +157,6 @@ class TweenController {
       }
     })
 
-    this.running = true
-
-    return this
-  }
-
-  /**
-   * @param {Function} callback
-   * @returns {this}
-   */
-  onEnd(callback) {
-    this._cb.push(callback)
     return this
   }
 
@@ -188,6 +178,23 @@ class TweenController {
       }
     }
 
+    return this
+  }
+
+  /**
+   * @param {LitecanvasInstance} [engine]
+   * @returns {this}
+   */
+  restart(engine, completed = false) {
+    return this.stop(completed).start(engine)
+  }
+
+  /**
+   * @param {Function} callback
+   * @returns {this}
+   */
+  onEnd(callback) {
+    this._cb.push(callback)
     return this
   }
 
