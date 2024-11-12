@@ -1,5 +1,6 @@
 import esbuild from "esbuild"
 import fs from "node:fs"
+import { gzipSizeFromFileSync } from "gzip-size"
 
 const files = {
     "src/_web": "all",
@@ -23,7 +24,9 @@ for (let [path, name] of Object.entries(files)) {
     bundle: true,
   })
 
-  console.log(`  ${outfile} (${filesize(outfile)})`)
+  console.log(
+    `  ${outfile} (${filesize(outfile)} ~= ${gzipsize(outfile)} gzipped)`
+  )
 
   outfile = `${outdir}/${name}.min.js`
 
@@ -34,11 +37,18 @@ for (let [path, name] of Object.entries(files)) {
     minify: true,
   })
 
-  console.log(`  ${outfile} (${filesize(outfile)})`)
+  console.log(
+    `  ${outfile} (${filesize(outfile)} ~= ${gzipsize(outfile)} gzipped)`
+  )
 }
 
 function filesize(filename) {
   var stats = fs.statSync(filename)
   var fileSizeInBytes = stats.size
+  return (fileSizeInBytes / 1000).toFixed(2) + "kb"
+}
+
+function gzipsize(filename) {
+  const fileSizeInBytes = gzipSizeFromFileSync(filename)
   return (fileSizeInBytes / 1000).toFixed(2) + "kb"
 }
