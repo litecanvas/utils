@@ -8,7 +8,7 @@ const HALF_PI = Math.PI / 2
  * @param {number|number} toValue
  * @param {number} [duration]
  * @param {(n: number) => number} [easing]
- * @returns {TweenController}
+ * @returns {this}
  */
 export const tween = (object, prop, toValue, duration = 1, easing = LINEAR) => {
   return new TweenController(object, prop, toValue, duration, easing)
@@ -124,15 +124,16 @@ class TweenController {
 
   /**
    * @param {LitecanvasInstance} [engine]
-   * @returns {TweenController} this instance
+   * @returns {this}
    */
   start(engine) {
-    if (!this.running) {
-      this.stop()
+    if (this.running) {
+      return this
     }
 
     this._cu.stop(false)
     this._ch = this._cu = this
+    this.running = true
 
     const fromValue = this._o[this._p] || 0
     const toValue = this._rel ? fromValue + this._x : this._x
@@ -156,17 +157,6 @@ class TweenController {
       }
     })
 
-    this.running = true
-
-    return this
-  }
-
-  /**
-   * @param {Function} callback
-   * @returns {this}
-   */
-  onEnd(callback) {
-    this._cb.push(callback)
     return this
   }
 
@@ -175,7 +165,7 @@ class TweenController {
    * @returns {this}
    */
   stop(completed = true) {
-    if (!this.running || !this._u) return
+    if (!this._u) return this
 
     this.running = false
 
@@ -188,6 +178,23 @@ class TweenController {
       }
     }
 
+    return this
+  }
+
+  /**
+   * @param {LitecanvasInstance} [engine]
+   * @returns {this}
+   */
+  restart(engine = null, completed = false) {
+    return this.stop(completed).restart(engine)
+  }
+
+  /**
+   * @param {Function} callback
+   * @returns {this}
+   */
+  onEnd(callback) {
+    this._cb.push(callback)
     return this
   }
 
