@@ -165,7 +165,7 @@ class TweenController {
    * @returns {this}
    */
   stop(completed = true) {
-    if (!this.running || !this._u) return
+    if (!this._u) return this
 
     this.running = false
 
@@ -186,7 +186,7 @@ class TweenController {
    * @returns {this}
    */
   restart(engine, completed = false) {
-    return this.stop(completed).start(engine)
+    return this.stop(completed).restart(engine)
   }
 
   /**
