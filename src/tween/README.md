@@ -59,7 +59,7 @@ function draw() {
 
 Starts the animation.
 
-Syntax: `.start(engine?: LitecanvasInstance): TweenController`
+Syntax: `.start(engine?: LitecanvasInstance): this`
 
 ```js
 // if your litecanvas has config.global = false
@@ -89,7 +89,7 @@ function init () {
 
 If enabled (`flag = true`) the tween we animate from a value to another relative value.
 
-Syntax: `.relative(flag?: boolean = true): void`
+Syntax: `.relative(flag?: boolean = true): this`
 
 ```js
 const obj = { x: 0 }
@@ -113,7 +113,7 @@ tween(obj, "x", -100).relative()
 
 Make another tween start right after this tween ends.
 
-Syntax: `.relative(another: TweenController): TweenController`
+Syntax: `.relative(another: TweenController): this`
 
 ```js
 const obj = { x: 0, angle: 0 }
@@ -131,7 +131,7 @@ moveRight.start()
 
 Enqueues a callback to be executed when the animation finishes.
 
-Syntax: `.onEnd(callback?: (object:any) => void): void`
+Syntax: `.onEnd(callback?: (object:any) => void): this`
 
 ```js
 // lets imagine a animation
@@ -143,11 +143,17 @@ anim.onEnd(() => {
 })
 ```
 
+### TweenController#restart()
+
+Stops and start again the animation.
+
+Syntax: `.restart(engine?: LitecanvasInstance, completed: boolean = false): this`
+
 ### TweenController#stop()
 
 Stops the animation.
 
-Syntax: `.stop(complete?: boolean): void`
+Syntax: `.stop(completed: boolean = true): this`
 
 ```js
 // lets imagine a animation with 5 seconds of duration
@@ -166,6 +172,8 @@ anim.stop(false)
 ### TweenController#reset()
 
 Stops the animation and remove all `.onEnd()` registered callbacks.
+
+Syntax: `.reset(): this`
 
 ### TweenController#progress
 

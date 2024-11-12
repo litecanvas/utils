@@ -131,9 +131,9 @@ class TweenController {
       return this
     }
 
-    this.running = true
     this._cu.stop(false)
     this._ch = this._cu = this
+    this.running = true
 
     const fromValue = this._o[this._p] || 0
     const toValue = this._rel ? fromValue + this._x : this._x
@@ -185,7 +185,7 @@ class TweenController {
    * @param {LitecanvasInstance} [engine]
    * @returns {this}
    */
-  restart(engine, completed = false) {
+  restart(engine = null, completed = false) {
     return this.stop(completed).restart(engine)
   }
 

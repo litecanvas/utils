@@ -21,7 +21,7 @@
     <script>
       // basic example
       // move the rect position x from 100 to 250 over 2 seconds
-      let object
+      let object, animation
 
       utils.global()
       litecanvas()
@@ -33,7 +33,7 @@
         }
 
         // create the animation
-        const animation = tween(pos, "x", 250, 2)
+        animation = tween(pos, "x", 250, 2).relative()
 
         // start the animation
         animation.start()
@@ -45,6 +45,13 @@
 
         // or just
         // tween(...).start()
+      }
+
+      function tapped() {
+        if (!animation.running) {
+          pos.x = 100
+          animation.start()
+        }
       }
 
       function draw() {
