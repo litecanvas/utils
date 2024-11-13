@@ -69,7 +69,7 @@ const engine = litecanvas({
 })
 
 function init () {
-    engine.tween(...).start(engine)
+    tween(...).start(engine)
 }
 ```
 
@@ -81,7 +81,7 @@ const engine = litecanvas({
 
 function init () {
     // just call start
-    engine.tween(...).start()
+    tween(...).start()
 }
 ```
 
