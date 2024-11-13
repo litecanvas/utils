@@ -120,7 +120,6 @@ const obj = { x: 0, angle: 0 }
 
 const moveRight = tween(obj, "x", 100, 1).relative()
 const moveLeft = tween(obj, "x", -100, 1).relative()
-const moveLeft = tween(obj, "angle", Math.PI, 1).relative()
 
 // move 100px to right, move 100px to left and rotate
 moveRight.chain(moveLeft)
