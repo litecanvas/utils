@@ -1,71 +1,71 @@
 # Grid utils
 
-**CDN**: https://unpkg.com/@litecanvas/utils/dist/grid.js
+**CDN**: https://unpkg.com/@litecanvas/utils/dist/noise.js
 
 ## Usage
 
-Lets build an arena with [ASCII graphics](https://en.wikipedia.org/wiki/ASCII_art) like in classic roguelikes.
+Generate procedural Perlin noise to use in your projects, such as terrain generation, animations, or particle effects.
 
 ```js
-import { Grid } from "@litecanvas/utils"
+import { Noise } from "@litecanvas/utils"
 
-// make a grid 7x7
-let grid = new Grid(7, 7)
+// Create a new Noise instance
+const noise = new Noise()
 
-// fill the entire grid with "."
-grid.fill(".")
+// Generate a noise value at 2D coordinates (x, y)
+const value = noise.noise(0.5, 0.8)
+console.log("Noise value at (0.5, 0.8):", value)
 
-// put a '@' in the middle
-grid.set(grid.width / 2, grid.height / 2, "@")
+// Generate a noise value at 3D coordinates (x, y, z)
+const value3D = noise.noise(1.2, 0.4, 0.9)
+console.log("Noise value at (1.2, 0.4, 0.9):", value3D)
+```
 
-// loop over the grid and put "#" around
-for (let [x, y, cellValue] of grid) {
-  if (x === 0 || y === 0 || x === grid.width - 1 || y === grid.height - 1) {
-    grid.set(x, y, "#")
+### Adjusting Noise Detail
+
+You can configure the number of octaves and amplitude falloff to control the detail of the noise.
+
+```js
+// Set 8 octaves and a 60% amplitude falloff
+noise.noiseDetail(8, 0.6)
+
+// Generate a new noise value with the updated settings
+const detailedValue = noise.noise(0.3, 0.7)
+console.log("Detailed noise value:", detailedValue)
+```
+
+## Seeding Noise
+
+Ensure deterministic results by setting a seed for the noise generator.
+
+```js
+// Set a specific seed
+noise.noiseSeed(42)
+
+// Generate consistent noise values
+const seededValue = noise.noise(0.1, 0.1)
+console.log("Seeded noise value at (0.1, 0.1):", seededValue)
+```
+
+## 2D Noise Grid
+
+Create a grid of Perlin noise values and display them as ASCII art.
+
+```js
+const noise = new utils.Noise()
+noise.noiseDetail(4, 0.5)
+
+// Generate a 8 by 8 noise grid
+const gridSize = 8
+let grid = ""
+
+for (let y = 0; y < gridSize; y++) {
+  for (let x = 0; x < gridSize; x++) {
+    const value = noise.noise(x / gridSize, y / gridSize)
+    grid += value > 0.5 ? "#" : "."
   }
-})
+  grid += "\n"
+}
 
-document.body.innerHTML = "<pre>" + grid.toString() + "</pre>"
+console.log(grid)
 ```
-
-The result:
-
-```
-# # # # # # #
-# . . . . . #
-# . . . . . #
-# . . @ . . #
-# . . . . . #
-# . . . . . #
-# # # # # # #
-```
-
-### .forEach()
-
-Instead of a `for-of` loop, you can use the `.forEach()` method:
-
-```js
-grid.forEach((x, y, cellValue, grid) => {
-  if (x === 0 || y === 0 || x === grid.width - 1 || y === grid.height - 1) {
-    grid.set(x, y, "#")
-  }
-  // optional: you can return `false` to break/stop that loop
-  // return false
-})
-```
-
-## Typed Grid
-
-You can create a grid structure thats uses a [typed array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Typed_arrays) rather than a "normal" array.
-
-```js
-import { TypedGrid } from "@litecanvas/utils"
-
-// by default, uses Uint8Array
-let u8grid = new TypedGrid(5, 5)
-
-// or specify your typed array
-let i16grid = new TypedGrid(5, 5, Int16Array)
-```
-
-> Note: `TypedGrid` inherits all methods from `Grid`.

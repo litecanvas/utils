@@ -1,19 +1,60 @@
+// further adapted from p5 Noise module
+// https://github.com/processing/p5.js/blob/v1.11.1/src/math/noise.js
+
+// http://mrl.nyu.edu/~perlin/noise/
+// Adapting from PApplet.java
+// which was adapted from toxi
+// which was adapted from the german demo group farbrausch
+// as used in their demo "art": http://www.farb-rausch.de/fr010src.zip
+
+/**
+ * Constants for Perlin noise calculations.
+ */
 const PERLIN_YWRAPB = 4;
 const PERLIN_YWRAP = 1 << PERLIN_YWRAPB;
 const PERLIN_ZWRAPB = 8;
 const PERLIN_ZWRAP = 1 << PERLIN_ZWRAPB;
 const PERLIN_SIZE = 4095;
 
+/**
+ * Scaled cosine function used for smoothing transitions in Perlin noise.
+ * @param {number} i - Input value.
+ * @returns {number} Scaled cosine value.
+ */
 const scaled_cosine = i => 0.5 * (1.0 - Math.cos(i * Math.PI));
 
+/**
+ * Class for generating Perlin noise, a type of gradient noise often used in procedural generation.
+ */
 export class Noise {
-  _perlin = null; // will be initialized lazily by noise() or noiseSeed()
+  /**
+   * Array to store Perlin noise values, initialized lazily.
+   * @type {number[] | null}
+   * @private
+   */
+  _perlin = null;
 
-  _perlin_octaves = 4; // default to medium smooth
-  _perlin_amp_falloff = 0.5; // 50% reduction/octave
+  /**
+   * Number of octaves for the Perlin noise. Higher values create more detail.
+   * @type {number}
+   * @private
+   */
+  _perlin_octaves = 4;
 
-  constructor() {}
+  /**
+   * Amplitude falloff factor for Perlin noise. Determines the reduction of amplitude per octave.
+   * @type {number}
+   * @private
+   */
+  _perlin_amp_falloff = 0.5;
 
+  /**
+   * Generates Perlin noise for the given coordinates.
+   * @param {number} x - X-coordinate.
+   * @param {number} [y=0] - Y-coordinate (default is 0).
+   * @param {number} [z=0] - Z-coordinate (default is 0).
+   * @returns {number} A noise value in the range [0, 1).
+   */
   noise(x, y = 0, z = 0) {
     if (this._perlin == null) {
       this._perlin = new Array(PERLIN_SIZE + 1);
@@ -91,6 +132,11 @@ export class Noise {
     return r;
   }
 
+  /**
+   * Adjusts the detail level of the noise by setting the number of octaves and amplitude falloff.
+   * @param {number} lod - Level of detail (number of octaves).
+   * @param {number} falloff - Amplitude falloff per octave.
+   */
   noiseDetail(lod, falloff) {
     if (lod > 0) {
       this._perlin_octaves = lod;
@@ -100,6 +146,10 @@ export class Noise {
     }
   }
 
+  /**
+   * Sets a seed for the Perlin noise generator, ensuring deterministic results.
+   * @param {number} seed - Seed value.
+   */
   noiseSeed(seed) {
     // Linear Congruential Generator
     // Variant of a Lehman Generator

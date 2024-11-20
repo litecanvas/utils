@@ -18,11 +18,7 @@
   <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
   <script src="../../dist/all.js"></script>
   <script>
-    const GREY = 2;
-    const RED = 4;
-    const GOLD = 5;
     const WHITE = 3;
-    const BLUE = 6;
 
     const MIN_X = 0;
     const MAX_X = 40;
@@ -31,8 +27,8 @@
 
     let noise;
 
-    utils.global()
-    const e = litecanvas()
+    utils.global();
+    const e = litecanvas();
 
     function init() {
       noise = new utils.Noise();
@@ -46,7 +42,7 @@
           const a = noise.noise(x / 10, y / 10);
 
           alpha(a);
-          rectfill(10 + 10 * x, 10 + 10 * y, 9, 9, RED);
+          rectfill(10 + 10 * x, 10 + 10 * y, 9, 9, WHITE);
         }
       }
     }
