@@ -1,4 +1,4 @@
-# Grid utils
+# Noise utils
 
 **CDN**: https://unpkg.com/@litecanvas/utils/dist/noise.js
 

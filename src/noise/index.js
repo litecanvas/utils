@@ -32,21 +32,21 @@ export class Noise {
    * @type {number[] | null}
    * @private
    */
-  _perlin = null;
+  _p = null;
 
   /**
    * Number of octaves for the Perlin noise. Higher values create more detail.
    * @type {number}
    * @private
    */
-  _perlin_octaves = 4;
+  _po = 4;
 
   /**
    * Amplitude falloff factor for Perlin noise. Determines the reduction of amplitude per octave.
    * @type {number}
    * @private
    */
-  _perlin_amp_falloff = 0.5;
+  _pf = 0.5;
 
   /**
    * Generates Perlin noise for the given coordinates.
@@ -56,10 +56,10 @@ export class Noise {
    * @returns {number} A noise value in the range [0, 1).
    */
   noise(x, y = 0, z = 0) {
-    if (this._perlin == null) {
-      this._perlin = new Array(PERLIN_SIZE + 1);
+    if (this._p == null) {
+      this._p = new Array(PERLIN_SIZE + 1);
       for (let i = 0; i < PERLIN_SIZE + 1; i++) {
-        this._perlin[i] = Math.random();
+        this._p[i] = Math.random();
       }
     }
 
@@ -86,29 +86,29 @@ export class Noise {
 
     let n1, n2, n3;
 
-    for (let o = 0; o < this._perlin_octaves; o++) {
+    for (let o = 0; o < this._po; o++) {
       let of = xi + (yi << PERLIN_YWRAPB) + (zi << PERLIN_ZWRAPB);
 
       rxf = scaled_cosine(xf);
       ryf = scaled_cosine(yf);
 
-      n1 = this._perlin[of & PERLIN_SIZE];
-      n1 += rxf * (this._perlin[(of + 1) & PERLIN_SIZE] - n1);
-      n2 = this._perlin[(of + PERLIN_YWRAP) & PERLIN_SIZE];
-      n2 += rxf * (this._perlin[(of + PERLIN_YWRAP + 1) & PERLIN_SIZE] - n2);
+      n1 = this._p[of & PERLIN_SIZE];
+      n1 += rxf * (this._p[(of + 1) & PERLIN_SIZE] - n1);
+      n2 = this._p[(of + PERLIN_YWRAP) & PERLIN_SIZE];
+      n2 += rxf * (this._p[(of + PERLIN_YWRAP + 1) & PERLIN_SIZE] - n2);
       n1 += ryf * (n2 - n1);
 
       of += PERLIN_ZWRAP;
-      n2 = this._perlin[of & PERLIN_SIZE];
-      n2 += rxf * (this._perlin[(of + 1) & PERLIN_SIZE] - n2);
-      n3 = this._perlin[(of + PERLIN_YWRAP) & PERLIN_SIZE];
-      n3 += rxf * (this._perlin[(of + PERLIN_YWRAP + 1) & PERLIN_SIZE] - n3);
+      n2 = this._p[of & PERLIN_SIZE];
+      n2 += rxf * (this._p[(of + 1) & PERLIN_SIZE] - n2);
+      n3 = this._p[(of + PERLIN_YWRAP) & PERLIN_SIZE];
+      n3 += rxf * (this._p[(of + PERLIN_YWRAP + 1) & PERLIN_SIZE] - n3);
       n2 += ryf * (n3 - n2);
 
       n1 += scaled_cosine(zf) * (n2 - n1);
 
       r += n1 * ampl;
-      ampl *= this._perlin_amp_falloff;
+      ampl *= this._pf;
       xi <<= 1;
       xf *= 2;
       yi <<= 1;
@@ -139,10 +139,10 @@ export class Noise {
    */
   noiseDetail(lod, falloff) {
     if (lod > 0) {
-      this._perlin_octaves = lod;
+      this._po = lod;
     }
     if (falloff > 0) {
-      this._perlin_amp_falloff = falloff;
+      this._pf = falloff;
     }
   }
 
@@ -183,9 +183,9 @@ export class Noise {
     })();
 
     lcg.setSeed(seed);
-    this._perlin = new Array(PERLIN_SIZE + 1);
+    this._p = new Array(PERLIN_SIZE + 1);
     for (let i = 0; i < PERLIN_SIZE + 1; i++) {
-      this._perlin[i] = lcg.rand();
+      this._p[i] = lcg.rand();
     }
   }
 }
