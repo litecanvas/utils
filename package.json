@@ -26,7 +26,8 @@
     "dev": "esbuild src/_web.js --bundle --watch --outfile=dist/all.js --servedir=.",
     "build": "node scripts/build.js",
     "prepare": "npm run build",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "format": "npx prettier -w ."
   },
   "files": [
     "src",
