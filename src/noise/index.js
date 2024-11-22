@@ -4,7 +4,7 @@
  */
 
 // import litecanvas types
-import 'litecanvas'
+import "litecanvas"
 
 /**
  * Constants for Perlin noise calculations.
@@ -27,7 +27,7 @@ const scaled_cosine = (i) => 0.5 * (1.0 - Math.cos(i * Math.PI))
  */
 export class Noise {
   /**
-   * Array to store Perlin noise values, initialized lazily.
+   * Array to store Perlin noise values.
    * @type {number[]}
    * @private
    */
@@ -48,13 +48,13 @@ export class Noise {
   _pf = 0.5
 
   /**
-   * @type {LitecancasInstance}
+   * @type {LitecanvasInstance}
    * @private
    */
   _e = null
 
   /**
-   * @param {LitecancasInstance} engine
+   * @param {LitecanvasInstance} engine
    */
   constructor(engine) {
     this._e = engine || globalThis

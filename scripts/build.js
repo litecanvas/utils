@@ -11,6 +11,7 @@ const files = {
     "src/grid/_web": "grid",
     "src/actor/_web": "actor",
     "src/tween/_web": "tween",
+    "src/noise/_web": "noise",
   },
   outdir = "dist"
 
