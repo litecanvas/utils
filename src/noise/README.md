@@ -7,10 +7,13 @@
 Generate procedural Perlin noise to use in your projects, such as terrain generation, animations, or particle effects.
 
 ```js
+import litecanvas from "litecanvas"
 import { Noise } from "@litecanvas/utils"
 
+const e = litecanvas()
+
 // Create a new Noise instance
-const noise = new Noise()
+const noise = new Noise(e)
 
 // Generate a noise value at 2D coordinates (x, y)
 const value = noise.noise(0.5, 0.8)
