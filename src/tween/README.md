@@ -126,6 +126,18 @@ moveRight.chain(moveLeft)
 moveRight.start()
 ```
 
+### TweenController#delay()
+
+Wait a amount of seconds before starts the animation.
+
+Syntax: `.delay(seconds: number): this`
+
+```js
+tween(...)
+  .delay(3)
+  .start() // wait 3 seconds before starts
+```
+
 ### TweenController#onEnd()
 
 Enqueues a callback to be executed when the animation finishes.
