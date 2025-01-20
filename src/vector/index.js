@@ -10,8 +10,8 @@ export class Vector {
   y
 
   /**
-   * @param {number} x
-   * @param {number} y
+   * @param {number} [x=0]
+   * @param {number} [y]
    */
   constructor(x = 0, y = x) {
     this.x = x
@@ -417,13 +417,13 @@ export const vecClamp = (v, min, max) => {
 }
 
 /**
- * @param {Vector} v
+ * @param {Vector} from
  * @param {Vector} to
- * @param {number} delta
+ * @param {number} [delta=1]
  * @returns {Vector}
  */
-export const vecMove = (v, to, delta = 1) =>
-  vecAdd(v, to.x * delta, to.y * delta)
+export const vecMove = (from, to, delta = 1) =>
+  vecAdd(from, to.x * delta, to.y * delta)
 
 export const vecIsZero = (v) => vecEq(v, ZERO)
 

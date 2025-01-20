@@ -27,11 +27,14 @@
       function init() {
         pos = vec(0, CENTERY)
         vel = vec(0, 0)
-        acc = vec(100, 0)
+        acc = vec(600, 0)
       }
 
       function update(dt) {
-        advance(pos, vel, acc, dt)
+        const MAX_VELOCITY = acc.x * 3
+        vel.x = clamp(vel.x, 0, MAX_VELOCITY)
+        advance(pos, vel, vel.x < MAX_VELOCITY ? acc : null, dt)
+
         if (pos.x > WIDTH) {
           pos.x = 0
         }

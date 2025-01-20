@@ -6,8 +6,8 @@ import { Vector } from "../vector"
  *
  * @param {Vector} position
  * @param {Vector} velocity
- * @param {Vector?} acceleration
- * @param {number?} deltaTime
+ * @param {Vector?} [acceleration]
+ * @param {number?} [deltaTime]
  */
 export default advance = (position, velocity, acceleration, deltaTime = 1) => {
   if (acceleration) {
