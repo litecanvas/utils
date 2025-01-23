@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <title>Litecanvas Utils</title>
+    <style type="text/css">
+      body {
+        background: #000;
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
+    <script src="../../dist/all.js"></script>
+    <script>
+      let original, flippedX, flippedY
+
+      utils.global()
+      litecanvas()
+
+      function init() {
+        original = paint(
+          3,
+          3,
+          // prettier-ignore
+          [
+            "444",
+            ".4.",
+            "6.5",
+          ],
+          { scale: 20 }
+        )
+
+        flippedX = flipImage(original, true, false)
+        flippedY = flipImage(original, false, true)
+      }
+
+      function draw() {
+        cls(0)
+        image(0, 0, original)
+        image(0, 70, flippedX)
+        image(0, 140, flippedY)
+      }
+    </script>
+  </body>
+</html>
