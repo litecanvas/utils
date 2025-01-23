@@ -12,6 +12,7 @@ const files = {
     "src/actor/_web": "actor",
     "src/tween/_web": "tween",
     "src/noise/_web": "noise",
+    "src/image/_web": "image",
   },
   outdir = "dist"
 
