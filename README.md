@@ -50,4 +50,5 @@ const pos = vec(0, 0)
 - **Grid**: class to handle retangular grid areas. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/grid)
 - **Collision** utilities. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/collision)
 - **Tween** to create animations. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/tween)
+- **Image** to manipulate images. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/image)
 - And some [math utilities](https://github.com/litecanvas/utils/tree/main/src/math)...
