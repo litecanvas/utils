@@ -43,7 +43,7 @@ function draw() {
 
 Apply the camera transformations (move, zoom and rotate). You must call this method before draw anything inside of the camera.
 
-### stop()
+### end()
 
 Stop looking through the camera. You must call this method after draw anything inside of the camera.
 
