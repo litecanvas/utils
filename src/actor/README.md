@@ -14,8 +14,7 @@ litecanvas({
   loop: { init, tapped, draw },
 })
 
-// create a sprite image
-// or load image with the @litecanvas/plugin-asset-loader
+// lets create a image to our actor
 mySprite = paint(3, 3, ["303", "030", "303"], { scale: 10 })
 
 function init() {
@@ -43,8 +42,11 @@ Set or get the actor position vector
 
 ```js
 player.pos.x = 100
-player.pos.x = 200
+player.pos.y = 200
 ```
+
+> Note:
+> The `player.pos` is a [Vector](https://github.com/litecanvas/utils/blob/main/src/vector/README.md) instance.
 
 ## Actor#x / Actor#y
 
@@ -100,15 +102,12 @@ If `true` the actor sprite is flipped vertically. Default is `false`.
 Set or get the actor anchor (origin). By default, the anchor is a vector `(0, 0)` (meaning anchor Top Left).
 
 ```js
-// position the sprite based on their center
+// example: actor position based on their center
 player.anchor.x = 0.5
 player.anchor.y = 0.5
-```
 
-```js
-// alternatively
+// or...
 import { ANCHOR_CENTER } from "@litecanvas/utils"
-
 player.anchor = ANCHOR_CENTER
 ```
 
@@ -174,4 +173,4 @@ player.sprite = anotherSprite
 
 > The actor sprite must be a `Image`, `HTMLCanvas` or `OffscreenCanvas`.
 >
-> Remember, you can create a image using the litecanvas' `paint()` built-in helper or [load a image](https://github.com/litecanvas/plugin-asset-loader?tab=readme-ov-file#loading-images) with plugins.
+> Remember, you can create a image using the litecanvas' `paint()` built-in helper or [load a image](https://github.com/litecanvas/plugin-asset-loader?tab=readme-ov-file#loading-images).
