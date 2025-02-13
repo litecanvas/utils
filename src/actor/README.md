@@ -15,10 +15,11 @@ litecanvas({
 })
 
 // create a sprite image
+// or load image with the @litecanvas/plugin-asset-loader
 mySprite = paint(3, 3, ["303", "030", "303"], { scale: 10 })
 
 function init() {
-  // create a actor
+  // create a actor and pass its image
   player = new Actor(mySprite)
 }
 
