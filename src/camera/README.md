@@ -8,6 +8,10 @@
 import { litecanvas } from "litecanvas"
 import { Camera } from "@litecanvas/utils"
 
+litecanvas({
+  loop: { init, draw }
+})
+
 function init() {
   camera = new Camera()
 }
@@ -17,11 +21,11 @@ function draw() {
 
   camera.start()
 
-  // draw your game objects here
+  // draw your dynamic game objects here (player, enemies, tilemap, etc)
 
   camera.end()
 
-  // draw your UI here
+  // draw your UI here (score, lifes, etc) 
 }
 ```
 
