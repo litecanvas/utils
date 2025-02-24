@@ -205,7 +205,7 @@ export const vecSetMag = (v, value) => {
  * @param {Vector} v
  * @returns {number}
  */
-export const vecMag = (v) => sqrt(v.x * v.x + v.y * v.y)
+export const vecMag = (v) => Math.hypot(v.x, v.y)
 
 /**
  * Calculates the magnitude (length) of the vector squared.
@@ -253,9 +253,7 @@ export const vecLimit = (v, max = 1) => {
  * @returns {number}
  */
 export const vecDist = (a, b) => {
-  const dx = a.x - b.x
-  const dy = a.y - b.y
-  return sqrt(dx * dx + dy * dy)
+  return Math.hypot(b.x - a.x, b.y - a.y)
 }
 
 /**
