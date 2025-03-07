@@ -16,7 +16,7 @@
     </style>
   </head>
   <body>
-    <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
+    <script src="https://unpkg.com/litecanvas/dist/dist.dev.js"></script>
     <script src="../../dist/all.js"></script>
     <script>
       utils.global()
@@ -63,7 +63,7 @@
         if (camera.viewing(x, y, w, h)) {
           rectfill(x, y, w, h, 4)
         } else {
-          linedash(3)
+          linedash([3])
           rect(x, y, w, h, 2)
         }
 

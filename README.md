@@ -51,4 +51,5 @@ const pos = vec(0, 0)
 - **Collision** utilities. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/collision)
 - **Tween** to create animations. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/tween)
 - **Image** to manipulate images. [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/image)
+- **Collection** to manipulate lists (arrays). [Usage & Docs](https://github.com/litecanvas/utils/tree/main/src/collection)
 - And some [math utilities](https://github.com/litecanvas/utils/tree/main/src/math)...

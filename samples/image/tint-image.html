@@ -19,38 +19,32 @@
     <script src="https://unpkg.com/litecanvas/dist/dist.dev.js"></script>
     <script src="../../dist/all.js"></script>
     <script>
-      utils.global()
+      let red, blue, purple
 
-      const g = litecanvas()
+      utils.global()
+      litecanvas()
 
       function init() {
-        seed(42) // uncomment this to set a fixed random seed
+        red = paint(64, 64, () => {
+          circfill(32, 32, 32, 4)
+          const p = path()
+          p.arc(32, 32, 16, 0, TWO_PI)
+          push()
+          clip(p)
+          cls()
+          pop()
+        })
 
-        center = vec(CENTERX, CENTERY)
-        points = []
-        count = 10
-      }
+        blue = tintImage(red, 6, 1)
 
-      function update(dt) {
-        if (count > 0) {
-          const p = vec(center) // clone
-          const randomDir = vecRand(200)
-
-          vecAdd(p, randomDir.x, randomDir.y)
-          points.push(p)
-
-          count--
-        }
+        purple = tintImage(red, 6, 0.65)
       }
 
       function draw() {
         cls(0)
-
-        circfill(center.x, center.y, 10, 5)
-
-        for (const p of points) {
-          circfill(p.x, p.y, 5, 4)
-        }
+        image(0, 0, red)
+        image(0, 64, blue)
+        image(64, 64, purple)
       }
     </script>
   </body>

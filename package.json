@@ -1,6 +1,6 @@
 {
   "name": "@litecanvas/utils",
-  "version": "0.28.1",
+  "version": "0.29.0",
   "description": "Utilities to help build litecanvas games",
   "author": "Luiz Bills <luizbills@pm.me>",
   "license": "MIT",
@@ -39,6 +39,6 @@
   "devDependencies": {
     "esbuild": "^0.25.0",
     "gzip-size": "^7.0.0",
-    "prettier": "^3.5.2"
+    "prettier": "^3.5.3"
   }
 }

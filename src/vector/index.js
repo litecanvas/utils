@@ -345,10 +345,10 @@ export const vecLerp = (a, b, t) => {
 export const vecRand = (
   minlength = 1,
   maxlength = minlength,
-  randomFn = globalThis.rand || Math.random
+  rng = globalThis.rand || Math.random
 ) => {
-  const angle = randomFn() * PI2
-  const radius = randomFn() * (maxlength - minlength) + minlength
+  const angle = rng() * PI2
+  const radius = rng() * (maxlength - minlength) + minlength
   return vec(cos(angle) * radius, sin(angle) * radius)
 }
 

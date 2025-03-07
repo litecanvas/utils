@@ -99,21 +99,6 @@ function draw() {
 
 [See in playground](https://litecanvas.js.org?c=eJxVjjELwjAQhff%2BihtTCKWCg0tdtKCLgxTEMV5SCYS0NGlUpP%2FdS1NQhxvue7yPN3ptXHE33U0YlmdGe4XCBuHoydrRotedBW21Zzm8M4C%2Bc1BBUMhKDrv61NTna048KPPlZSQCcSGrMrHpRzn2UnjFpE9aIYOwqBjpeXTxWOdAMYW6hRgUT9jC5bhvDqkzjyFYQUnf9KeXg3gsi9E4Ng9CPWDy8Ln54rDe0NGwDwbOS1Q%3D)
 
-## range
-
-Returns a sequence of numbers from `0` to `size - 1`.
-
-Syntax: `range(size: number): number[]`
-
-```js
-import { range } from "@litecanvas/utils"
-
-// prints 0 1 2 3 4
-for (let i of range(5)) {
-  console.log(i)
-}
-```
-
 ## mod
 
 Math modulus (always returns a positive number).
@@ -123,4 +108,24 @@ import { mod } from "@litecanvas/utils"
 
 mod(17, 5) // => 2
 mod(-17, 5) // => 3
+```
+
+## mean
+
+Computes the mean of the values in a array.
+
+```js
+import { mean } from "@litecanvas/utils"
+
+mean(10, 5, 3) // => 6 or (10 + 5 + 3) / 3
+```
+
+## sum
+
+Computes the sum of the values in a array.
+
+```js
+import { sum } from "@litecanvas/utils"
+
+sum(10, 5, 3) // => 18 or (10 + 5 + 3)
 ```

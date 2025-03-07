@@ -16,35 +16,24 @@
     </style>
   </head>
   <body>
-    <script src="https://unpkg.com/litecanvas/dist/dist.js"></script>
+    <script src="https://unpkg.com/litecanvas/dist/dist.dev.js"></script>
     <script src="../../dist/all.js"></script>
     <script>
-      let red, blue, purple
+      let values
 
       utils.global()
-      litecanvas()
+      const e = litecanvas()
 
       function init() {
-        red = paint(64, 64, () => {
-          circfill(32, 32, 32, 4)
-          const p = path()
-          p.arc(32, 32, 16, 0, TWO_PI)
-          push()
-          clip(p)
-          cls()
-          pop()
-        })
-
-        blue = tint(red, 6, 1)
-
-        purple = tint(red, 6, 0.65)
+        // seed(42)
+        values = shuffle(range(10), e.rand)
       }
+
+      function update(dt) {}
 
       function draw() {
         cls(0)
-        image(0, 0, red)
-        image(0, 64, blue)
-        image(64, 64, purple)
+        text(0, 0, values.join(" "))
       }
     </script>
   </body>
