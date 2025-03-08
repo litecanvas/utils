@@ -103,6 +103,8 @@ function draw() {
 
 Math modulus (always returns a positive number).
 
+Syntax: `mod(dividend: number, divisor: number): number`
+
 ```js
 import { mod } from "@litecanvas/utils"
 
@@ -117,15 +119,32 @@ Computes the mean of the values in a array.
 ```js
 import { mean } from "@litecanvas/utils"
 
-mean(10, 5, 3) // => 6 or (10 + 5 + 3) / 3
+Syntax: `mean(values: number[]): number`
+
+mean([10, 5, 3]) // => 6 or (10 + 5 + 3) / 3
 ```
 
 ## sum
 
 Computes the sum of the values in a array.
 
+Syntax: `sum(values: number[]): number`
+
 ```js
 import { sum } from "@litecanvas/utils"
 
-sum(10, 5, 3) // => 18 or (10 + 5 + 3)
+sum([10, 5, 3]) // => 18 or (10 + 5 + 3)
+```
+
+## lerpAngle
+
+Calculates the linear interpolation of two angles (in degrees).
+
+Syntax: `lerpAngle(start: number, end: number, amount: number): number`
+
+```js
+import { lerpAngle } from "@litecanvas/utils"
+
+lerpAngle(0, 90, 0.5) // => 45
+lerpAngle(0, 270, 0.5) // => -45
 ```
