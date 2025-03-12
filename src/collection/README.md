@@ -63,25 +63,25 @@ for (let i of range(10, 10, 10)) {
 }
 ```
 
-## sample
+## choose
 
 Return a random value of an array.
 
-Syntax: `sample(values: any[], rng = Math.random): any`
+Syntax: `choose(values: any[], rng = Math.random): any`
 
 ```js
-import { sample } from "@litecanvas/utils"
+import { choose } from "@litecanvas/utils"
 
 const values = [0, 1, 2]
 
-sample(values) // returns a value of this array
+choose(values) // returns a value of this array
 ```
 
 ## shuffle
 
 Creates an new array of shuffled values.
 
-Syntax: `sample(values: any[], rng = Math.random): any`
+Syntax: `shuffle(values: any[], rng = Math.random): any`
 
 ```js
 import { shuffle } from "@litecanvas/utils"

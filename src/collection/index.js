@@ -1,6 +1,6 @@
 export { default as range } from "./range.js"
 export { default as shuffle } from "./shuffle.js"
-export { default as sample } from "./sample.js"
+export { default as choose } from "./choose.js"
 export { default as head } from "./head.js"
 export { default as last } from "./last.js"
 export { default as tail } from "./tail.js"
