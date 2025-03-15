@@ -1,8 +1,4 @@
 import "../_global.js"
-import resolve from "./resolve.js"
-import intersection from "./intersection.js"
+import * as collisionUtils from "./index.js"
 
-globalThis.utils = Object.assign(globalThis.utils || {}, {
-  resolve,
-  intersection,
-})
+globalThis.utils = Object.assign(globalThis.utils || {}, collisionUtils)

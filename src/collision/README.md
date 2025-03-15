@@ -2,6 +2,18 @@
 
 **CDN**: https://unpkg.com/@litecanvas/utils/dist/collision.js
 
+## colrect
+
+Check a collision between two rectangles.
+
+Syntax: `colrect(x1, y1, w1, h1, x2, y2, w2, h2): boolean`
+
+## colcirc
+
+Check a collision between two circles.
+
+Syntax: `colcirc(x1, y1, r1, x2, y2, r2): boolean`
+
 ## intersection
 
 Returns the resulting rectangle of the intersection between two rectangles.
@@ -10,7 +22,7 @@ Syntax: `intersection(x1, y1, w1, h1, x2, y2, w2, h2): number[]`
 
 ```js
 import litecanvas from "litecanvas"
-import { intersection } from "@litecanvas/utils"
+import { intersection, colrect } from "@litecanvas/utils"
 
 litecanvas({
   loop: { init, draw },
@@ -36,15 +48,15 @@ function draw() {
 }
 ```
 
-## resolve
+## resolverect
 
-Syntax: `resolve(x1, y1, w1, h1, x2, y2, w2, h2): { direction: string, x: number, y: number }`
+Syntax: `resolverect(x1, y1, w1, h1, x2, y2, w2, h2): { direction: string, x: number, y: number }`
 
 > Note: possible values for `direction` is `"top"`, `"botton"`, `"left"`, `"right"` or `""` (empty string, if no collision).
 
 ```js
 import litecanvas from "litecanvas"
-import { resolve } from "@litecanvas/utils"
+import { resolverect, colrect } from "@litecanvas/utils"
 
 litecanvas({
   loop: { init, draw },
@@ -57,7 +69,7 @@ function init() {
 
   // check the collision
   if (colrect(...rect1, ...rect2)) {
-    const { direction, x, y } = resolve(...rect1, ...rect2)
+    const { direction, x, y } = resolverect(...rect1, ...rect2)
 
     // which side of rect1 is colliding with rect2
     console.log(direction) // outputs "bottom"
