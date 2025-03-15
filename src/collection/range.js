@@ -18,10 +18,6 @@
  * }
  */
 export default (size, from = 0, step = 1) =>
-  Array.from(
-    Array(size)
-      .keys()
-      .map((i) => {
-        return from + step * i
-      })
-  )
+  [...new Array(size).keys()].map((i) => {
+    return from + step * i
+  })

@@ -1,6 +1,5 @@
-export { default as resolve } from "./collision/resolve.js"
-export { default as intersection } from "./collision/intersection.js"
 export { default as Camera } from "./camera/index.js"
+export * from "./collision/index.js"
 export * from "./grid/index.js"
 export * from "./vector/index.js"
 export * from "./actor/index.js"
