@@ -38,6 +38,7 @@ for (let [path, name] of Object.entries(files)) {
     outfile,
     bundle: true,
     minify: true,
+    dropLabels: ["DEV"],
   })
 
   console.log(
