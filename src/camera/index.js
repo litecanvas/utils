@@ -23,12 +23,6 @@ export default class Camera {
   /** @type {number} */
   scale = 1
 
-  _shake = {
-    x: 0,
-    y: 0,
-    removeListener: null,
-  }
-
   /**
    * @param {LitecanvasInstance} engine
    */
@@ -45,6 +39,12 @@ export default class Camera {
 
     this.x = this.width / 2
     this.y = this.height / 2
+
+    this._shake = {
+      x: 0,
+      y: 0,
+      removeListener: null,
+    }
   }
 
   resize(width, height) {
@@ -169,33 +169,6 @@ export default class Camera {
    */
   getBounds() {
     return [this.ox, this.oy, this.width, this.height]
-  }
-
-  /**
-   * Check if a rect is inside of the camera.
-   *
-   * @param {number} x
-   * @param {number} y
-   * @param {number} width
-   * @param {number} height
-   * @returns {boolean}
-   */
-  viewing(x, y, width, height) {
-    const cameraX = this.width / 2 - this.x
-    const cameraY = this.height / 2 - this.y
-    const cameraWidth = this.width / this.scale
-    const cameraHeight = this.height / this.scale
-
-    return this._engine.colrect(
-      x,
-      y,
-      width,
-      height,
-      cameraX,
-      cameraY,
-      cameraWidth,
-      cameraHeight
-    )
   }
 
   /**

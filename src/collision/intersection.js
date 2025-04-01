@@ -1,6 +1,6 @@
 /**
  * Returns the resulting rectangle of the intersection between two rectangles.
- * Note: this function should be called with or after `litecanvas#colrect`.
+ * Note: this function should be called with or after `colrect`.
  *
  * @param {number} x1
  * @param {number} y1

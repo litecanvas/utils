@@ -2,7 +2,7 @@ import intersection from "./intersection"
 /**
  * Determines the direction of the collision between two rectangles and
  * the new position of the first rectangle to be adjusted.
- * Note: this function should be called with or after `litecanvas#colrect`.
+ * Note: this function should be called with or after `colrect`.
  *
  * @param {number} x1
  * @param {number} y1
