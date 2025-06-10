@@ -27,7 +27,7 @@
       const e = litecanvas()
 
       function init() {
-        pos = vec(0, CENTERY)
+        pos = vec(0, CY)
         vel = vec(0, 0)
         acc = vec(100, 0)
       }
@@ -36,7 +36,7 @@
         advance(pos, vel, vel.x < MAX_VELOCITY ? acc : null, dt)
         vel.x = clamp(vel.x, 0, MAX_VELOCITY)
 
-        if (pos.x > WIDTH) {
+        if (pos.x > W) {
           pos.x = 0
           sfx()
         }

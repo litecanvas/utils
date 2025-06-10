@@ -155,11 +155,12 @@ export class Noise {
 
   /**
    * Sets a seed for the Perlin noise generator, ensuring deterministic results.
+   *
    * @param {number} value - Seed value.
    */
   noiseSeed(value = null) {
     if (value != null) {
-      this._e.seed(value)
+      this._e.rseed(value)
     }
     const random = this._e.rand || Math.random
     for (let i = 0; i < PERLIN_SIZE + 1; i++) {

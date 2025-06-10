@@ -34,24 +34,24 @@
 
         player.anchor = ANCHOR_CENTER
 
-        player.x = e.CENTERX
-        player.y = e.CENTERY
+        player.x = e.CX
+        player.y = e.CY
 
         player.opacity = 0.5
       }
 
       function update(dt) {
         player.angle += 180 * dt
-        player.scale.x = wave(0.5, 2, e.ELAPSED)
-        player.scale.y = wave(0.5, 2, e.ELAPSED)
+        player.scale.x = wave(0.5, 2, e.T)
+        player.scale.y = wave(0.5, 2, e.T)
       }
 
       function draw() {
         e.cls(0)
 
         // two lines
-        e.line(0, e.CENTERY, e.WIDTH, e.CENTERY, 1)
-        e.line(e.CENTERX, 0, e.CENTERX, e.HEIGHT, 1)
+        e.line(0, e.CY, e.W, e.CY, 1)
+        e.line(e.CX, 0, e.CX, e.H, 1)
 
         // the actor
         player.draw(e)
