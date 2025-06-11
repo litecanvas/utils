@@ -54,7 +54,7 @@
       litecanvas({
         width: state.width,
         height: state.height,
-        canvas: document.querySelector("#canvas"),
+        canvas: "#canvas",
         // autoscale: false,
       })
 
@@ -105,13 +105,12 @@
         }
         console.log(`Rendering ${state.count} sprites...`)
 
+
+        stats = new Stats()
+          stats.showPanel(0)
+          stats.dom.style.position = "absolute"
+          document.querySelector("#stats").appendChild(stats.dom)
         listen("before:update", () => {
-          if (!stats) {
-            stats = new Stats()
-            stats.showPanel(0)
-            stats.dom.style.position = "absolute"
-            document.querySelector("#stats").appendChild(stats.dom)
-          }
           stats.begin()
         })
         listen("after:draw", () => stats.end())
