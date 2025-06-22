@@ -56,7 +56,7 @@ import { vec, advance } from "@litecanvas/utils"
 litecanvas()
 
 function init() {
-  pos = vec(0, CY)
+  pos = vec(0, H / 2)
   vel = vec(0, 0)
   acc = vec(100, 0)
 }

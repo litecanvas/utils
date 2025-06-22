@@ -34,7 +34,7 @@
         const size = 16
         const fireball = makeCircle(size, 4)
 
-        parent = new Actor(fireball, vec(CX, CY), ANCHOR_CENTER)
+        parent = new Actor(fireball, vec(W / 2, H / 2), ANCHOR_CENTER)
         parent.children = []
 
         for (let i = 0; i < 6; i++) {

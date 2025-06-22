@@ -33,7 +33,7 @@ litecanvas()
 function init() {
   pos = {
     x: 100,
-    y: CY,
+    y: H / 2,
   }
 
   // create the animation
@@ -221,7 +221,7 @@ litecanvas()
 function init() {
   pos = {
     x: 100,
-    y: CY,
+    y: H / 2,
   }
 
   tween(pos, "x", 250, 2, BOUNCE_OUT).start()

@@ -69,14 +69,14 @@
 
       // tap to move the player
       function tapped(tapx, tapy) {
-        distx = abs(tapx - CX)
-        disty = abs(tapy - CY)
+        distx = abs(tapx - W / 2)
+        disty = abs(tapy - H / 2)
 
         if (distx > disty) {
-          dirx = sign(tapx - CX)
+          dirx = sign(tapx - W / 2)
           player.x += TILE_SIZE * dirx
         } else {
-          diry = sign(tapy - CY)
+          diry = sign(tapy - H / 2)
           player.y += TILE_SIZE * diry
         }
 
