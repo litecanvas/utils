@@ -9,7 +9,7 @@ import { Vector } from "../vector/index.js"
  * @param {Vector?} [acceleration]
  * @param {number?} [deltaTime]
  */
-export default advance = (position, velocity, acceleration, deltaTime = 1) => {
+export default (position, velocity, acceleration, deltaTime = 1) => {
   if (acceleration) {
     velocity.x += acceleration.x * deltaTime
     velocity.y += acceleration.y * deltaTime
