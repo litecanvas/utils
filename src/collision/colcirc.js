@@ -1,4 +1,4 @@
-import assert from "../debug/assert"
+import assert from "../debug/assert.js"
 
 /**
  * Check a collision between two circles

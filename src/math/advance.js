@@ -1,4 +1,4 @@
-import { Vector } from "../vector"
+import { Vector } from "../vector/index.js"
 
 /**
  * Move a vector (position) using another vectors: velocity and acceleration (optional).

@@ -1,4 +1,4 @@
-import intersection from "./intersection"
+import intersection from "./intersection.js"
 /**
  * Determines the direction of the collision between two rectangles and
  * the new position of the first rectangle to be adjusted.

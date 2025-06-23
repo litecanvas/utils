@@ -1,4 +1,4 @@
-import sum from "./sum"
+import sum from "./sum.js"
 
 /**
  * Computes the mean of the values in a array.
