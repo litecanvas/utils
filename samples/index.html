@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,
+    user-scalable=no, initial-scale=1, maximum-scale=1, user-scalable=0"
+    />
+    <title>Litecanvas Utils</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css"
+    />
+
+    <style type="text/css">
+      body {
+        margin: 0;
+        color: #333;
+      }
+
+      body > main {
+        text-align: center;
+        padding: 0;
+      }
+
+      select {
+        margin: 1rem 0;
+        max-width: 400px;
+      }
+
+      button {
+        color: #555;
+        --pico-background-color: var(--pico-form-element-background-color);
+        --pico-border-color: var(--pico-form-element-border-color);
+      }
+
+      button:focus,
+      button:hover {
+        --pico-background-color: var(--pico-form-element-background-color);
+        --pico-border-color: var(--pico-form-element-border-color);
+      }
+
+      svg {
+        width: 1em;
+        height: 1em;
+      }
+
+      iframe {
+        outline: 1px solid white;
+      }
+
+      #controls {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        padding: 0 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div id="controls">
+        <button id="prev">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M21 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061A1.125 1.125 0 0 1 21 8.689v8.122ZM11.25 16.811c0 .864-.933 1.406-1.683.977l-7.108-4.061a1.125 1.125 0 0 1 0-1.954l7.108-4.061a1.125 1.125 0 0 1 1.683.977v8.122Z"
+            />
+          </svg>
+        </button>
+        <select id="samples"></select>
+        <button id="next">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M3 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061A1.125 1.125 0 0 1 3 16.811V8.69ZM12.75 8.689c0-.864.933-1.406 1.683-.977l7.108 4.061a1.125 1.125 0 0 1 0 1.954l-7.108 4.061a1.125 1.125 0 0 1-1.683-.977V8.69Z"
+            />
+          </svg>
+        </button>
+        <button id="reload">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99"
+            />
+          </svg>
+        </button>
+      </div>
+      <div id="preview"></div>
+    </main>
+
+    <script src="get-samples.js"></script>
+    <script>
+      const $ = (selector) => document.querySelector(selector)
+
+      const samples = $("#samples")
+      const samplesPreview = $("#preview")
+      const reloadButton = $("#reload")
+      const nextButton = $("#next")
+      const prevButton = $("#prev")
+
+      const samplesList = getSamples()
+      const sampleWidth = Math.min(innerWidth, 1024)
+      const aspectRatio = 3 / 4
+
+      let sampleFrame = null
+      let currentSample = 0
+
+      for (const s of samplesList) {
+        const sample = document.createElement("option")
+        sample.value = s
+        sample.textContent = s.replace("/", ": ").replace("-", " ")
+        samples.append(sample)
+      }
+
+      reloadButton.onclick = () => {
+        loadSample(location.hash.slice(1))
+      }
+
+      prevButton.onclick = () => {
+        loadSample(
+          samplesList[
+            currentSample - 1 < 0 ? samplesList.length - 1 : currentSample - 1
+          ]
+        )
+      }
+
+      nextButton.onclick = () => {
+        loadSample(
+          samplesList[
+            currentSample + 1 >= samplesList.length ? 0 : currentSample + 1
+          ]
+        )
+      }
+
+      samples.onchange = (ev) => {
+        loadSample(samples.value)
+      }
+
+      if (location.hash) {
+        loadSample(location.hash.slice(1))
+      } else {
+        loadSample(samplesList[0])
+      }
+
+      function loadSample(sampleId) {
+        if (location.hash) {
+          location.href = `${location.origin}${location.pathname}#${sampleId}`
+        }
+
+        const index = samplesList.indexOf(sampleId)
+        if (!sampleId || -1 === index) {
+          alert(`sample "${sampleId}" not exists!`)
+        }
+
+        currentSample = index
+
+        location.hash = sampleId
+
+        if (sampleFrame) {
+          sampleFrame.remove()
+        }
+
+        try {
+          console.clear()
+        } catch (err) {
+          // just prevent errors
+        }
+
+        sampleFrame = document.createElement("iframe")
+        sampleFrame.src = "./frame.html#" + sampleId
+        sampleFrame.width = sampleWidth
+        sampleFrame.height = Math.floor(sampleWidth * aspectRatio)
+        sampleFrame.frameBorder = 0
+
+        samplesPreview.appendChild(sampleFrame)
+
+        sampleFrame.focus()
+
+        samples.value = sampleId
+      }
+
+      function capitalize(str) {
+        return str.charAt(0).toUpperCase() + str.slice(1)
+      }
+    </script>
+  </body>
+</html>
