@@ -1,6 +1,6 @@
 {
   "name": "@litecanvas/utils",
-  "version": "0.35.1",
+  "version": "0.36.0",
   "description": "Utilities to help build litecanvas games",
   "author": "Luiz Bills <luizbills@pm.me>",
   "license": "MIT",
@@ -23,7 +23,7 @@
     "grid"
   ],
   "scripts": {
-    "dev": "esbuild src/_web.js --bundle --watch --outfile=dist/all.js --servedir=.",
+    "dev": "esbuild src/_web.js --bundle --watch --outfile=samples/dist/all.js --servedir=samples",
     "build": "node scripts/build.js",
     "prepare": "npm run build",
     "prepublishOnly": "npm run build",
@@ -37,8 +37,8 @@
     "litecanvas": "latest"
   },
   "devDependencies": {
-    "esbuild": "^0.25.5",
+    "esbuild": "^0.25.6",
     "gzip-size": "^7.0.0",
-    "prettier": "^3.5.3"
+    "prettier": "^3.6.2"
   }
 }
