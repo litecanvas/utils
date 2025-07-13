@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "target": "es2017",
+    "lib": ["ES2017", "DOM", "DOM.Iterable"],
+    "types": ["./node_modules/litecanvas/types/global.d.ts"],
+    "noEmit": true,
+    "allowJs": true
+  },
+  "include": ["./src/**/*", "./samples/**/*"]
+}

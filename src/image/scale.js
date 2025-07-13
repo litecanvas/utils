@@ -1,9 +1,7 @@
-import "litecanvas"
-
 /**
  * Increases or decreases a image size.
  *
- * @param {HTMLImageElement|HTMLCanvasElement|OffscreenCanvas} img
+ * @param {CanvasImageSource} img
  * @param {number} factor
  * @param {LitecanvasInstance} [engine]
  */

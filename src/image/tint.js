@@ -1,9 +1,7 @@
-import "litecanvas"
-
 /**
  * Tint a image with a color and optional opacity.
  *
- * @param {HTMLImageElement|HTMLCanvasElement|OffscreenCanvas} img
+ * @param {CanvasImageSource} img
  * @param {number} color
  * @param {number} [opacity=1]
  * @param {LitecanvasInstance} [engine]

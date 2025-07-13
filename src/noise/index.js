@@ -3,12 +3,7 @@
  * https://github.com/processing/p5.js/blob/v1.11.1/src/math/noise.js
  */
 
-// import litecanvas types
-import "litecanvas"
-
-/**
- * Constants for Perlin noise calculations.
- */
+// Constants for Perlin noise calculations.
 const PERLIN_YWRAPB = 4
 const PERLIN_YWRAP = 1 << PERLIN_YWRAPB
 const PERLIN_ZWRAPB = 8

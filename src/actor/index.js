@@ -1,5 +1,4 @@
 import { Vector, vec } from "../vector/index.js"
-import "litecanvas"
 
 export const ANCHOR_CENTER = /** @__PURE__ */ vec(0.5, 0.5)
 export const ANCHOR_TOP_LEFT = /** @__PURE__ */ vec(0, 0)
@@ -8,7 +7,7 @@ export const ANCHOR_BOT_LEFT = /** @__PURE__ */ vec(0, 1)
 export const ANCHOR_BOT_RIGHT = /** @__PURE__ */ vec(1, 1)
 
 export class Actor {
-  /** @type {Image|HTMLCanvasElement|OffscreenCanvas} */
+  /** @type {CanvasImageSource} */
   sprite
 
   /** @type {Vector} The actor position */

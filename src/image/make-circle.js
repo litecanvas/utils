@@ -1,5 +1,3 @@
-import "litecanvas"
-
 /**
  * Creates an image with the geometric shape of a circle with an optional border.
  *

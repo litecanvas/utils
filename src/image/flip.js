@@ -1,9 +1,7 @@
-import "litecanvas"
-
 /**
  * Flip a image with a color and optional opacity.
  *
- * @param {HTMLImageElement|HTMLCanvasElement|OffscreenCanvas} img
+ * @param {CanvasImageSource} img
  * @param {boolean} [horizontal=true]
  * @param {boolean} [vertically=false]
  * @param {LitecanvasInstance} [engine]

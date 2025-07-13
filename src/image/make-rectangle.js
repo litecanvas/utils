@@ -1,5 +1,3 @@
-import "litecanvas"
-
 /**
  * Creates an image with the geometric shape of a rectangle with an optional border.
  *
@@ -22,16 +20,17 @@ export default (
   const imageHeight = height + borderWidth * 2
 
   return engine.paint(imageWidth, imageHeight, () => {
+    const hasBorder = borderWidth > 0
+    if (hasBorder) {
+      engine.cls(borderColor)
+    }
+
     engine.rectfill(
-      borderWidth > 0 ? borderWidth : 0,
-      borderWidth > 0 ? borderWidth : 0,
+      hasBorder ? borderWidth : 0,
+      hasBorder ? borderWidth : 0,
       width,
       height,
       color
     )
-    if (borderWidth > 0) {
-      engine.linewidth(borderWidth)
-      engine.stroke(borderColor)
-    }
   })
 }

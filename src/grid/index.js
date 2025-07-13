@@ -154,10 +154,10 @@ export class Grid {
    * @param {Grid} grid
    * @returns {boolean?} returns `false` to stop/break the loop
    *
-   * @param {GridForEachCallback} handler
+   * @param {GridForEachCallback} callback
    * @param {boolean} [reverse=false]
    */
-  forEach(handler, reverse = false) {
+  forEach(callback, reverse = false) {
     let i = reverse ? this.length - 1 : 0,
       limit = reverse ? -1 : this.length,
       step = reverse ? -1 : 1
@@ -167,7 +167,7 @@ export class Grid {
         y = this.indexToPointY(i),
         cellValue = this._c[i]
 
-      if (false === handler(x, y, cellValue, this)) break
+      if (false === callback(x, y, cellValue, this)) break
 
       i += step
     }
