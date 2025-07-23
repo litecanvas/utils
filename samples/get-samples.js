@@ -29,5 +29,6 @@ function getSamples() {
     "vector/basic",
     "vector/bounce",
     "vector/random",
+    "time/format-time",
   ]
 }
