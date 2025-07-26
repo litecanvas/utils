@@ -239,8 +239,7 @@ export const vecNorm = (v) => {
 export const vecLimit = (v, max = 1) => {
   const sq = vecMag2(v)
   if (sq > max * max) {
-    vecDiv(v, sqrt(sq)) //normalize it
-    vecMult(v, max)
+    vecSetMag(v, max)
   }
   return v
 }
@@ -275,7 +274,15 @@ export const vecDist2 = (a, b) => {
  * @param {Vector} v
  * @returns {number}
  */
-export const vecAngle = (v) => Math.atan2(v.y, v.x)
+export const vecHeading = (v) => Math.atan2(v.y, v.x)
+
+/**
+ * `vecHeading` alias.
+ *
+ * @param {Vector} v
+ * @returns {number}
+ */
+export const vecAngle = (v) => vecHeading(v)
 
 /**
  * Calculates the angle between two vectors.
