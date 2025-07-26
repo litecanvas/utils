@@ -12,7 +12,7 @@ function getSamples() {
     "collection/range",
     "collection/shuffle",
     "collision/intersection",
-    "collision/resolve",
+    "collision/resolverect",
     "grid/arena",
     "grid/typed",
     "image/flip-image",

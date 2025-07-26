@@ -1,21 +1,22 @@
 utils.global()
 
 litecanvas({
-  width: 100,
-  autoscale: false,
+  width: 400,
+  // autoscale: false,
+  pixelart: false,
 })
 
 // based on https://p5js.org/reference/p5.Vector/reflect/
 function draw() {
   cls(3)
 
-  line(50, 0, 50, 100, 2)
+  line(W / 2, 0, W / 2, H, 2)
 
   // Create a normal vector
   let n = vec(1, 0)
 
   // Center
-  let v0 = vec(50, 50)
+  let v0 = vec(W / 2, H / 2)
 
   // Create a vector to reflect
   let v1 = vec(30, 40)

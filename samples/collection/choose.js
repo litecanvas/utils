@@ -5,7 +5,7 @@ const e = litecanvas({})
 let value
 
 function init() {
-  rseed(42)
+  // rseed(42)
   value = choose(range(1000), e.rand)
 }
 
