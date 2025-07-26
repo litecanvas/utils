@@ -129,16 +129,18 @@ Returns the distance between two points represented by vectors squared.
 
 Syntax: `vecDist2(a: Vector, b: Vector): number`
 
-## vecAngle
+## vecHeading
 
 Calculates the angle a vector makes with the positive x-axis.
 
-Syntax: `vecAngle(v: Vector): number`
+Syntax: `vecHeading(v: Vector): number`
 
 ```js
-const a = vecAngle(vec(1, 0)) // outputs 0 (zero)
-const b = vecAngle(vec(0, 1)) // outputs ~1.571 (same as Math.PI / 2)
+const a = vecHeading(vec(1, 0)) // outputs 0 (zero)
+const b = vecHeading(vec(0, 1)) // outputs ~1.571 (same as Math.PI/2 or 90°)
 ```
+
+> Note: `vecAngle` is alias of `vecHeading`.
 
 ## vecDot
 
@@ -162,6 +164,12 @@ The `atm` parameter is the amount to interpolate between the old vector and the 
 values equal to the new vector's.
 
 Syntax: `vecLerp(a: Vector, b: Vector, atm: number): Lerp`
+
+## vecRem
+
+Performs modulo (remainder) division with a vector's components.
+
+Syntax: `vecRem(v: Vector, divisor: number): Vector`
 
 ## vecRand
 

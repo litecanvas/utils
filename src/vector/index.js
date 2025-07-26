@@ -1,21 +1,15 @@
-const sqrt = Math.sqrt,
-  cos = Math.cos,
+const cos = Math.cos,
   sin = Math.sin,
   PI2 = 2 * Math.PI
 
 export class Vector {
-  /** @type {number} */
-  x
-  /** @type {number} */
-  y
-
   /**
    * @param {number} [x=0]
    * @param {number} [y]
    */
   constructor(x = 0, y = x) {
-    this.x = x
-    this.y = y
+    this.x = parseFloat(x) || 0
+    this.y = parseFloat(y) || 0
   }
 
   /**
@@ -45,21 +39,6 @@ export const vec = (x = 0, y = x) => {
     x = x.x
   }
   return new Vector(x, y)
-}
-
-/**
- * Checks whether two vectors are equal.
- *
- * @param {Vector} v
- * @param {number|Vector} x
- * @param {number} [y]
- * @returns {boolean}
- */
-export const vecEq = (v, x, y = x) => {
-  if (isVector(x)) {
-    return vecEq(v, x.x, x.y)
-  }
-  return v.x === x && v.y === y
 }
 
 /**
@@ -187,7 +166,7 @@ export const vecReflect = (v, normal) => {
 }
 
 /**
- * Reflects a vector about a line (second argument).
+ * Sets a vector's magnitude to value.
  *
  * @param {Vector} v
  * @param {Vector} normal
@@ -339,27 +318,6 @@ export const vecLerp = (a, b, t) => {
 }
 
 /**
- * Sample a vector with random direction and (optional) length.
- *
- * If the `litecanvas#rand()` not is globally explosed, uses `Math.random()`.
- * You can set `vecconfig.random` to set your own "random" function.
- *
- * @param {number} [minlength]
- * @param {number} [maxlength]
- * @param {() => number} [randomFn]
- * @returns {Vector}
- */
-export const vecRand = (
-  minlength = 1,
-  maxlength = minlength,
-  rng = globalThis.rand || Math.random
-) => {
-  const angle = rng() * PI2
-  const radius = rng() * (maxlength - minlength) + minlength
-  return vec(cos(angle) * radius, sin(angle) * radius)
-}
-
-/**
  * @param {Vector} v
  * @returns {Vector}
  */
@@ -422,6 +380,19 @@ export const vecClamp = (v, min, max) => {
 }
 
 /**
+ * Performs modulo (remainder) division with a vector's components.
+ *
+ * @param {Vector} v
+ * @param {number} value
+ * @returns {Vector}
+ */
+export const vecRem = (v, value) => {
+  v.x %= value
+  v.y %= value
+  return v
+}
+
+/**
  * @param {Vector} from
  * @param {Vector} to
  * @param {number} [delta=1]
@@ -430,7 +401,55 @@ export const vecClamp = (v, min, max) => {
 export const vecMove = (from, to, delta = 1) =>
   vecAdd(from, to.x * delta, to.y * delta)
 
+/**
+ * Checks whether two vectors are equal.
+ *
+ * @param {Vector} v
+ * @param {number|Vector} x
+ * @param {number} [y]
+ * @returns {boolean}
+ */
+export const vecEq = (v, x, y = x) => {
+  if (isVector(x)) {
+    return vecEq(v, x.x, x.y)
+  }
+  return v.x === x && v.y === y
+}
+
+/**
+ * Checks if the vector's components are zero.
+ *
+ * @param {Vector} v
+ * @returns {boolean}
+ */
 export const vecIsZero = (v) => vecEq(v, ZERO)
+
+/**
+ * Returns the vector's components as an array of numbers.
+ *
+ * @returns {number[]}
+ */
+export const vecToArray = (v) => [v.x, v.y]
+
+/**
+ * Sample a vector with random direction and (optional) length.
+ *
+ * If the `litecanvas#rand()` not is globally explosed, uses `Math.random()`.
+ *
+ * @param {number} [minlength]
+ * @param {number} [maxlength]
+ * @param {() => number} [randomFn]
+ * @returns {Vector}
+ */
+export const vecRand = (
+  minlength = 1,
+  maxlength = minlength,
+  rng = globalThis.rand || Math.random
+) => {
+  const angle = rng() * PI2
+  const radius = rng() * (maxlength - minlength) + minlength
+  return vec(cos(angle) * radius, sin(angle) * radius)
+}
 
 // constants
 export const ZERO = /** @__PURE__ */ vec(0, 0)
