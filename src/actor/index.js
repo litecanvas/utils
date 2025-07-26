@@ -40,7 +40,7 @@ export class Actor {
    * @param {Vector} anchor
    */
   constructor(sprite, position, anchor = ANCHOR_TOP_LEFT) {
-    this.sprite = sprite
+    this.sprite = sprite || { width: 0, height: 0 }
     this.pos = position || vec(0)
     this._o = vec(anchor) // clone the anchor vector
     this._s = vec(1, 1)
@@ -146,40 +146,46 @@ export class Actor {
   /**
    * Draw the actor
    *
-   * @param {LitecanvasInstance} [litecanvas]
+   * @param {LitecanvasInstance} [engine]
    */
-  draw(litecanvas = globalThis, saveContext = true) {
-    if (this.hidden || this.opacity <= 0) return
+  draw(engine = globalThis, saveContext = true) {
+    if (saveContext) engine.push()
 
-    if (saveContext) litecanvas.push()
+    this.transform(engine)
 
-    this.transform(litecanvas)
-    this.drawImage(litecanvas)
+    if (
+      this.sprite.width &&
+      this.sprite.height &&
+      !this.hidden &&
+      this.opacity > 0
+    ) {
+      this.drawImage(engine)
+    }
 
-    if (saveContext) litecanvas.pop()
+    if (saveContext) engine.pop()
   }
 
   /**
-   * @param {LitecanvasInstance} litecanvas
+   * @param {LitecanvasInstance} engine
    */
-  transform(litecanvas) {
-    litecanvas.translate(this.pos.x, this.pos.y)
-    litecanvas.rotate(litecanvas.deg2rad(this.angle))
-    litecanvas.scale(
+  transform(engine) {
+    engine.translate(this.pos.x, this.pos.y)
+    engine.rotate(engine.deg2rad(this.angle))
+    engine.scale(
       (this.flipX ? -1 : 1) * this._s.x,
       (this.flipY ? -1 : 1) * this._s.y
     )
   }
 
   /**
-   * @param {LitecanvasInstance} litecanvas
+   * @param {LitecanvasInstance} engine
    */
-  drawImage(litecanvas, alpha = true) {
+  drawImage(engine, alpha = true) {
     const anchor = this.anchor
     const x = -this.sprite.width * (this.flipX ? 1 - anchor.x : anchor.x)
     const y = -this.sprite.height * (this.flipY ? 1 - anchor.y : anchor.y)
 
-    if (alpha) litecanvas.alpha(this.opacity)
-    litecanvas.image(x, y, this.sprite)
+    if (alpha) engine.alpha(this.opacity)
+    engine.image(x, y, this.sprite)
   }
 }
