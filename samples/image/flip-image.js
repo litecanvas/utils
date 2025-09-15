@@ -7,12 +7,7 @@ function init() {
   original = paint(
     3,
     3,
-    // prettier-ignore
-    [
-            "444",
-            ".4.",
-            "6.5",
-          ],
+    () => spr(0, 0, 3, 3, ["444", ".4.", "6.5"].join("")),
     { scale: 20 }
   )
 

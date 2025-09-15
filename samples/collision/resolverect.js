@@ -23,12 +23,12 @@ function tap(x, y) {
 // this function controls the game logic
 function update(dt) {
   if (colrect(...a, ...b)) {
-    let { direction, x, y } = resolverect(...a, ...b)
-    dir = direction
-    if (direction) {
+    let { dir: d, x, y } = resolverect(...a, ...b)
+    if (d) {
       a[0] = x
       a[1] = y
     }
+    dir = d ? d : ""
   }
 }
 

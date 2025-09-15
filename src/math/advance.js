@@ -6,8 +6,8 @@ import { Vector } from "../vector/index.js"
  *
  * @param {Vector} position
  * @param {Vector} velocity
- * @param {Vector?} [acceleration]
- * @param {number?} [deltaTime]
+ * @param {Vector} [acceleration]
+ * @param {number} [deltaTime]
  */
 export default (position, velocity, acceleration, deltaTime = 1) => {
   if (acceleration) {

@@ -152,7 +152,7 @@ export class Grid {
    * @param {number} y
    * @param {any} value
    * @param {Grid} grid
-   * @returns {boolean?} returns `false` to stop/break the loop
+   * @returns {false|void} returns `false` to stop/break the loop
    *
    * @param {GridForEachCallback} callback
    * @param {boolean} [reverse=false]

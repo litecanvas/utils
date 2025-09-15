@@ -12,7 +12,7 @@ import intersection from "./intersection.js"
  * @param {number} y2
  * @param {number} w2
  * @param {number} h2
- * @returns {{direction: string, x: number, y: number}} An object containing the direction of the collision and the new position (X and Y) of the first rectangle.
+ * @returns {{dir: string, x: number, y: number}} An object containing the direction of the collision and the new position (X and Y) of the first rectangle.
  */
 export default (x1, y1, w1, h1, x2, y2, w2, h2) => {
   // get the intersection area
@@ -49,5 +49,5 @@ export default (x1, y1, w1, h1, x2, y2, w2, h2) => {
     }
   }
 
-  return { direction, x: resolveX, y: resolveY }
+  return { dir: direction, x: resolveX, y: resolveY }
 }

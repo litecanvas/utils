@@ -13,27 +13,43 @@ const engine = litecanvas({
 
 function init() {
   sprites = {
-    player: paint(8, 8, [
-      "........",
-      "..0000..",
-      "..0707.",
-      "..0000..",
-      "..0000..",
-      "..0000..",
-      "..0000..",
-      "..0..0..",
-    ]),
+    player: paint(8, 8, () =>
+      spr(
+        0,
+        0,
+        8,
+        8,
+        `
+        ........
+        ..0000..
+        ..0707..
+        ..0000..
+        ..0000..
+        ..0000..
+        ..0000..
+        ..0..0..
+        `
+      )
+    ),
 
-    grass: paint(8, 8, [
-      "bbbbbbbb",
-      "b9b9b9b9",
-      "bb9bbb9b",
-      "bbbbbbbb",
-      "9b9b9b9b",
-      "b9bbb9bb",
-      "bbbbbbbb",
-      "bbbbbbbb",
-    ]),
+    grass: paint(8, 8, () =>
+      spr(
+        0,
+        0,
+        8,
+        8,
+        `
+        bbbbbbbb
+        b9b9b9b9
+        bb9bbb9b
+        bbbbbbbb
+        9b9b9b9b
+        b9bbb9bb
+        bbbbbbbb
+        bbbbbbbb
+        `
+      )
+    ),
   }
 
   camera = new Camera(engine)

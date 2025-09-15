@@ -4,7 +4,9 @@ utils.global()
 litecanvas()
 
 function init() {
-  x1 = paint(3, 3, [".4.", "4.4", ".4."], { scale: 10 })
+  x1 = paint(3, 3, () => spr(0, 0, 3, 3, [".4.", "4.4", ".4."].join("")), {
+    scale: 10,
+  })
 
   x5 = scaleImage(x1, 5) // scales 5x
 }

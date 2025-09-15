@@ -47,24 +47,27 @@ litecanvas({
 })
 
 state.sprite = paint(
-  12,
-  12,
-  [
-    "....4444....",
-    "....4aa4....",
-    "..004aa400..",
-    "..02444420..",
-    "777733335555",
-    "766731135bb5",
-    "766731135bb5",
-    "777733335555",
-    "..02999920..",
-    "..00988900..",
-    "....9889....",
-    "....9999....",
-  ],
+  8,
+  8,
+  () =>
+    spr(
+      0,
+      0,
+      8,
+      8,
+      `
+  .000000.
+  05555550
+  05055050
+  05555550
+  05055050
+  05000050
+  05555550
+  .000000.
+  `
+    ),
   {
-    scale: 3,
+    scale: 4,
   }
 )
 state.spriteSize = state.sprite.width
@@ -124,7 +127,7 @@ function update() {
 
 function draw() {
   // Clear the canvas
-  cls(0)
+  cls(3)
 
   // Particle animation
   const particles = state.particles

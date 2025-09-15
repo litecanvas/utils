@@ -4,9 +4,16 @@ const e = litecanvas({
   global: false,
 })
 
-sprite = e.paint(5, 4, ["33333", "33737", "33333", "33333"], {
-  scale: 20,
-})
+const sprite = e.paint(
+  5,
+  4,
+  () => {
+    e.spr(0, 0, 5, 4, ["33333", "33737", "33333", "33333"].join(""))
+  },
+  {
+    scale: 20,
+  }
+)
 
 function init() {
   player = new Actor(sprite)
