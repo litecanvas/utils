@@ -30,5 +30,6 @@ function getSamples() {
     "vector/bounce",
     "vector/random",
     "time/format-time",
+    "debug/log",
   ]
 }
