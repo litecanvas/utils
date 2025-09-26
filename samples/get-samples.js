@@ -31,5 +31,6 @@ function getSamples() {
     "vector/random",
     "time/format-time",
     "debug/log",
+    "debug/dump-and-die",
   ]
 }

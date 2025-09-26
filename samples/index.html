@@ -133,7 +133,7 @@
       for (const s of samplesList) {
         const sample = document.createElement("option")
         sample.value = s
-        sample.textContent = s.replace("/", ": ").replace("-", " ")
+        sample.textContent = s.replace("/", ": ").replace(/-/g, " ")
         samples.append(sample)
       }
 

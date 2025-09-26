@@ -2,14 +2,14 @@ import is from "./is.js"
 
 /**
  * @param {any} data
- * @param {number} [color]
+ * @param {string} [context]
  * @param {LitecanvasInstance} [engine]
  */
-export default (data, color = 3, engine = globalThis) => {
+export default (data, context, engine = globalThis) => {
   return engine.text(
     16,
     16,
-    is(data, "object") ? JSON.stringify(data, null, 4) : data,
-    color
+    (context ? `${context}: ` : "") +
+      (is(data, "object") ? JSON.stringify(data, null, 4) : data)
   )
 }
