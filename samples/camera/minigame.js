@@ -17,8 +17,6 @@ function init() {
       spr(
         0,
         0,
-        8,
-        8,
         `
         ........
         ..0000..
@@ -36,8 +34,6 @@ function init() {
       spr(
         0,
         0,
-        8,
-        8,
         `
         bbbbbbbb
         b9b9b9b9
