@@ -15,6 +15,7 @@ const files = {
     "src/image/_web": "image",
     "src/collection/_web": "collection",
     "src/time/_web": "time",
+    "src/string/_web": "string",
     "src/debug/_web": "debug",
   },
   outdir = "dist"
