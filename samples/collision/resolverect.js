@@ -35,7 +35,7 @@ function update(dt) {
 // this function render the game scene
 function draw() {
   cls(0) // clear the screen
-  rectfill(...a, 4)
-  rectfill(...b, 5)
+  rectfill(...a, 2)
+  rectfill(...b, 3)
   if (dir) text(0, 0, dir)
 }

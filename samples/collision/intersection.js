@@ -21,10 +21,10 @@ function draw() {
   cls(0) // clear the screen
 
   rectfill(...a, 2)
-  rectfill(...b, 4)
+  rectfill(...b, 3)
 
   if (colrect(...a, ...b)) {
     overlaps = intersection(...a, ...b)
-    rectfill(...overlaps, 5)
+    rectfill(...overlaps, 1)
   }
 }

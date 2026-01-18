@@ -7,9 +7,9 @@ litecanvas({
 })
 
 function init() {
-  rectImage = makeRectangle(W / 2, H / 2, 4, {
+  rectImage = makeRectangle(W / 2, H / 2, 3, {
     borderWidth: 16,
-    borderColor: 3,
+    borderColor: 2,
   })
 }
 

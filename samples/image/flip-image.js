@@ -4,7 +4,7 @@ utils.global()
 litecanvas()
 
 function init() {
-  original = paint(3, 3, () => spr(0, 0, ["444", ".4.", "6.5"].join("\n")), {
+  original = paint(3, 3, () => spr(0, 0, ["333", ".3.", "2.1"].join("\n")), {
     scale: 20,
   })
 

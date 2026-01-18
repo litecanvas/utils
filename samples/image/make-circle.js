@@ -4,7 +4,7 @@ utils.global()
 litecanvas()
 
 function init() {
-  circleImage = makeCircle(32, 4, {
+  circleImage = makeCircle(32, 2, {
     borderWidth: 8,
     borderColor: 3,
   })

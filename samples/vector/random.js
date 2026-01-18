@@ -25,9 +25,9 @@ function update(dt) {
 function draw() {
   cls(0)
 
-  circfill(center.x, center.y, 10, 5)
+  circfill(center.x, center.y, 10, 2)
 
   for (const p of points) {
-    circfill(p.x, p.y, 5, 4)
+    circfill(p.x, p.y, 5, 3)
   }
 }

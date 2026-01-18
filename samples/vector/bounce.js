@@ -28,11 +28,11 @@ function draw() {
   // Draw the black line.
   drawLine(v0, n, 0)
 
-  // Draw the red line.
-  drawLine(v0, v1, 4)
+  // Draw the gray line.
+  drawLine(v0, v1, 1)
 
-  // Draw the blue line.
-  drawLine(v0, v2, 7)
+  // Draw the green line.
+  drawLine(v0, v2, 2)
 }
 
 function drawLine(base, vec, color) {

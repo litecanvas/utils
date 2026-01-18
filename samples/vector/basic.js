@@ -13,5 +13,5 @@ function tapped(tapx, tapy) {
 
 function draw() {
   cls(0)
-  circfill(pos.x, pos.y, 5, 4)
+  circfill(pos.x, pos.y, 5, 3)
 }

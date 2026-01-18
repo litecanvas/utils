@@ -11,7 +11,7 @@ function makeCircle(radius, color) {
 
 function init() {
   const size = 16
-  const fireball = makeCircle(size, 4)
+  const fireball = makeCircle(size, 3)
 
   // firebar is the parent
   firebar = new Actor(null, vec(W / 2, H / 2), ANCHOR_CENTER)

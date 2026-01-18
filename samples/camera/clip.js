@@ -32,13 +32,13 @@ function draw() {
 
   const { x, y, w, h } = object
 
-  rectfill(x, y, w, h, 4)
+  rectfill(x, y, w, h, 3)
 
   camera.end()
 
   // draw the camera bounds (yellow rectangle)
   linewidth(2)
-  rect(...camera.getBounds(), 5)
+  rect(...camera.getBounds(), 2)
 
   text(10, 10, "Tap!")
 }

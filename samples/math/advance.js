@@ -23,7 +23,7 @@ function update(dt) {
 
 function draw() {
   cls(0)
-  circ(pos.x, pos.y, 48, 4)
+  circ(pos.x, pos.y, 48, 3)
   text(
     0,
     0,
