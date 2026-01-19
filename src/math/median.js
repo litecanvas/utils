@@ -1,4 +1,4 @@
-import assert from "../debug/assert"
+import assert from "../debug/assert.js"
 
 /**
  * Compute the median of the values. The values are sorted and the middle value is returned.

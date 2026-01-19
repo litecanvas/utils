@@ -1,4 +1,4 @@
-import assert from "../debug/assert"
+import assert from "../debug/assert.js"
 
 /**
  * Computes the sum of the values in a array.
