@@ -1,4 +1,5 @@
 import { Vector, vec } from "../vector/index.js"
+import colrectcirc from "../collision/colrectcirc.js"
 
 export const ANCHOR_CENTER = /** @__PURE__ */ vec(0.5, 0.5)
 export const ANCHOR_TOP_LEFT = /** @__PURE__ */ vec(0, 0)
@@ -35,7 +36,7 @@ export class Actor {
   hidden = false
 
   /**
-   * @param {Image|HTMLCanvasElement|OffscreenCanvas} sprite
+   * @param {Image|HTMLCanvasElement|OffscreenCanvas|ImageBitmap} sprite
    * @param {Vector} position
    * @param {Vector} anchor
    */
@@ -133,6 +134,7 @@ export class Actor {
   }
 
   /**
+   * @param {boolean} scaled
    * @returns {number[]}
    */
   getBounds(scaled = true) {
@@ -141,6 +143,29 @@ export class Actor {
     const x = this.pos.x - w * this.anchor.x
     const y = this.pos.y - h * this.anchor.y
     return [x, y, w, h]
+  }
+
+  /**
+   * Checks if the actor is colliding with a point (with optional radius).
+   * Useful to check clicks or touchs.
+   *
+   * @param {number} x
+   * @param {number} y
+   * @param {number} [radius=1]
+   * @returns {boolean}
+   */
+  in(x, y, radius = 1) {
+    return colrectcirc(...this.getBounds(), x, y, radius)
+  }
+
+  /**
+   * Checks if the actor is colliding with another actor.
+   *
+   * @param {Actor} other
+   * @returns {boolean}
+   */
+  col(other) {
+    return colrect(...this.getBounds(), ...other.getBounds())
   }
 
   /**
@@ -168,7 +193,7 @@ export class Actor {
   /**
    * @param {LitecanvasInstance} engine
    */
-  transform(engine) {
+  transform(engine = globalThis) {
     engine.translate(this.pos.x, this.pos.y)
     engine.rotate(engine.deg2rad(this.angle))
     engine.scale(
@@ -179,8 +204,9 @@ export class Actor {
 
   /**
    * @param {LitecanvasInstance} engine
+   * @param {boolean} alpha
    */
-  drawImage(engine, alpha = true) {
+  drawImage(engine = globalThis, alpha = true) {
     const anchor = this.anchor
     const x = -this.sprite.width * (this.flipX ? 1 - anchor.x : anchor.x)
     const y = -this.sprite.height * (this.flipY ? 1 - anchor.y : anchor.y)

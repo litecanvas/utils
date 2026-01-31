@@ -29,8 +29,10 @@ function init() {
 }
 
 // tap to flip the actor
-function tapped() {
-  player.flipX = !player.flipX
+function tapped(x, y) {
+  if (player.in(x, y)) {
+    player.flipX = !player.flipX
+  }
 }
 
 function draw() {
@@ -42,4 +44,7 @@ function draw() {
 
   // the actor
   player.draw(e)
+
+  e.linewidth(4)
+  e.rect(...player.getBounds(), 1)
 }
