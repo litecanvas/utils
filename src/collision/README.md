@@ -14,6 +14,12 @@ Check a collision between two circles.
 
 Syntax: `colcirc(x1, y1, r1, x2, y2, r2): boolean`
 
+## colrectcirc
+
+Check a collision between a rectangle and a circle.
+
+Syntax: `colrectcirc(x1, y1, w1, h1, x2, y2, r2): boolean`
+
 ## intersection
 
 Returns the resulting rectangle of the intersection between two rectangles.

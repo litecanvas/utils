@@ -171,6 +171,27 @@ Set or get the actor sprite image. Useful to make animations.
 player.sprite = anotherSprite
 ```
 
-> The actor sprite must be a `Image`, `HTMLCanvas` or `OffscreenCanvas`.
+> The actor sprite must be a `Image`, `ImageBitmap`, `HTMLCanvasElement` or `OffscreenCanvas`.
 >
-> Remember, you can create a image using the litecanvas' `paint()` built-in helper or [load a image](https://github.com/litecanvas/plugin-asset-loader?tab=readme-ov-file#loading-images).
+> Remember, you can create images using the litecanvas' built-in `paint()` function or [loading a image](https://github.com/litecanvas/plugin-asset-loader?tab=readme-ov-file#loading-images).
+
+## Actor#in(x, y, radius)
+
+Check taps (clicks and touchs).
+
+```js
+function tapped(x, y) {
+  const pointArea = 8 // default = 1
+  if (player.in(x, y, pointArea)) {
+    console.log("tap!")
+  }
+}
+```
+
+## Actor#col(other)
+
+Check collision between actors
+
+```js
+const collided = player.col(anotherActor)
+```
