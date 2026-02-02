@@ -2,6 +2,10 @@
 
 Small collection of tools for developing games with [Litecanvas](https://github.com/litecanvas/game-engine).
 
+<!-- prettier-ignore -->
+> [!TIP]
+> **All modules of this package are automatically loaded on Litecanvas playground.**
+
 ## Install
 
 ### NPM package
