@@ -4,7 +4,7 @@ Small collection of tools for developing games with [Litecanvas](https://github.
 
 <!-- prettier-ignore -->
 > [!TIP]
-> **All modules of this package are automatically loaded on Litecanvas playground.**
+> **All modules of this package are automatically loaded on Litecanvas [playground](https://litecanvas.js.org/).**
 
 ## Install
 
