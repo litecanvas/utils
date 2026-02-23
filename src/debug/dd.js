@@ -1,7 +1,7 @@
-import log from "./log.js"
+import is from "./is.js"
 
 /**
- * Logs something and stops the engine.
+ * Dump and die: print something and stops the engine.
  *
  * @param {any} data
  * @param {string} context
@@ -14,6 +14,11 @@ export default (data, context, engine = globalThis) => {
   engine.textfont("monospace")
   engine.textsize(16)
   engine.textalign("start", "top")
-  log(data, context || "dd() output", engine)
+  engine.text(
+    16,
+    16,
+    `${context ?? "dd() output"}: ` +
+      (is(data, "object") ? JSON.stringify(data, null, 4) : data)
+  )
   engine.quit()
 }

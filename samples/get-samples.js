@@ -21,6 +21,7 @@ function getSamples() {
     "image/scale-image",
     "image/tint-image",
     "math/advance",
+    "math/wave",
     "noise/basic",
     "tween/basic",
     "tween/chain",
@@ -32,7 +33,6 @@ function getSamples() {
     "time/format-time",
     "string/lpad",
     "string/rpad",
-    "debug/log",
     "debug/dump-and-die",
   ]
 }
