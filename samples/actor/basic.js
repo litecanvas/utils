@@ -28,8 +28,8 @@ function init() {
 
 function update(dt) {
   player.angle += 180 * dt
-  player.scale.x = e.wave(0.5, 2, e.T)
-  player.scale.y = e.wave(0.5, 2, e.T)
+  player.scale.x = wave(0.5, 2, e.T)
+  player.scale.y = wave(0.5, 2, e.T)
 }
 
 function draw() {
@@ -43,8 +43,8 @@ function draw() {
   player.draw(e)
 
   // the actor bounds (useful to check collision)
-  e.rect(...player.getBounds(), 4)
+  e.rect(...player.getBounds(), 3)
 
-  // the red dot
-  e.circfill(player.x, player.y, 1, 4)
+  // the central point
+  e.circfill(player.x, player.y, 1, 3)
 }

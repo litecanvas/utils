@@ -1,4 +1,5 @@
 import assert from "../debug/assert.js"
+import is from "../debug/is.js"
 
 /**
  * Interpolate between 2 values using a periodic function.
@@ -9,11 +10,17 @@ import assert from "../debug/assert.js"
  * @param {(n: number) => number} [fn] - the periodic function (which default to `Math.sin`)
  */
 export default (from, to, t, fn = Math.sin) => {
-  DEV: assert(isNumber(from), "[litecanvas] wave() 1st param must be a number")
-  DEV: assert(isNumber(to), "[litecanvas] wave() 2nd param must be a number")
-  DEV: assert(isNumber(t), "[litecanvas] wave() 3rd param must be a number")
   DEV: assert(
-    "function" === typeof fn,
+    is(from, "number"),
+    "[litecanvas] wave() 1st param must be a number"
+  )
+  DEV: assert(
+    is(to, "number"),
+    "[litecanvas] wave() 2nd param must be a number"
+  )
+  DEV: assert(is(t, "number"), "[litecanvas] wave() 3rd param must be a number")
+  DEV: assert(
+    is(fn, "function"),
     "[litecanvas] wave() 4rd param must be a function (n: number) => number"
   )
 
