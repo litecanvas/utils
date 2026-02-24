@@ -1,6 +1,6 @@
 {
   "name": "@litecanvas/utils",
-  "version": "0.47.2",
+  "version": "0.47.3",
   "description": "Utilities to help build litecanvas games",
   "author": "Luiz Bills <luizbills@pm.me>",
   "license": "MIT",
@@ -16,7 +16,6 @@
   "main": "src/index.js",
   "unpkg": "./dist/all.js",
   "jsdelivr": "./dist/all.js",
-  "browser": "./dist/all.js",
   "keywords": [
     "litecanvas",
     "utilities",
