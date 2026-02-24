@@ -28,9 +28,12 @@ import { vec } from "@litecanvas/utils"
 const pos = vec(0, 0)
 ```
 
-### CDN
+### Global/CDN
 
-Download from https://unpkg.com/browse/@litecanvas/utils/dist/ and load in a `<script>` tag in your HTML.
+Download or load from a CDN:
+
+- jsDelivr: https://cdn.jsdelivr.net/npm/@litecanvas/utils
+- Unpkg: https://unpkg.com/@litecanvas/utils
 
 ```js
 // now the "utils" namespace is created
