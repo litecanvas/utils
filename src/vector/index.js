@@ -395,11 +395,28 @@ export const vecRem = (v, value) => {
 /**
  * @param {Vector} from
  * @param {Vector} to
- * @param {number} [delta=1]
+ * @param {number} [step=1]
  * @returns {Vector}
  */
-export const vecMove = (from, to, delta = 1) =>
-  vecAdd(from, to.x * delta, to.y * delta)
+export const vecMove = (from, to, step = 1) => {
+  const dx = to.x - from.x
+  const dy = to.y - from.y
+  const distance = Math.hypot(dx, dy)
+
+  step = Math.abs(step)
+
+  if (distance <= step || distance === 0) {
+    from.x = to.x
+    from.y = to.y
+  } else {
+    const ratio = step / distance
+
+    from.x = from.x + dx * ratio
+    from.y = from.y + dy * ratio
+  }
+
+  return from
+}
 
 /**
  * Checks whether two vectors are equal.
