@@ -30,19 +30,17 @@ function init() {
       )
     ),
 
-    grass: paint(8, 8, () =>
+    grass: paint(8, 6, () =>
       spr(
         0,
         0,
         `
-        bbbbbbbb
-        b9b9b9b9
-        bb9bbb9b
-        bbbbbbbb
-        9b9b9b9b
-        b9bbb9bb
-        bbbbbbbb
-        bbbbbbbb
+        ........
+        .2.2.2.2
+        ..2...2.
+        ........
+        2.2.2.2.
+        .2...2..
         `
       )
     ),

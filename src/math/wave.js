@@ -21,7 +21,7 @@ export default (from, to, t, fn = Math.sin) => {
   DEV: assert(is(t, "number"), "[litecanvas] wave() 3rd param must be a number")
   DEV: assert(
     is(fn, "function"),
-    "[litecanvas] wave() 4rd param must be a function (n: number) => number"
+    "[litecanvas] wave() 4rd param must be a function similar to (n: number) => number"
   )
 
   return from + ((fn(t) + 1) / 2) * (to - from)

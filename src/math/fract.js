@@ -1,3 +1,5 @@
+import assert from "../debug/assert.js"
+
 /**
  * Returns the fractional part of a number
  *
@@ -6,4 +8,10 @@
  * @example
  *    fract(10.1) // => 0.1
  */
-export default (value) => value % 1 || 0
+export default (value) => {
+  DEV: assert(
+    Number.isFinite(value),
+    "[litecanvas/utils] fract() 1st param must be a number"
+  )
+  return value % 1
+}

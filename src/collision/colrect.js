@@ -14,14 +14,38 @@ import assert from "../debug/assert.js"
  * @returns {boolean}
  */
 export default (x1, y1, w1, h1, x2, y2, w2, h2) => {
-  DEV: assert(isFinite(x1), "colrect: 1st param must be a number")
-  DEV: assert(isFinite(y1), "colrect: 2nd param must be a number")
-  DEV: assert(isFinite(w1), "colrect: 3rd param must be a number")
-  DEV: assert(isFinite(h1), "colrect: 4th param must be a number")
-  DEV: assert(isFinite(x2), "colrect: 5th param must be a number")
-  DEV: assert(isFinite(y2), "colrect: 6th param must be a number")
-  DEV: assert(isFinite(w2), "colrect: 7th param must be a number")
-  DEV: assert(isFinite(h2), "colrect: 8th param must be a number")
+  DEV: assert(
+    Number.isFinite(x1),
+    "[litecanvas/utils] [litecanvas/utils] colrect() 1st param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(y1),
+    "[litecanvas/utils] colrect() 2nd param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(w1),
+    "[litecanvas/utils] colrect() 3rd param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(h1),
+    "[litecanvas/utils] colrect() 4th param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(x2),
+    "[litecanvas/utils] colrect() 5th param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(y2),
+    "[litecanvas/utils] colrect() 6th param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(w2),
+    "[litecanvas/utils] colrect() 7th param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(h2),
+    "[litecanvas/utils] colrect() 8th param must be a number"
+  )
 
   return x1 < x2 + w2 && x1 + w1 > x2 && y1 < y2 + h2 && y1 + h1 > y2
 }

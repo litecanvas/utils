@@ -1,15 +1,18 @@
+import clamp from "../math/clamp.js"
+
 const cos = Math.cos,
   sin = Math.sin,
-  PI2 = 2 * Math.PI
+  PI2 = 2 * Math.PI,
+  float = parseFloat
 
-export class Vector {
+class V {
   /**
    * @param {number} [x=0]
    * @param {number} [y]
    */
   constructor(x = 0, y = x) {
-    this.x = parseFloat(x) || 0
-    this.y = parseFloat(y) || 0
+    this.x = float(x) || 0
+    this.y = float(y) || 0
   }
 
   /**
@@ -20,11 +23,13 @@ export class Vector {
   }
 }
 
+export const Vector = V
+
 /**
  * @param {*} v
  * @returns {boolean}
  */
-const isVector = (v) => v instanceof Vector
+const isVector = (v) => v instanceof V
 
 /**
  * Copy an vector or creates a new one.
@@ -38,7 +43,7 @@ export const vec = (x = 0, y = x) => {
     y = x.y
     x = x.x
   }
-  return new Vector(x, y)
+  return new V(x, y)
 }
 
 /**
@@ -172,11 +177,7 @@ export const vecReflect = (v, normal) => {
  * @param {Vector} normal
  * @returns {Vector}
  */
-export const vecSetMag = (v, value) => {
-  vecNorm(v)
-  vecMult(v, value)
-  return v
-}
+export const vecSetMag = (v, value) => vecMult(vecNorm(v), value)
 
 /**
  * Calculates the magnitude (length) of the vector.
@@ -212,7 +213,7 @@ export const vecNorm = (v) => {
  * Limits (clamp) a vector's magnitude to a maximum value.
  *
  * @param {Vector} v
- * @param {number} max
+ * @param {number} [max]
  * @returns {Vector}
  */
 export const vecLimit = (v, max = 1) => {
@@ -264,15 +265,6 @@ export const vecHeading = (v) => Math.atan2(v.y, v.x)
 export const vecAngle = (v) => vecHeading(v)
 
 /**
- * Calculates the angle between two vectors.
- *
- * @param {Vector} v1
- * @param {Vector} v2
- * @returns {number}
- */
-export const vecAngleBetween = (v1, v2) => Math.atan2(v2.y - v1.y, v2.x - v1.x)
-
-/**
  * Calculates the dot product of two vectors.
  *
  * The dot product is a number that describes the overlap between two vectors.
@@ -286,6 +278,22 @@ export const vecAngleBetween = (v1, v2) => Math.atan2(v2.y - v1.y, v2.x - v1.x)
  * @returns {number}
  */
 export const vecDot = (a, b) => a.x * b.x + a.y * b.y
+
+/**
+ * Calculates the angle between two vectors.
+ *
+ * @param {Vector} v1
+ * @param {Vector} v2
+ * @returns {number} the angle in radians
+ */
+export const vecAngleBetween = (v1, v2) => {
+  const mag1 = vecMag(v1)
+  const mag2 = vecMag(v2)
+
+  return mag2 - mag1
+    ? Math.acos(clamp(vecDot(v1, v2) / (mag1 * mag2), 0, 1))
+    : 0
+}
 
 /**
  * Calculates the cross product of two vectors.
@@ -372,11 +380,7 @@ export const vecRound = (v) => {
  * @returns {Vector}
  */
 export const vecClamp = (v, min, max) => {
-  if (v.x < min.x) v.x = min.x
-  if (v.x > max.x) v.x = max.x
-  if (v.y < min.y) v.y = min.y
-  if (v.y > max.y) v.y = max.y
-  return v
+  return vecSet(v, clamp(v.x, min, max), clamp(v.y, min, max))
 }
 
 /**
@@ -424,13 +428,14 @@ export const vecMove = (from, to, step = 1) => {
  * @param {Vector} v
  * @param {number|Vector} x
  * @param {number} [y]
+ * @param {number} [epsilon]
  * @returns {boolean}
  */
-export const vecEq = (v, x, y = x) => {
+export const vecEq = (v, x, y = x, epsilon = 0.00001) => {
   if (isVector(x)) {
-    return vecEq(v, x.x, x.y)
+    return vecEq(v, x.x, x.y, epsilon)
   }
-  return v.x === x && v.y === y
+  return vecDist(v, x, y) <= epsilon
 }
 
 /**

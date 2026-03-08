@@ -1,5 +1,4 @@
 import assert from "../debug/assert.js"
-import is from "../debug/is.js"
 
 /**
  * Moves a value toward a target using fixed increments, without overshooting.
@@ -11,16 +10,16 @@ import is from "../debug/is.js"
  */
 export default (from, to, step) => {
   DEV: assert(
-    is(from, "number"),
-    "[litecanvas] move() 1st param must be a number"
+    Number.isFinite(from),
+    "[litecanvas/utils] move() 1st param must be a number"
   )
   DEV: assert(
-    is(to, "number"),
-    "[litecanvas] move() 2nd param must be a number"
+    Number.isFinite(to),
+    "[litecanvas/utils] move() 2nd param must be a number"
   )
   DEV: assert(
-    is(step, "number"),
-    "[litecanvas] move() 3rd param must be a number"
+    Number.isFinite(step),
+    "[litecanvas/utils] move() 3rd param must be a number"
   )
 
   return Math.abs(to - from) <= step ? to : from + Math.sign(to - from) * step

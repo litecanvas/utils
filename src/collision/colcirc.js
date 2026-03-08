@@ -12,12 +12,30 @@ import assert from "../debug/assert.js"
  * @returns {boolean}
  */
 export default (x1, y1, r1, x2, y2, r2) => {
-  DEV: assert(isFinite(x1), "colcirc: 1st param must be a number")
-  DEV: assert(isFinite(y1), "colcirc: 2nd param must be a number")
-  DEV: assert(isFinite(r1), "colcirc: 3rd param must be a number")
-  DEV: assert(isFinite(x2), "colcirc: 4th param must be a number")
-  DEV: assert(isFinite(y2), "colcirc: 5th param must be a number")
-  DEV: assert(isFinite(r2), "colcirc: 6th param must be a number")
+  DEV: assert(
+    Number.isFinite(x1),
+    "[litecanvas/utils] colcirc() 1st param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(y1),
+    "[litecanvas/utils] colcirc() 2nd param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(r1),
+    "[litecanvas/utils] colcirc() 3rd param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(x2),
+    "[litecanvas/utils] colcirc() 4th param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(y2),
+    "[litecanvas/utils] colcirc() 5th param must be a number"
+  )
+  DEV: assert(
+    Number.isFinite(r2),
+    "[litecanvas/utils] colcirc() 6th param must be a number"
+  )
 
   return (x2 - x1) * (x2 - x1) + (y2 - y1) * (y2 - y1) <= (r1 + r2) * (r1 + r2)
 }

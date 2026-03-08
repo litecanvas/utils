@@ -9,7 +9,10 @@ import assert from "../debug/assert.js"
  * @returns {number}
  */
 export default (values) => {
-  DEV: assert(Array.isArray(values), "1st param must be an array")
+  DEV: assert(
+    Array.isArray(values),
+    "[litecanvas/utils] sum() 1st param must be an array"
+  )
   let result = 0
   for (let i = 0; i < values.length; i++) {
     result += values[i]

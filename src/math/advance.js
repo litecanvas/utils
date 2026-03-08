@@ -1,3 +1,5 @@
+import assert from "../debug/assert.js"
+import is from "../debug/is.js"
 import { Vector } from "../vector/index.js"
 
 /**
@@ -10,6 +12,23 @@ import { Vector } from "../vector/index.js"
  * @param {number} [deltaTime]
  */
 export default (position, velocity, acceleration, deltaTime = 1) => {
+  DEV: assert(
+    is(position, Vector),
+    "[litecanvas/utils] advance() 1st param must be a Vector"
+  )
+  DEV: assert(
+    is(velocity, Vector),
+    "[litecanvas/utils] advance() 2nd param must be a Vector"
+  )
+  DEV: assert(
+    null == acceleration || is(acceleration, Vector),
+    "[litecanvas/utils] advance() 3rd param must be a Vector or null"
+  )
+  DEV: assert(
+    Number.isFinite(deltaTime),
+    "[litecanvas/utils] advance() 4th param must be a number"
+  )
+
   if (acceleration) {
     velocity.x += acceleration.x * deltaTime
     velocity.y += acceleration.y * deltaTime

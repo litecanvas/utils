@@ -8,7 +8,10 @@ import assert from "../debug/assert.js"
  * @returns {number}
  */
 export default (values) => {
-  DEV: assert(Array.isArray(values), "1st param must be an array")
+  DEV: assert(
+    Array.isArray(values),
+    "[litecanvas/utils] median() 1st param must be an array"
+  )
   const sorted = values.sort((a, b) => a - b)
   const middle = Math.floor(sorted.length / 2)
 
