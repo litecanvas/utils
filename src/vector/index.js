@@ -291,7 +291,7 @@ export const vecAngleBetween = (v1, v2) => {
   const mag2 = vecMag(v2)
 
   return mag2 - mag1
-    ? Math.acos(clamp(vecDot(v1, v2) / (mag1 * mag2), 0, 1))
+    ? Math.acos(clamp(vecDot(v1, v2) / (mag1 * mag2), -1, 1))
     : 0
 }
 
