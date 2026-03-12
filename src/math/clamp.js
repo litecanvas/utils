@@ -22,7 +22,7 @@ export default (value, min, max) => {
     "[litecanvas/utils] clamp() 3rd param must be a number"
   )
   DEV: assert(
-    max > min,
+    max >= min,
     "[litecanvas/utils] clamp() the 2nd param must be less than the 3rd param"
   )
 

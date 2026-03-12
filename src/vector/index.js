@@ -460,7 +460,7 @@ export const vecToArray = (v) => [v.x, v.y]
  *
  * @param {number} [minlength]
  * @param {number} [maxlength]
- * @param {() => number} [randomFn]
+ * @param {() => number} [rng]
  * @returns {Vector}
  */
 export const vecRand = (
