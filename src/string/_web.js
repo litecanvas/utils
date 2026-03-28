@@ -1,4 +1,4 @@
 import "../_global.js"
 import * as stringUtils from "./index.js"
 
-globalThis.utils = Object.assign(globalThis.utils || {}, stringUtils)
+window.utils = Object.assign(window.utils || {}, stringUtils)

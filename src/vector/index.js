@@ -466,7 +466,7 @@ export const vecToArray = (v) => [v.x, v.y]
 export const vecRand = (
   minlength = 1,
   maxlength = minlength,
-  rng = globalThis.rand || Math.random
+  rng = window.rand || Math.random
 ) => {
   const angle = rng() * PI2
   const radius = rng() * (maxlength - minlength) + minlength

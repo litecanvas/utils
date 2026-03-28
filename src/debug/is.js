@@ -10,6 +10,8 @@ export default (value, type) => {
     return value instanceof type
   } else if (type === "array") {
     return Array.isArray(value)
+  } else if (type === "int") {
+    return Number.isInteger(value)
   } else if (type === "number") {
     return "number" === typeof value && !Number.isNaN(value)
   } else if (type === "infinity") {

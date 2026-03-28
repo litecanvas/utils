@@ -5,7 +5,7 @@
  * @param {()=>number} [rng]
  * @returns {T[]} the shuffled array
  */
-export default (values, rng = globalThis.rand || Math.random) => {
+export default (values, rng = window.rand || Math.random) => {
   values = [...values] // clone the values
   for (let i = values.length - 1; i > 0; i--) {
     let j = Math.floor(rng() * (i + 1))

@@ -5,6 +5,6 @@
  * @param {()=>number} [rng]
  * @returns {number}
  */
-export default (values, rng = globalThis.rand || Math.random) => {
+export default (values, rng = window.rand || Math.random) => {
   return values[Math.floor(rng() * values.length)]
 }

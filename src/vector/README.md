@@ -175,6 +175,6 @@ Syntax: `vecRem(v: Vector, divisor: number): Vector`
 
 Creates a vector with random direction and (optional) length.
 
-By default the `randomFn` (third argument) is the `globalThis.rand` (from litecanvas globally instantiated) or the native `Math.random`.
+By default the `randomFn` (third argument) is the `window.rand` (from litecanvas globally instantiated) or the native `Math.random`.
 
 Syntax: `vecRand(minlength: number = 1, maxlength: number = minlength, randomFn?): Vector`

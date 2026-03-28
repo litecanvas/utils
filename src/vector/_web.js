@@ -1,3 +1,3 @@
 import * as vectorUtils from "./index.js"
 
-globalThis.utils = Object.assign(globalThis.utils || {}, vectorUtils)
+window.utils = Object.assign(window.utils || {}, vectorUtils)

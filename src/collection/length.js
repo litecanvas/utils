@@ -4,14 +4,14 @@ import is from "../debug/is.js"
 /**
  * Return length of an array or string.
  *
- * @param {any[]|string} x
+ * @param {any[]|string} xs
  * @returns {number} The length or zero
  */
-export default (x) => {
+export default (xs) => {
   DEV: assert(
-    is(x, 'string') || is(x, 'array'),
+    is(xs, "string") || is(xs, "array"),
     "[litecanvas/utils] length() 1st param must be an array or string"
   )
 
-  return ~~x?.length
+  return ~~xs?.length
 }

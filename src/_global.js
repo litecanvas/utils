@@ -1,10 +1,10 @@
-globalThis.utils = globalThis.utils || {}
+window.utils = window.utils || {}
 
-globalThis.utils.global = (overrides = true) => {
-  for (const key in globalThis.utils) {
+window.utils.global = (overrides = true) => {
+  for (const key in window.utils) {
     if ("global" === key) continue
     if (overrides || globalThis[key] === undefined) {
-      globalThis[key] = globalThis.utils[key]
+      globalThis[key] = window.utils[key]
     }
   }
 }
