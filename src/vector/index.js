@@ -1,35 +1,24 @@
 import clamp from "../math/clamp.js"
 
 const cos = Math.cos,
-  sin = Math.sin,
-  PI2 = 2 * Math.PI,
-  float = parseFloat
+  sin = Math.sin
 
-class V {
+export class Vector {
   /**
    * @param {number} [x=0]
    * @param {number} [y]
    */
   constructor(x = 0, y = x) {
-    this.x = float(x) || 0
-    this.y = float(y) || 0
-  }
-
-  /**
-   * @returns {string}
-   */
-  toString() {
-    return `Vector (${this.x}, ${this.y})`
+    this.x = parseFloat(x) || 0
+    this.y = parseFloat(y) || 0
   }
 }
 
-export const Vector = V
-
 /**
- * @param {*} v
+ * @param {any} v
  * @returns {boolean}
  */
-const isVector = (v) => v instanceof V
+const isVector = (v) => v instanceof Vector
 
 /**
  * Copy an vector or creates a new one.
@@ -43,7 +32,7 @@ export const vec = (x = 0, y = x) => {
     y = x.y
     x = x.x
   }
-  return new V(x, y)
+  return new Vector(x, y)
 }
 
 /**
@@ -454,6 +443,15 @@ export const vecIsZero = (v) => vecEq(v, ZERO)
 export const vecToArray = (v) => [v.x, v.y]
 
 /**
+ * Returns the string represetation of a vector.
+ *
+ * @param {Vector} v
+ * @param {string} prefix
+ * @returns {string}
+ */
+export const vecToStr = (v, prefix = "Vector ") => `${prefix}(${v.x}, ${v.y})`
+
+/**
  * Sample a vector with random direction and (optional) length.
  *
  * If the `litecanvas#rand()` not is globally explosed, uses `Math.random()`.
@@ -468,7 +466,7 @@ export const vecRand = (
   maxlength = minlength,
   rng = window.rand || Math.random
 ) => {
-  const angle = rng() * PI2
+  const angle = rng() * Math.PI * 2
   const radius = rng() * (maxlength - minlength) + minlength
   return vec(cos(angle) * radius, sin(angle) * radius)
 }
