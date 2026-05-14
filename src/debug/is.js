@@ -6,16 +6,18 @@
  * @returns {boolean}
  */
 export default (value, type) => {
-  if (typeof type === "function") {
-    return value instanceof type
-  } else if (type === "array") {
-    return Array.isArray(value)
-  } else if (type === "int") {
-    return Number.isInteger(value)
-  } else if (type === "number") {
-    return "number" === typeof value && !Number.isNaN(value)
-  } else if (type === "infinity") {
-    return "number" === typeof value && Infinity === Math.abs(value)
+  switch (type) {
+    case "function":
+      return value instanceof type
+    case "array":
+      return Array.isArray(value)
+    case "int":
+      return Number.isInteger(value)
+    case "number":
+      return "number" === typeof value && !Number.isNaN(value)
+    case "infinity":
+      return "number" === typeof value && Infinity === Math.abs(value)
+    default:
+      return typeof value === type
   }
-  return typeof value === type
 }
