@@ -1,7 +1,7 @@
 import assert from "../debug/assert.js"
 
 /**
- * Math modulus (always returns a positive number).
+ * Math modulus (Euclidean division).
  *
  * Note: When `b === 0` returns 0, rather than `NaN`.
  *
@@ -15,8 +15,8 @@ export default (a, b) => {
     "[litecanvas/utils] mod() 1st param must be a number"
   )
   DEV: assert(
-    Number.isFinite(b),
-    "[litecanvas/utils] mod() 2nd param must be a number"
+    Number.isFinite(b) && b >= 0,
+    "[litecanvas/utils] mod() 2nd param must be a non-negative number"
   )
-  return b ? (b + (a % b)) % b : 0
+  return ((a % b) + b) % b || 0
 }
