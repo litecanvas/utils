@@ -5,10 +5,10 @@
  * @param {string|function} type
  * @returns {boolean}
  */
-export default (value, type) => {
+export default (value, type, extra) => {
   switch (type) {
     case "function":
-      return value instanceof type
+      return "function" === typeof value
     case "array":
       return Array.isArray(value)
     case "int":

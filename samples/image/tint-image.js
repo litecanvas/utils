@@ -8,7 +8,7 @@ function init() {
     circfill(32, 32, 32, 3)
     push()
     clip((ctx) => {
-      ctx.arc(32, 32, 16, 0, TWO_PI)
+      ctx.arc(32, 32, 16, 0, TAU)
     })
     cls()
     pop()
