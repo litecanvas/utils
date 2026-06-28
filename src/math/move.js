@@ -5,10 +5,10 @@ import assert from "../debug/assert.js"
  *
  * @param {number} from The current value.
  * @param {number} to The target value.
- * @param {number} step The size of the increment.
+ * @param {number} delta The size of the increment.
  * @returns {number} The updated value.
  */
-export default (from, to, step) => {
+export default (from, to, delta) => {
   DEV: assert(
     Number.isFinite(from),
     "[litecanvas/utils] move() 1st param must be a number"
@@ -18,9 +18,9 @@ export default (from, to, step) => {
     "[litecanvas/utils] move() 2nd param must be a number"
   )
   DEV: assert(
-    Number.isFinite(step),
+    Number.isFinite(delta),
     "[litecanvas/utils] move() 3rd param must be a number"
   )
 
-  return Math.abs(to - from) <= step ? to : from + Math.sign(to - from) * step
+  return Math.abs(to - from) <= delta ? to : from + Math.sign(to - from) * delta
 }

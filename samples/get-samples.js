@@ -29,6 +29,7 @@ function getSamples() {
     "math/advance",
     "math/move",
     "math/wave",
+    "math/pingpong",
 
     "noise/basic",
 
