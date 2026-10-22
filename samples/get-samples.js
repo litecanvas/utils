@@ -1,6 +1,8 @@
 function getSamples() {
   return [
     "actor/basic",
+    "actor/movement-keyboard",
+    "actor/movement-tap",
     "actor/children",
     "actor/flip",
     "actor/bench",

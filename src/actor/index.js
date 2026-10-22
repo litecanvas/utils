@@ -14,6 +14,12 @@ export class Actor {
   /** @type {Vector} The actor position */
   pos
 
+  /** @type {Vector} The actor speed/velocity */
+  spd
+
+  /** @type {Vector} The actor acceleration */
+  acc
+
   /** @type {Vector} The actor anchor (origin) */
   _o
 
@@ -43,6 +49,8 @@ export class Actor {
   constructor(sprite, position, anchor = ANCHOR_TOP_LEFT) {
     this.sprite = sprite || { width: 0, height: 0 }
     this.pos = position || vec(0)
+    this.spd = vec(0)
+    this.acc = vec(0)
     this._o = vec(anchor) // clone the anchor vector
     this._s = vec(1, 1)
   }
@@ -73,6 +81,62 @@ export class Actor {
    */
   get y() {
     return this.pos.y
+  }
+
+  /**
+   * @param {number}
+   */
+  set dx(value) {
+    this.spd.x = value
+  }
+
+  /**
+   * @returns {number}
+   */
+  get dx() {
+    return this.spd.x
+  }
+
+  /**
+   * @param {number}
+   */
+  set dy(value) {
+    this.spd.y = value
+  }
+
+  /**
+   * @returns {number}
+   */
+  get dy() {
+    return this.spd.y
+  }
+
+  /**
+   * @param {number}
+   */
+  set ddx(value) {
+    this.acc.x = value
+  }
+
+  /**
+   * @returns {number}
+   */
+  get ddx() {
+    return this.acc.x
+  }
+
+  /**
+   * @param {number}
+   */
+  set ddy(value) {
+    this.acc.y = value
+  }
+
+  /**
+   * @returns {number}
+   */
+  get ddy() {
+    return this.acc.y
   }
 
   /**
@@ -166,6 +230,18 @@ export class Actor {
    */
   col(other) {
     return colrect(...this.getBounds(), ...other.getBounds())
+  }
+
+  /**
+   * Update the actor
+   *
+   * @param {number} [deltaTime]
+   */
+  update(deltaTime = 1) {
+    this.spd.x += this.acc.x * deltaTime
+    this.spd.y += this.acc.y * deltaTime
+    this.pos.x += this.spd.x * deltaTime
+    this.pos.y += this.spd.y * deltaTime
   }
 
   /**
